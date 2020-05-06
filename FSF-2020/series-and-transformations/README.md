@@ -1,4 +1,4 @@
-Contributer: G Sri Harsha
+Contributer: <b>G Sri Harsha</b>
 
 Sub-Topics Covered: 
                     <ul>
