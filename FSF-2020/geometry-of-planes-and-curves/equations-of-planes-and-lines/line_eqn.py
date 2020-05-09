@@ -17,6 +17,7 @@ class three(ThreeDScene):
         self.wait(3)
         self.play(FadeOut(d2text))
         self.move_camera(phi = 60*DEGREES, theta=45*DEGREES,run_time=3)
+        self.begin_ambient_camera_rotation(rate=0.02)
         self.play(FadeIn(d3text))
         self.wait(3)
         self.play(FadeOut(d3text), FadeOut(plane), FadeOut(axes))        
