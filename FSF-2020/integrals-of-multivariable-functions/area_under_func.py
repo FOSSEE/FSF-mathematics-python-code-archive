@@ -70,3 +70,4 @@ class AreaUnderIntegral(GraphScene):
  #       self.play(ShowCreation(area))
         self.wait(3)
         
+#uploaded by Somnath Pandit.FSF2020_Double_Integral
