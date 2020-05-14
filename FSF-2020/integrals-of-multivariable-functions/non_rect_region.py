@@ -5,12 +5,13 @@ class AreaUnderCurve(GraphScene):
         "x_min" : -1,
         "x_max" : 8,
         "y_min" : -1,
-        "y_max" : 6, 
+        "y_max" : 5, 
         "y_axis_label": "$y$",
         "x_tick_frequency" : 1,
         "y_tick_frequency" : 1,
         "x_labeled_nums": list(np.arange(-1, 9)),
-	    "y_labeled_nums": list(np.arange(-1, 7)),
+	    "y_labeled_nums": list(np.arange(-1, 6)),
+	    "y_axis_height":5.5,
         "graph_origin": ORIGIN+4*LEFT+2.5*DOWN,    
     }
 
@@ -133,16 +134,16 @@ class AreaUnderCurve(GraphScene):
         self.wait(2)
         
         total_int=TextMobject(r"The total integraton= ").to_edge(UP)
-        plus=TextMobject("$$+$$").move_to(self.graph_origin+4*X+5*Y)
+        plus=TextMobject("$$+$$").move_to(self.graph_origin+4*X+4.8*Y)
         self.play(ReplacementTransform(easy_text,total_int))
         self.play(c2_region.set_color,BLUE)
-        self.play(c1_int.next_to,c1,UP,c2_int.next_to,plus,RIGHT, FadeIn(plus))
+        self.play(c1_int.next_to,c1,.1*UP, c2_int.next_to,plus,RIGHT, FadeIn(plus))
         
         region=VGroup(*[c1_region,c2_region])
         region.set_color(GREEN)
         self.play(ShowCreation(region))
         self.wait(3)
-        
+
         
 	
 #uploaded by Somnath Pandit.FSF2020_Double_Integral
