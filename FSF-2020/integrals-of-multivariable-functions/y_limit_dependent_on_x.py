@@ -110,3 +110,4 @@ class AreaUnderCurve(GraphScene):
         y_brace = last_brace
         
         
+#uploaded by Somnath Pandit.FSF2020_Double_Integral
