@@ -141,8 +141,4 @@ class ElementaryArea(GraphScene):
         self.wait(2)
         
         
-        
-        
-        
-        
-        
+  #uploaded by Somnath Pandit.FSF2020_Double_Integral
