@@ -10,7 +10,7 @@ class SurfacesAnimation(ThreeDScene):
             "y_max": 8,
             "z_min": 0,
             "z_max": 6,
-            "a":2 ,"b": 6, "c":1 , "d":6,
+            "a":1 ,"b": 6, "c":2 , "d":6,
             "axes_shift":-3*OUT + 5*LEFT,
             "x_axis_config": {
                 "tick_frequency": 1,
@@ -80,10 +80,10 @@ class SurfacesAnimation(ThreeDScene):
       
     def get_surface(self,axes, func, **kwargs):
         config = {
-            "u_min": axes.c,
-            "u_max": axes.d,
-            "v_min": axes.a,
-            "v_max": axes.b,
+            "u_min": axes.a,
+            "u_max": axes.b,
+            "v_min": axes.c,
+            "v_max": axes.d,
             "resolution": (
                 (axes.y_max - axes.y_min) // axes.y_axis.tick_frequency,
                 (axes.x_max - axes.x_min) // axes.x_axis.tick_frequency,
@@ -153,7 +153,7 @@ class SurfacesAnimation(ThreeDScene):
 
         # Add xy-plane
         input_plane = self.get_surface(
-            axes, lambda x, t: 1e-5
+            axes, lambda x, t: 0
         )
         input_plane.set_style(
             fill_opacity=0.5,
