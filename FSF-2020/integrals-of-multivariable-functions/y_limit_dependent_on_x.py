@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-class AreaUnderCurve(GraphScene):
+class YlimitXdependent(GraphScene):
     CONFIG = {
         "x_min" : 0,
         "x_max" : 1,
@@ -26,7 +26,7 @@ class AreaUnderCurve(GraphScene):
             x_min = 0,
             x_max = 1,
             color = RED)
-        line_eqn=TextMobject("2x+y=0").move_to(self.graph_origin+.8*X+Y).rotate(np.arctan(-2))
+        line_eqn=TextMobject("2x+y=2").move_to(self.graph_origin+.8*X+Y).rotate(np.arctan(-2))
         self.line=line
         
         caption=TextMobject(r"See the value of $y$ \\ is changing with $x$").move_to(self.graph_origin+1.2*X+1.8*Y)
@@ -36,7 +36,7 @@ class AreaUnderCurve(GraphScene):
         self.play(Write(caption))
         self.show_y_values_at_different_x()
 
-        self.wait(2)
+        self.wait(.5)
         
   ###################         
     def show_area(self):
@@ -59,10 +59,10 @@ class AreaUnderCurve(GraphScene):
             self.line, 
             x_min = 0,
             x_max = 1,
-            dx =.02,
+            dx =.01,
             start_color = BLUE,
             end_color = BLUE,
-            fill_opacity = 0.75,
+            fill_opacity =1,
             stroke_width = 0,
         )
      #   self.play(ShowCreation(rects))
@@ -81,10 +81,10 @@ class AreaUnderCurve(GraphScene):
         last_rect = None
         for rect in rects_subset:
             brace = Brace(rect, LEFT, buff = 0)
-            y = TexMobject("y=2-2x")
+            y = TexMobject("y=2-2x")#.rotate(PI/2)
             y.next_to(brace, LEFT, SMALL_BUFF)
             anims = [
-                rect.set_fill, YELLOW, 1,
+                rect.set_fill, BLUE_E, 1,
                 dx_brace_group.next_to, rect, DOWN, SMALL_BUFF
             ]
             if last_rect is not None:
@@ -109,5 +109,5 @@ class AreaUnderCurve(GraphScene):
         y = last_y
         y_brace = last_brace
         
-        
+          
 #uploaded by Somnath Pandit.FSF2020_Double_Integral
