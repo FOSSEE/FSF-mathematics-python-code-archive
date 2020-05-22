@@ -1,4 +1,5 @@
 # Contributer: Vaishnavi Bisht
+Github: https://github.com/vnb09
 <br/></br>
 ## Sub-Topics Covered:
 + Critical Points
