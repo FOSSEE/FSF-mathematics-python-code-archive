@@ -1,4 +1,4 @@
-# Contributer: Vaishnavi Bisht
+# Contributor: Vaishnavi Bisht
 Github: https://github.com/vnb09
 <br/></br>
 ## Sub-Topics Covered:
