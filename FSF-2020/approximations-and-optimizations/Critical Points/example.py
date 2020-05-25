@@ -13,7 +13,7 @@ class ExampleAnimation(ThreeDScene):
             ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [PURPLE_D, PURPLE_E],
             resolution=(20, 20)).scale(1)
         
-        self.set_camera_orientation(phi = 35 * DEGREES, theta = -40* DEGREES)
+        self.set_camera_orientation(phi = 35 * DEGREES, theta = -40 * DEGREES)
         
         f_text = TextMobject("$f(x,y) = (y-x)(1-2x-3y)$").to_corner(UL)
         d = Dot(np.array([0,0,0]), color = '#800000')  #---- Critical Point
