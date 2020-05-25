@@ -18,33 +18,8 @@ class ExampleAnimation(ThreeDScene):
             ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [PURPLE_D, PURPLE_E],
             resolution=(20, 20)).scale(1)       
         
-        fx_text = TextMobject("$\\frac{\\partial f}{\\partial x} = 4x-1+y$").to_corner(UL)
-
-        #----fx = 4x-1+y
-        fx = ParametricSurface(
-            lambda u, v: np.array([
-                u,
-                v,
-                4*u-1+v
-            ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [BLUE_D, BLUE_E],
-            resolution = (20, 20)).scale(1)
-
-        fy_text = TextMobject("$\\frac{\\partial f}{\\partial y} = -6y+1+x$").to_corner(UL)
-
-        #----fy = -6y+1+x
-        fy = ParametricSurface(
-            lambda u, v: np.array([
-                u,
-                v,
-                -6*v+1+u
-            ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [RED_D, RED_E],
-            resolution = (20, 20)).scale(1)
-
         self.set_camera_orientation(phi = 75 * DEGREES)
-        self.begin_ambient_camera_rotation(rate=0.2)
-
-        group1 = VGroup(axes,f,d,d_text,r_text,f_text)
-        group2 = VGroup(axes,fx,fx_text)
+        self.begin_ambient_camera_rotation(rate=0.5)
 
         self.add_fixed_in_frame_mobjects(f_text)
         self.wait(1) 
@@ -54,16 +29,4 @@ class ExampleAnimation(ThreeDScene):
         self.add_fixed_in_frame_mobjects(d_text)
         self.wait(1)
         self.add_fixed_in_frame_mobjects(r_text)
-        self.wait(2)
-        self.play(FadeOut(group1))
-        self.wait(1)
-        self.add_fixed_in_frame_mobjects(fx_text) 
-        self.add(axes)
-        self.play(Write(fx))
-        self.wait(2)
-        self.play(FadeOut(group2))
-        self.wait(1)
-        self.add_fixed_in_frame_mobjects(fy_text) 
-        self.add(axes)
-        self.play(Write(fy))
-        self.wait(2)
+        self.wait(3)
