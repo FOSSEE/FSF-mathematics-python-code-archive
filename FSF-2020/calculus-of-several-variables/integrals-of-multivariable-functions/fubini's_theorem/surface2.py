@@ -8,10 +8,10 @@ class SurfacesAnimation(ThreeDScene):
             "x_max": 4,
             "y_min": 0,
             "y_max": 4,
-            "z_min": -4,
+            "z_min": -2,
             "z_max": 4,
             "a":0 ,"b": 4, "c":0 , "d":4,
-            "axes_shift":IN+LEFT,
+            "axes_shift":IN+2*LEFT+2*DOWN,
             "x_axis_config": {
                 "tick_frequency": 1,
                 "include_tip": False,
@@ -37,25 +37,23 @@ class SurfacesAnimation(ThreeDScene):
             "stroke_color": WHITE,
             "stroke_opacity": 0.5,
         },
-    "Func": lambda x,y: 5*(x**2-y**2)/((1e-4+x**2+y**2)**2)
+    "Func": lambda x,y: x*y/4
     }
 
 
     def construct(self):
 
         self.setup_axes()
-        self.set_camera_orientation(#distance=10,
-            phi=80 * DEGREES,
-            theta=35 * DEGREES,
+        self.set_camera_orientation(
+            distance=30,
+            phi=75 * DEGREES,
+            theta=20 * DEGREES,
         )
         
-        fn_text=TextMobject("$z=\dfrac{x^2-y^2}{(x^2+y^2)^2}$").set_color(BLUE)
-        fn_text.to_corner(UR,buff=1)
+        fn_text=TextMobject("$z=xy$").set_color(BLUE).scale(1.5)
+        fn_text.to_corner(UR,buff=2)
         self.add_fixed_in_frame_mobjects(fn_text) 
         
-        R=TextMobject("R").set_color(BLACK).scale(2).rotate(180*DEGREES , OUT)
-        R.move_to(self.axes.input_plane,IN)
-        self.add(R)
         
         #get the surface
         surface= self.get_surface(
@@ -63,19 +61,76 @@ class SurfacesAnimation(ThreeDScene):
             self.Func(x,y)
         )
         surface.set_style(
-            fill_opacity=0.6,
+            fill_opacity=.5,
             fill_color=BLUE_E,
-            stroke_width=0.8,
+            stroke_width=0.2,
             stroke_color=WHITE,
         )
+        #get boundary curves
+        c1=self.get_curve(
+        self.axes, lambda x: x**2/4
+        )
+        c1_label=TextMobject("$y=x^2$").next_to(c1,IN+OUT).shift(DOWN+RIGHT)
+        c1_label.rotate(PI)
+        c1_group=VGroup(c1,c1_label).set_color(ORANGE)
+
+        c2=self.get_curve(
+        self.axes, lambda x: x
+        ).set_color(PINK)
+        c2_label=TextMobject("$y=x$").next_to(c2,IN+OUT)
+        c2_label.rotate(PI/2,about_point=(c2_label.get_corner(UL)))
+        c2_group=VGroup(c2,c2_label).set_color(YELLOW_E)
         
         
-        self.begin_ambient_camera_rotation(rate=0.2)
+        
+        self.add(c1,c2,c1_label,c2_label)
+        
+        self.begin_ambient_camera_rotation(rate=0.4)
+        self.get_region(self.axes,c1,c2)
         self.play(Write(surface))
-        
         self.get_lines()
-        self.wait(4)
-      
+        self.wait(1)
+        self.stop_ambient_camera_rotation()
+        self.move_camera(
+            distance=20,
+            phi=10 * DEGREES,
+            theta=80 * DEGREES,
+            run_time=2.5
+        )
+        self.wait(2)
+    
+    
+    
+    def get_curve(self,axes, func, **kwargs):
+        config = {
+            "t_min": axes.x_min,
+            "t_max": axes.x_max,    
+        }
+        config.update(kwargs)
+        return ParametricFunction(
+            lambda  x : axes.c2p(
+                x, func(x),0
+            ),
+            **config
+        )
+    
+    def get_region(self,axes,curve1,curve2,**kwargs):
+        x_vals=np.arange(axes.x_min,axes.x_max,.1)
+        c1_points=[curve1.get_point_from_function(x) for x in x_vals]
+        c2_points=[curve2.get_point_from_function(x) for x in x_vals]
+        c2_points.reverse()
+        points=c1_points+c2_points
+        region=Polygon(*points,
+            stroke_width=0,  
+            fill_color=PINK,
+            fill_opacity=.5
+        )
+        R=TextMobject("R").set_color(PINK).scale(2).rotate(180*DEGREES , OUT)
+        R.move_to(region,IN+RIGHT)
+        
+        self.play(Write(region))
+        self.add(R)
+              
     def get_surface(self,axes, func, **kwargs):
         config = {
             "u_min": axes.x_max,
@@ -123,7 +178,8 @@ class SurfacesAnimation(ThreeDScene):
         line=DashedLine(start,end,color=color)
         
         return line
-            
+        
+    #customize 3D axes        
     def get_three_d_axes(self, include_labels=True, include_numbers=True, **kwargs):
         config = dict(self.axes_config)
         config.update(kwargs)
@@ -167,7 +223,7 @@ class SurfacesAnimation(ThreeDScene):
         
     def setup_axes(self):
         axes = self.get_three_d_axes(include_labels=True)
-        axes.add(axes.input_plane)
+     #   axes.add(axes.input_plane)
         axes.scale(1)
      #   axes.center()
         axes.shift(axes.axes_shift)
@@ -179,12 +235,10 @@ class SurfacesAnimation(ThreeDScene):
         x_axis = axes.x_axis
         y_axis = axes.y_axis
         tex_vals_x = [
-            ("a", axes.a+.4),
-            ("b", axes.b),
+            ("1", axes.b),
         ]
         tex_vals_y=[
-            ("c", axes.c+.4),
-            ("d", axes.d)
+            ("1", axes.d)
         ]
         x_labels = VGroup()
         y_labels = VGroup()
@@ -227,6 +281,6 @@ class SurfacesAnimation(ThreeDScene):
             axis.add(axis.label)
         return axes    
         
-#uploaded by Somnath Pandit.FSF2020_Fubini's_Theorem
-
-
+  #uploaded by Somnath Pandit.FSF2020_Fubini's_Theorem
+  
+  
