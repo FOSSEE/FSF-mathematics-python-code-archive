@@ -11,8 +11,8 @@ class TheoremAnimation(ThreeDScene):
                 u,
                 v,
                 u**2+v**2
-            ]),v_min=-1,v_max=1,u_min=-1,u_max=1,checkerboard_colors=[TEAL_E],
-            resolution=(20, 20)).scale(1)     
+            ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [TEAL_E],
+            resolution = (20, 20)).scale(1)     
         
         #----parabola: -x**2-y**2
         parabola2 = ParametricSurface(
@@ -20,14 +20,14 @@ class TheoremAnimation(ThreeDScene):
                 u,
                 v,
                 -u**2-v**2
-            ]),v_min=-1,v_max=1,u_min=-1,u_max=1,checkerboard_colors=[PURPLE_E,PURPLE_E],
-            resolution=(20, 20)).scale(1)
+            ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [PURPLE_E,PURPLE_E],
+            resolution = (20, 20)).scale(1)
                
-        self.set_camera_orientation(phi=75 * DEGREES)  
-        self.begin_ambient_camera_rotation(rate=0.4)  
+        self.set_camera_orientation(phi = 75 * DEGREES)  
+        self.begin_ambient_camera_rotation(rate = 0.4)  
 
         d = Dot(np.array([0,0,0]), color = '#800000')           #---- critical point     
-        r = Rectangle(fill_color= '#C0C0C0',fill_opacity =0.3).move_to(ORIGIN)    #----tangent plane         
+        r = Rectangle(fill_color = '#C0C0C0',fill_opacity = 0.3).move_to(ORIGIN)    #----tangent plane         
 
         parabola1_text = TextMobject("Maximum with horizontal tangent plane").scale(0.7).to_corner(UL)    
      
