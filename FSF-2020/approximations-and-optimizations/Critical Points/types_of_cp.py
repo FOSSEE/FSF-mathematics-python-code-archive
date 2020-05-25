@@ -4,7 +4,7 @@ class TypescpAnimation(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes()
         
-        r_text = TextMobject("Relative Maxima at ORIGIN",color ='#87CEFA')
+        r_text = TextMobject("Relative Maximum at ORIGIN",color ='#87CEFA')
         f_text = TextMobject("$f(x,y) = -x^2-y^2$").to_corner(UL)
 
         #----graph of first function f(x,y) = -x**2-y**2
@@ -28,7 +28,7 @@ class TypescpAnimation(ThreeDScene):
             ]),v_min = -1, v_max = 1, u_min = -1, u_max = 1, checkerboard_colors = [RED_D, RED_E],
             resolution = (20, 20)).scale(1)
         
-        r3_text = TextMobject("Relative Minima at ORIGIN",color ='#87CEFA')
+        r3_text = TextMobject("Relative Minimum at ORIGIN",color ='#87CEFA')
         f3_text = TextMobject("$f(x,y) = x^2+y^2$").to_corner(UL)         
         
         #----graph of third function f(x,y) = x**2+y**2   
@@ -41,29 +41,30 @@ class TypescpAnimation(ThreeDScene):
             resolution = (20, 20)).scale(1) 
         
         self.set_camera_orientation(phi = 75 * DEGREES, theta = -45 * DEGREES )
+        d = Dot(np.array([0,0,0]), color = '#800000')        #---- critical point  
 
         self.add_fixed_in_frame_mobjects(r_text)
         self.wait(1)
         self.play(FadeOut(r_text))
         self.add(axes)
-        self.play(Write(f))
+        self.play(Write(f),Write(d))
         self.add_fixed_in_frame_mobjects(f_text)
         self.wait(2)
-        self.play(FadeOut(axes),FadeOut(f),FadeOut(f_text))
+        self.play(FadeOut(axes),FadeOut(f),FadeOut(f_text),FadeOut(d))
 
         self.add_fixed_in_frame_mobjects(r2_text)
         self.wait(1)
         self.play(FadeOut(r2_text))
         self.add(axes)
-        self.play(Write(f2))
+        self.play(Write(f2),Write(d))
         self.add_fixed_in_frame_mobjects(f2_text)
         self.wait(2)
-        self.play(FadeOut(axes),FadeOut(f2),FadeOut(f2_text))
+        self.play(FadeOut(axes),FadeOut(f2),FadeOut(f2_text),FadeOut(d))
 
         self.add_fixed_in_frame_mobjects(r3_text)
         self.wait(1)
         self.play(FadeOut(r3_text))
         self.add(axes)
-        self.play(Write(f3))
+        self.play(Write(f3),Write(d))
         self.add_fixed_in_frame_mobjects(f3_text)
         self.wait(2)
