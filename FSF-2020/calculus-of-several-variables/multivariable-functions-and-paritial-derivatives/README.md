@@ -4,6 +4,6 @@ Github Account : <a href="https://github.com/nishanpoojary">nishanpoojary</a>
 ## Sub-Topics Covered:
 + Scalar Functions
 + Multivariable Functions
-+ Limits and continuity of Multivariable Function
++ Limits and Continuity of Multivariable Function
 + Partial Derivatives
 + Directonal Derivatives
