@@ -5,7 +5,7 @@ class ExampleAnimation(ThreeDScene):
         axes = ThreeDAxes()
 
         f_text = TextMobject("$f(x,y) = (y-x)(1-2x-3y)$").to_corner(UL)        
-        d = Dot(np.array([0,0,0]), color = '#800000')  #---- Critical Point
+        d = Dot(np.array([0,0,0]), color = '#800000')   #---- Critical Point
         d_text = TextMobject("$(0.2,0.2)$",color = '#DC143C').scale(0.5).shift(0.2*UP)  #----x = 0.2, y = 0.2
         r_text=TextMobject("Critical Point",color = '#00FFFF').shift(0.3*DOWN).scale(0.6)
 
