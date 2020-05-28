@@ -63,7 +63,7 @@ class SurfacesAnimation(ThreeDScene):
         surface.set_style(
             fill_opacity=.5,
             fill_color=BLUE_E,
-            stroke_width=0.2,
+            stroke_width=0.4,
             stroke_color=WHITE,
         )
         #get boundary curves
@@ -85,17 +85,18 @@ class SurfacesAnimation(ThreeDScene):
         
         self.add(c1,c2,c1_label,c2_label)
         
-        self.begin_ambient_camera_rotation(rate=0.4)
+        self.begin_ambient_camera_rotation(rate=0.24)
         self.get_region(self.axes,c1,c2)
         self.play(Write(surface))
         self.get_lines()
-        self.wait(1)
+        self.wait(3.5)
         self.stop_ambient_camera_rotation()
+        self.wait(.5)
         self.move_camera(
             distance=20,
             phi=10 * DEGREES,
             theta=80 * DEGREES,
-            run_time=2.5
+            run_time=3
         )
         self.wait(2)
     
@@ -128,7 +129,7 @@ class SurfacesAnimation(ThreeDScene):
         R=TextMobject("R").set_color(PINK).scale(2).rotate(180*DEGREES , OUT)
         R.move_to(region,IN+RIGHT)
         
-        self.play(Write(region))
+        self.play(ShowCreation(region))
         self.add(R)
               
     def get_surface(self,axes, func, **kwargs):
@@ -279,8 +280,11 @@ class SurfacesAnimation(ThreeDScene):
         axes.z_axis.label = z_label
         for axis in axes:
             axis.add(axis.label)
-        return axes    
+        return axes  
         
   #uploaded by Somnath Pandit.FSF2020_Fubini's_Theorem
   
   
+          
+        
+    
