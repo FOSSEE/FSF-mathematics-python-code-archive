@@ -8,7 +8,7 @@ FSF2020--Somnath Pandit
 
 ![file2_area_under_func](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file2_area_under_func.gif?raw=true)
 
-![file3_y_limit_dependent_on_x](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals?raw=true/file3_y_limit_dependent_on_x.gif)
+![file3_y_limit_dependent_on_x](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file3_y_limit_dependent_on_x.gif)
 
 ![file4_non_rect_region](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file4_non_rect_region.gif?raw=true)
 
