@@ -29,7 +29,7 @@ class YlimitXdependent(GraphScene):
         line_eqn=TextMobject("2x+y=2").move_to(self.graph_origin+.8*X+Y).rotate(np.arctan(-2))
         self.line=line
         
-        caption=TextMobject(r"See the value of $y$ \\ is changing with $x$").move_to(self.graph_origin+1.2*X+1.8*Y)
+        caption=TextMobject(r"The value of $y$ is\\ changing with $x$").move_to(self.graph_origin+1.2*X+1.8*Y)
         self.play(ShowCreation(line),Write(line_eqn))
    #     self.show_area()
         self.show_rects()

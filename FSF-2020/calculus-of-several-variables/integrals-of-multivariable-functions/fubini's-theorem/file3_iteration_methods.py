@@ -63,15 +63,13 @@ class IterationMethods(GraphScene):
             ).align_to(
             caption_limit,LEFT
             )
-            
+        self.int_lim=int_lim  
         self.play(ShowCreation(VGroup(curve1,curve2)),Write(VGroup(c2_eqn,c1_eqn)))
         
         self.play(Write(caption_limit))
         self.get_rects()
         self.show_integral_values_at_different_x()
         self.wait(1)
-        self.add(int_lim)
-        
         self.integral_setup(int_lim,first_y=True)
         
         
@@ -105,8 +103,9 @@ class IterationMethods(GraphScene):
         
         int_lim_y=int_lim.copy()
         int_lim_y.next_to(int_lim,DOWN)
+        self.int_lim_y=int_lim_y
         equal=TextMobject("$$=$$").next_to(int_lim_y,LEFT)
-        self.add(equal,int_lim_y)
+        self.add(equal)
         
         self.integral_setup(int_lim_y,first_y=False)
 
@@ -139,7 +138,8 @@ class IterationMethods(GraphScene):
           self.play(ApplyMethod(
               self.dx_label.next_to,
               self.y_int,RIGHT),
-              ShowCreation(area),run_time=4
+              ShowCreation(area),
+              Write(self.int_lim),run_time=4
           )
         else:
           area=self.get_area(base_y=True)
@@ -155,7 +155,8 @@ class IterationMethods(GraphScene):
           self.play(ApplyMethod(
               self.dy_label.next_to,
               self.x_int,RIGHT),
-              ShowCreation(area),run_time=4
+              ShowCreation(area),
+               Write(self.int_lim_y),run_time=4
           )
             
     def get_area(self,base_y=False):
