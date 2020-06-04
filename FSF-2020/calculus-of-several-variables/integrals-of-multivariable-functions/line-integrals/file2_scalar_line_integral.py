@@ -52,9 +52,7 @@ class LineIntegrationProcess(SpecialThreeDScene):
         )
         
         fn_text=TextMobject("$z=2+x^2y$").set_color(BLUE)
-        self.add_fixed_in_frame_mobjects(fn_text) 
-        fn_text.to_edge(TOP,buff=MED_SMALL_BUFF)
-        
+        fn_text.to_corner(UR,buff=.8).shift(DOWN)
         
         #get the surface
         surface= self.get_surface(
@@ -69,10 +67,11 @@ class LineIntegrationProcess(SpecialThreeDScene):
         )
         
         
-     #   self.play(Write(surface))    
-        self.add(surface)
-        self.get_line_of_int(fn_text)
-        self.begin_ambient_camera_rotation(rate=-0.02)
+     #   self.play(Write(surface)) 
+        self.add_fixed_in_frame_mobjects(fn_text)   
+        self.play(Write(surface),Write(fn_text))
+        self.get_line_of_int()
+        self.begin_ambient_camera_rotation(rate=-0.035)
         self.get_field_values_on_line()
         self.wait(1.5)
         self.area=self.get_area()
@@ -86,7 +85,7 @@ class LineIntegrationProcess(SpecialThreeDScene):
         self.add_fixed_in_frame_mobjects(area_text) 
         self.play(Write(area_text))
         self.play(Write(self.area),run_time=2)
-        self.play(FadeOut(surface))
+        self.play(FadeOut(VGroup(surface,fn_text)))
         self.wait()
         
         self.stop_ambient_camera_rotation()
@@ -99,9 +98,7 @@ class LineIntegrationProcess(SpecialThreeDScene):
             
 
         
-    def get_line_of_int(self,fn_text):  
-        self.remove(fn_text)
-          
+    def get_line_of_int(self): 
         line_of_int_text=TextMobject(r"Line of integration is\\","$\\vec r(t)=\cos(t)\hat x+\sin(t)\hat y$")
         line_of_int_text[1].set_color(PINK)
         line_of_int_text.to_edge(TOP,buff=SMALL_BUFF)
