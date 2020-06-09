@@ -79,26 +79,16 @@ class LineIntegration(GraphScene):
         return vector_field   
 
         
-        
-    def get_points(self):
-        dn=.1
-        x_vals=np.arange(self.a,self.b,dn)
-        y_vals=np.arange(self.a,self.b,dn)
-        points=[]
-        for x_val in x_vals:
-          for y_val in y_vals:
-            points+=[self.coords_to_point(x_val,y_val)]
-        return points 
     
     def get_endpoints_of_curve(self):
-        dots=[[1,1],[0,0]]
-        dot_labels= ["(1,1)","(0,0)"]
-        for dot,label in zip(dots,dot_labels):
-            dot=Dot(self.coords_to_point(*dot)).set_color(RED)
+        points=[[1,1],[0,0]]
+        point_labels= ["(1,1)","(0,0)"]
+        for point,label in zip(points,point_labels):
+            dot=Dot(self.coords_to_point(*point)).set_color(RED)
             dot_label=TexMobject(label)
             dot_label.next_to(dot,DR)
             self.add(dot,dot_label)
-        self.end_points=dots
+        self.end_points=points
         
     def show_line_integral(self):
         int_text=TexMobject(
