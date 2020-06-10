@@ -113,7 +113,35 @@ class IntegrationProcess(SpecialThreeDScene):
             fill_color=BLUE_E,
             fill_opacity=.65,
         ))
+        plane_side1 = always_redraw(lambda: Polygon(
+            *[
+            axes.c2p(axes.a,y,self.Func(axes.a,y)) 
+                for y in np.arange(axes.c,y(),0.01)
+            ],
+            *[
+             axes.c2p(axes.a, y, 0)
+                for y in [ y(),axes.c, ]
+            ],
+            stroke_width=2.5,
+            fill_color=BLUE_C,
+            fill_opacity=.2,
+        ))
+        plane_side2 = always_redraw(lambda: Polygon(
+            *[
+            axes.c2p(axes.b,y,self.Func(axes.b,y)) 
+                for y in np.arange(axes.c,y(),0.01)
+            ],
+            *[
+             axes.c2p(axes.b, y, 0)
+                for y in [y(),axes.c,] 
+            ],
+            stroke_width=2.5,
+            fill_color=BLUE_E,
+            fill_opacity=.45,
+        ))
         plane.suspend_updating()
+        plane_side1.suspend_updating()
+        plane_side2.suspend_updating()
         
         first_x_text=TextMobject("First the $x$ integration..",color=YELLOW)
         first_x_text.to_corner(UR,buff=1.1)
@@ -138,8 +166,11 @@ class IntegrationProcess(SpecialThreeDScene):
         self.remove(first_x_text)
         self.add_fixed_in_frame_mobjects(then_y_text) 
         self.play(Write(then_y_text))
+        self.add(plane.copy(),plane_side1,plane_side2)
         graph.resume_updating()
         plane.resume_updating()
+        plane_side1.resume_updating()
+        plane_side2.resume_updating()
         self.play(
             ApplyMethod(
                 y_tracker.set_value, axes.d,
@@ -147,6 +178,11 @@ class IntegrationProcess(SpecialThreeDScene):
                 run_time=6,
             )  
         )
+        
+        graph.suspend_updating()
+        plane.suspend_updating()
+        plane_side1.suspend_updating()
+        plane_side2.suspend_updating()
         
 
     def get_y_slice_graph(self, axes, func, y, **kwargs):
@@ -189,9 +225,6 @@ class IntegrationProcess(SpecialThreeDScene):
         
     def get_lines(self):
         axes = self.axes
-        labels=[axes.x_axis.n2p(axes.a), axes.x_axis.n2p(axes.b), axes.y_axis.n2p(axes.c),       
-            axes.y_axis.n2p(axes.d)]
-        
         
         surface_corners=[]
         for x,y,z in self.region_corners:
@@ -201,13 +234,17 @@ class IntegrationProcess(SpecialThreeDScene):
         for start , end in zip(surface_corners,
         self.region_corners):
             lines.add(self.draw_lines(start,end,"RED"))
-            
+        
+        labels=[
+            (axes.a,0,0), 
+            (axes.b,0,0), 
+            (0,axes.d,0), 
+            (0,axes.c,0)
+        ]  
+        self.region_corners[-1]=self.region_corners[0]
         for start , end in zip(labels,
         self.region_corners):
-         #   lines.add(self.draw_lines(start,end,"BLUE"))
-         #   print (start,end)
-            pass
-       # self.play(ShowCreation(lines))
+            lines.add(self.draw_lines(start,end,"WHITE"))
         self.add(lines)
         
               
@@ -217,9 +254,10 @@ class IntegrationProcess(SpecialThreeDScene):
         line=DashedLine(start,end,color=color)
         
         return line
-        
-        
-    #customize 3D axes        
+   
+   
+#------------------------------------------------------------
+    #customize 3d axes        
     def get_three_d_axes(self, include_labels=True, include_numbers=True, **kwargs):
         config = dict(self.axes_config)
         config.update(kwargs)
@@ -256,7 +294,7 @@ class IntegrationProcess(SpecialThreeDScene):
         axes.input_plane = input_plane
 
         self.region_corners=[ 
-        input_plane.get_corner(pos) for pos in (DL,DR,UR,UL)]
+        input_plane.get_corner(pos) for pos in (DL,DR,UL,UR)]
         
         return axes
         

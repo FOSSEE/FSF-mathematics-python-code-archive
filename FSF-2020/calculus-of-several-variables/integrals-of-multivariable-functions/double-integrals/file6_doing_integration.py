@@ -5,13 +5,13 @@ class IntegrationProcess(SpecialThreeDScene):
     CONFIG = {
         "axes_config": {
             "x_min": 0,
-            "x_max": 8,
+            "x_max": 7,
             "y_min": 0,
-            "y_max": 8,
+            "y_max": 7,
             "z_min": 0,
-            "z_max": 6,
+            "z_max": 4,
             "a":1 ,"b": 6, "c":2 , "d":6,
-            "axes_shift":-3*OUT + 5*LEFT,
+            "axes_shift":-3*OUT,
             "x_axis_config": {
                 "tick_frequency": 1,
                # "include_tip": False,
@@ -37,7 +37,7 @@ class IntegrationProcess(SpecialThreeDScene):
             "stroke_color": WHITE,
             "stroke_opacity": 0.5,
         },
-    "Func": lambda x,y: 2+y/4+np.cos(x)
+    "Func": lambda x,y: 2+y/4+np.cos(x/1.4)
     }
 
 
@@ -45,31 +45,34 @@ class IntegrationProcess(SpecialThreeDScene):
 
         self.setup_axes()
         axes=self.axes
+        
+        self.camera.frame_center.shift(axes.c2p(3,4,1.7))
         self.set_camera_orientation(distance=35,
-            phi=85 * DEGREES,
-            theta=-80 * DEGREES,
+            phi= 80 * DEGREES,
+            theta= -80 * DEGREES,
+            gamma = 0 * DEGREES
         )
         
         fn_text=TextMobject("$z=f(x,y)$").set_color(PINK)
         self.add_fixed_in_frame_mobjects(fn_text) 
-        fn_text.to_edge(TOP,buff=MED_SMALL_BUFF)
+        
         
         R=TextMobject("R").set_color(BLACK).scale(3)
         R.move_to(axes.input_plane,IN)
         self.add(R)
         
-        #get the surface
+       # get the surface
         surface= self.get_surface(
             axes, lambda x , y: 
             self.Func(x,y)
         )
         surface.set_style(
-            fill_opacity=0.75,
+            fill_opacity=.65,
             fill_color=PINK,
             stroke_width=0.8,
             stroke_color=WHITE,
         )
-        
+        fn_text.next_to(surface,UP,buff=MED_LARGE_BUFF)
         slice_curve=(self.get_y_slice_graph(
             axes,self.Func,5,color=YELLOW))
             
@@ -79,10 +82,10 @@ class IntegrationProcess(SpecialThreeDScene):
         self.add(surface)
         
         self.get_lines()
-   
+      
         self.show_process(axes)
         
-        self.wait(2)
+        self.wait(3)
         
      
     
@@ -90,6 +93,7 @@ class IntegrationProcess(SpecialThreeDScene):
         y_tracker = ValueTracker(axes.c)
         self.y_tracker=y_tracker
         y=y_tracker.get_value
+        
         graph = always_redraw(
             lambda: self.get_y_slice_graph(
                 axes, self.Func, y(),
@@ -107,24 +111,67 @@ class IntegrationProcess(SpecialThreeDScene):
             ],
             *[
              axes.c2p(x, y(), 0)
-                for x in [ axes.b, axes.a,] 
+                for x in [ axes.b, axes.a,]
             ],
-            stroke_width=0,
+            stroke_width=2,
+            fill_color=BLUE_D,
+            fill_opacity=.4,
+        ))
+        
+        plane_side1 = always_redraw(lambda: Polygon(
+            *[
+            axes.c2p(axes.a,y,self.Func(axes.a,y)) 
+                for y in np.arange(axes.c,y(),0.01)
+            ],
+            *[
+             axes.c2p(axes.a, y, 0)
+                for y in [ y(),axes.c, ]
+            ],
+            stroke_width=2.5,
+            fill_color=BLUE_C,
+            fill_opacity=.2,
+        ))
+        plane_side2 = always_redraw(lambda: Polygon(
+            *[
+            axes.c2p(axes.b,y,self.Func(axes.b,y)) 
+                for y in np.arange(axes.c,y(),0.01)
+            ],
+            *[
+             axes.c2p(axes.b, y, 0)
+                for y in [y(),axes.c,] 
+            ],
+            stroke_width=2.5,
             fill_color=BLUE_E,
-            fill_opacity=.5,
+            fill_opacity=.45,
         ))
         plane.suspend_updating()
+        plane_side1.suspend_updating()
+        plane_side2.suspend_updating()
         
-        self.play(Write(VGroup(graph,plane)),run_time=4)
-        graph.resume_updating()
-        plane.resume_updating()
+        self.play(Write(VGroup(graph,plane)),run_time=2)
+        self.add(plane.copy(),plane_side1,plane_side2)
+        
+
+        plane_side1.resume_updating()
+        plane_side2.resume_updating()
+        
+        self.move_camera(
+            distance=30,
+            phi= 85 * DEGREES,
+            theta= -10 * DEGREES,
+            run_time=1.5
+        )
         self.play(
             ApplyMethod(
                 y_tracker.set_value, axes.d,
                 rate_func=linear,
                 run_time=6,
-            )  
+            ) 
         )
+        plane.suspend_updating()
+        plane_side1.suspend_updating()
+        plane_side2.suspend_updating()
+        
         
 
     def get_y_slice_graph(self, axes, func, y, **kwargs):
@@ -142,35 +189,7 @@ class IntegrationProcess(SpecialThreeDScene):
             **config,
         )
         return slice_curve
-        
-    '''def get_y_slice_plane(self, axes):
-        self.y_tracker=y_tracker
-        y=y_tracker.get_value()
-        curve_points=[
-            axes.c2p(x,y,self.Func(x,y)) 
-                for x in np.arange(axes.a,axes.b,0.01)
-        ]
-        base_points=[
-             axes.c2p(x, y, 0)
-                for x in [ axes.b, axes.a,] 
-        ]
-        plane_points= curve_points+base_points
-        plane = always_redraw(lambda: Polygon(
-            *plane_points,
-            stroke_width=.4,
-            fill_color=BLUE,
-            fill_opacity=0.2
-        ))
-        plane.add_updater(lambda m: m.shift(
-            axes.c2p(
-                axes.a,
-                y_tracker.get_value(),
-                1,
-            ) - plane.points[0]
-        ))
-        plane.y_tracker = y_tracker
-        
-        return plane  ''' 
+  
         
     def get_surface(self,axes, func, **kwargs):
         config = {
@@ -195,9 +214,6 @@ class IntegrationProcess(SpecialThreeDScene):
         
     def get_lines(self):
         axes = self.axes
-        labels=[axes.x_axis.n2p(axes.a), axes.x_axis.n2p(axes.b), axes.y_axis.n2p(axes.c),       
-            axes.y_axis.n2p(axes.d)]
-        
         
         surface_corners=[]
         for x,y,z in self.region_corners:
@@ -207,13 +223,17 @@ class IntegrationProcess(SpecialThreeDScene):
         for start , end in zip(surface_corners,
         self.region_corners):
             lines.add(self.draw_lines(start,end,"RED"))
-            
+        
+        labels=[
+            (axes.a,0,0), 
+            (axes.b,0,0), 
+            (0,axes.d,0), 
+            (0,axes.c,0)
+        ]  
+        self.region_corners[-1]=self.region_corners[0]
         for start , end in zip(labels,
         self.region_corners):
-         #   lines.add(self.draw_lines(start,end,"BLUE"))
-         #   print (start,end)
-            pass
-       # self.play(ShowCreation(lines))
+            lines.add(self.draw_lines(start,end,"WHITE"))
         self.add(lines)
         
               
@@ -223,7 +243,10 @@ class IntegrationProcess(SpecialThreeDScene):
         line=DashedLine(start,end,color=color)
         
         return line
-            
+   
+   
+#------------------------------------------------------------
+    #customize 3d axes            
     def get_three_d_axes(self, include_labels=True, include_numbers=True, **kwargs):
         config = dict(self.axes_config)
         config.update(kwargs)
@@ -260,7 +283,7 @@ class IntegrationProcess(SpecialThreeDScene):
         axes.input_plane = input_plane
 
         self.region_corners=[ 
-        input_plane.get_corner(pos) for pos in (DL,DR,UR,UL)]
+        input_plane.get_corner(pos) for pos in (DL,DR,UL,UR)]
         
         return axes
         
