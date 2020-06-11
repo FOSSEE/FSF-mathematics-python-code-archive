@@ -1,8 +1,8 @@
-**file1_surface**
-![file1_surface](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file1_surface.gif)
+**file1_area_under_func**
+![file1_area_under_func](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file1_area_under_func.gif)
 
-**file2_area_under_func**
-![file2_area_under_func](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file2_area_under_func.gif)
+**file2_volume_under_surface**
+![file2_volume_under_surface](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file2_volume_under_surface.gif)
 
 **file3_y_limit_dependent_on_x**
 ![file3_y_limit_dependent_on_x](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file3_y_limit_dependent_on_x.gif)
