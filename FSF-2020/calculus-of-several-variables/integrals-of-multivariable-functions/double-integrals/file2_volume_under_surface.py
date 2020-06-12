@@ -49,11 +49,19 @@ class SurfacesAnimation(ThreeDScene):
             theta=-100 * DEGREES,
         )
         
-        fn_text=TextMobject("$z=f(x,y)$").set_color(PINK)
+        fn_text=TextMobject(
+            "$z=f(x,y)$",
+            color=PINK,
+            stroke_width=1.5
+        )
         self.add_fixed_in_frame_mobjects(fn_text) 
         fn_text.to_edge(TOP,buff=MED_SMALL_BUFF)
         
-        riemann_sum_text=TextMobject(r"The volume approximated as\\ sum of cuboids",color=BLUE)
+        riemann_sum_text=TextMobject(
+            r"The volume approximated as\\ sum of cuboids",
+            color=BLUE,
+            stroke_width=1.5
+        )
         riemann_sum_text.to_corner(UR,buff=.2)
         
         R=TextMobject("R").set_color(BLACK).scale(3)
@@ -73,7 +81,7 @@ class SurfacesAnimation(ThreeDScene):
         )
         
         
-        self.begin_ambient_camera_rotation(rate=0.08)
+        self.begin_ambient_camera_rotation(rate=0.06)
         self.play(Write(surface))
      #   self.add(surface)
         
@@ -81,14 +89,42 @@ class SurfacesAnimation(ThreeDScene):
         self.wait(1)
         self.add_fixed_in_frame_mobjects(riemann_sum_text)
         self.play(Write(riemann_sum_text))
-        self.show_the_riemmann_sum(
+        
+        cuboids1=self.show_the_riemmann_sum(
             lambda x,y : np.array([x,y,self.Func(x,y)]),
             fill_opacity=1,
             dl=.5,
             start_color=BLUE,
             end_color=BLUE_E,
         )
+        self.play(ShowCreation(cuboids1),run_time=5)
         self.play(FadeOut(surface))
+        
+        cuboids2=self.show_the_riemmann_sum(
+            lambda x,y : np.array([x,y,self.Func(x,y)]),
+            fill_opacity=1,
+            dl=.25,
+            start_color=BLUE,
+            end_color=BLUE_E,
+        )
+        self.play(ReplacementTransform(
+            cuboids1,
+            cuboids2
+        ))
+        
+        cuboids3=self.show_the_riemmann_sum(
+            lambda x,y : np.array([x,y,self.Func(x,y)]),
+            fill_opacity=1,
+            dl=.1,
+            start_color=BLUE,
+            end_color=BLUE_E,
+            stroke_width=.1,
+        )
+        self.play(
+            FadeOut(cuboids2),
+            ShowCreation(cuboids3),
+        )
+        
         self.wait(3)
         
         
@@ -203,8 +239,7 @@ class SurfacesAnimation(ThreeDScene):
                   cuboid.set_stroke(stroke_color, width=stroke_width)
                   cuboids.add(cuboid)
             
-            self.play(ShowCreation(cuboids),run_time=6)
-           # self.add(cuboids)
+            return cuboids
             
   
 #-------------------------------------------------------  
