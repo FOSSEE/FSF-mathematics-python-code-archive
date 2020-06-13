@@ -1,6 +1,6 @@
 from manimlib.imports import*  
 
-class TheoremAnimation(ThreeDScene):
+class TangentPlane(ThreeDScene):
     def construct(self):
 
         axes = ThreeDAxes()
