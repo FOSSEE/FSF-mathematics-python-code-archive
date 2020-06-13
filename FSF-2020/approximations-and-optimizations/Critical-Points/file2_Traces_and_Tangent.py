@@ -53,7 +53,7 @@ class secondScene(ThreeDScene):
                 u,
                 v,
                 m.exp(-10*u**2-10*v**2) #---- f(x,y) 
-            ]),u_min=-2,u_max=1, v_min=-1,v_max=1,checkerboard_colors=[PURPLE_C,PURPLE_D,PURPLE_E,PURPLE_B]).scale(3).shift([1.1,0.48,1.731])
+            ]),u_min=-1,u_max=1, v_min=-1,v_max=1,checkerboard_colors=[PURPLE_C,PURPLE_D,PURPLE_E,PURPLE_B]).scale(3).shift([1.1,0.48,1.731])
 
         trace = ParametricSurface(
             lambda u, v: np.array([
