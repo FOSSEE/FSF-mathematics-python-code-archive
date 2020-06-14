@@ -165,6 +165,7 @@ class GradOfScalar(ThreeDScene):
         config.update(self.default_vector_field_config)
         config.update(kwargs)
         vector_field= VectorField(func,**config)
+        vector_field.move_to(self.axes.c2p(0,0,0))
         self.vector_field=vector_field
         
         if on_surface:
@@ -175,10 +176,8 @@ class GradOfScalar(ThreeDScene):
     
         
     def get_vectors_on_surface(self):
-        config = dict()
-        config.update(self.default_vector_field_config["vector_config"])
         vectors_on_surface = VGroup(*[
-            self.vector_field.get_vector(point,**config) 
+            self.vector_field.get_vector(point) 
             for point in self.surface_points
         ])
 
