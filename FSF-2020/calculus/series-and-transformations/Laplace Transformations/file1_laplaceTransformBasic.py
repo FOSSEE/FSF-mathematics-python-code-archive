@@ -1,0 +1,67 @@
+from manimlib.imports import *
+import pylatex
+
+class depict(Scene):
+    def construct(self):
+        square=Square(side_length=2,fill_color=GREEN,fill_opacity=0.7)
+        inputText=TextMobject("$t$")
+        squareText=TextMobject("$f$")
+        outputText=TextMobject("$f($","$t$","$)$")
+
+        inputText.scale(0.8)
+        outputText.scale(0.8)
+        inputText.shift(2.1*LEFT)
+        outputText.shift(1.5*RIGHT)
+        squareText.scale(1.2)
+
+        outputText.set_color_by_tex_to_color_map({"$t$":RED})
+
+        self.play(ShowCreation(square))
+        self.play(FadeIn(squareText))
+        self.add(inputText)
+        self.wait(0.5)
+        self.play(ApplyMethod(inputText.shift,0.9*RIGHT))
+        self.play(FadeOut(inputText),FadeIn(outputText))
+        self.play(ApplyMethod(outputText.shift,1.5*RIGHT))
+        self.wait(1)
+
+        fOutGroup=VGroup(outputText,square,squareText)
+        self.play(ApplyMethod(fOutGroup.scale,0.6))
+        self.play(ApplyMethod(fOutGroup.shift,5*LEFT))
+        self.wait(0.8)
+        laplaceSquare=Square(side_length=3,fill_color=BLUE,fill_opacity=0.6)
+        laplaceText=TextMobject("$\mathscr{L}$")
+        outText=TextMobject("$F($","$s$","$)$")
+        outText.scale(0.8)
+        outText.set_color_by_tex_to_color_map({"$s$":RED})
+        laplaceText.scale(1.5)
+        outText.shift(2*RIGHT)
+        self.play(ShowCreation(laplaceSquare))
+        self.play(FadeIn(laplaceText))
+        self.wait(0.5)
+        self.play(ApplyMethod(outputText.shift,RIGHT))
+        self.play(FadeOut(outputText),FadeIn(outText))
+        self.play(ApplyMethod(outText.shift,2*RIGHT))
+        self.wait(1)
+
+        updatedOutputText=TextMobject("$f($","$t$","$)$")
+        updatedOutputText.shift(2.5*LEFT)
+        updatedOutputText.set_color_by_tex_to_color_map({"$t$":RED})
+        updatedInputText=TextMobject("$t$")
+        updatedInputText.shift(6*LEFT)
+        updatedInputText.scale(0.7)
+        updatedOutputText.scale(0.7)
+
+        self.play(FadeIn(updatedInputText),FadeIn(updatedOutputText))
+        self.wait(0.5)
+
+        timeText=TextMobject("Time Domain")
+        frequencyText=TextMobject("Frequency Domain")
+        timeText.set_color(RED)
+        frequencyText.set_color(RED)
+        timeText.scale(0.35)
+        frequencyText.scale(0.35)
+        timeText.shift(2.5*LEFT+0.5*DOWN)
+        frequencyText.shift(4*RIGHT+0.5*DOWN)
+        self.play(Write(frequencyText),Write(timeText))
+        self.wait(2)
