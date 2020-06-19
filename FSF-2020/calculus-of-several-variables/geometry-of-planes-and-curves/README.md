@@ -1,4 +1,4 @@
-This repository contains the codes written by [Saarth Deshpande](https://github.com/saarthdeshpande) during the course of FOSSEE Summer Fellowship 2020 under the Floss: Mathematics using Python.
+This repository contains the codes written by [Saarth Deshpande](https://github.com/saarthdeshpande) during the course of FOSSEE Summer Fellowship 2020 under the FLOSS: Mathematics using Python.
 
 __Sub-topics covered__:
 * Equations of Planes and Lines
