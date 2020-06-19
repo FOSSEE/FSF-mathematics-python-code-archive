@@ -14,6 +14,7 @@ class pointnormal(ThreeDScene):
         ylabel = TextMobject(r'$y$').shift(4.5*RIGHT + 1.8*DOWN)
         zlabel = TextMobject(r'$z$').shift(3.3*UP+0.5*RIGHT)
 
+        normaltext = TextMobject(r'Consider an arbitrary \\ normal vector $\overrightarrow{n}$').scale(0.6).shift(2*UP + 2.5*LEFT)
         planetext = TextMobject(r'A single vector is normal \\ to infinitely many planes.').scale(0.6).shift(2*UP + 2.5*LEFT)
         pointtext = TextMobject(r'Given a fixed point $P$, \\ a plane is obtained as:').scale(0.6).shift(2*UP + 2.5*LEFT)
 
@@ -22,10 +23,11 @@ class pointnormal(ThreeDScene):
         self.add_fixed_in_frame_mobjects(xlabel, ylabel, zlabel)
         self.wait(1)
         self.play(FadeIn(normal))
-        self.add_fixed_in_frame_mobjects(normalLabel)
+        self.add_fixed_in_frame_mobjects(normalLabel, normaltext)
+        self.play(FadeIn(normaltext))
         self.wait(2)
         self.add_fixed_in_frame_mobjects(planetext)
-        self.play(FadeIn(planetext))
+        self.play(ReplacementTransform(normaltext, planetext), run_time=0.01)
         self.play(MoveAlongPath(plane1, normal), run_time = 6)
         self.add_fixed_in_frame_mobjects(pointtext)
         self.play(ReplacementTransform(planetext, pointtext))
@@ -33,5 +35,5 @@ class pointnormal(ThreeDScene):
         self.wait(1)
         self.play(Transform(plane1, plane2))
         self.wait(2)
-        self.play(FadeOut(axes), FadeOut(plane2), FadeOut(plane1), FadeOut(point), FadeOut(pointLabel), FadeOut(normal), FadeOut(normalLabel), FadeOut(planetext), FadeOut(pointtext), FadeOut(VGroup(*[xlabel, ylabel, zlabel])))
+        self.play(FadeOut(axes), FadeOut(plane2), FadeOut(plane1), FadeOut(point), FadeOut(pointLabel), FadeOut(normal), FadeOut(normalLabel), FadeOut(planetext), FadeOut(pointtext), FadeOut(normaltext), FadeOut(VGroup(*[xlabel, ylabel, zlabel])))
         self.wait(1)

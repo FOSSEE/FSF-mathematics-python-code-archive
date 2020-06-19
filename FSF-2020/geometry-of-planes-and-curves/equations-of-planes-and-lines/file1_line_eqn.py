@@ -3,16 +3,17 @@ from manimlib.imports import *
 class three(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes()
+        self.set_camera_orientation(phi=14.25* DEGREES,theta=0*DEGREES,distance=8)
         self.play(FadeIn(axes))
+
         plane = ParametricSurface(
             lambda u,v: np.array([
-                2,
-                2*v,
+                6,
+                8*v,
                 3*u
-                ])).rotate(45*DEGREES).shift(LEFT)
-        d2text = TextMobject(r'$\mathbb{R}^{2}: y = mx + c$').shift(1.5*LEFT + 2*UP).rotate(np.pi/2)
-        d3text = TextMobject(r'$\mathbb{R}^{3}: y = mx + c$').shift(4*RIGHT)
-        self.set_camera_orientation(phi=14.25* DEGREES,theta=0*DEGREES,distance=8)
+                ]), u_min = -0.8, u_max = 0.8, fill_opacity = 0.4).rotate(45*DEGREES).move_to(ORIGIN).shift(RIGHT+UP)
+        d2text = TextMobject(r'$\mathbb{R}^{2}: y = mx + c$').shift(3*LEFT + 2*UP).rotate(np.pi/2)
+        d3text = TextMobject(r'$\mathbb{R}^{3}: y = mx + c$').shift(4*RIGHT+3*UP)
         self.play(FadeIn(plane), FadeIn(d2text))
         self.wait(3)
         self.play(FadeOut(d2text))

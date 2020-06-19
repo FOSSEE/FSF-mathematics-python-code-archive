@@ -2,24 +2,24 @@ from manimlib.imports import *
 
 class parametricHelix(ThreeDScene, GraphScene):
     def construct(self):
-        self.x_min = -3
+        self.x_min = -5
         self.y_min = -4
         self.graph_origin = ORIGIN
-        self.x_max = 3
+        self.x_max = 5
         self.y_max = 4
         self.x_axis_label =  ""
         self.y_axis_label =  ""
-        self.x_axis_width = 7.5
+        self.x_axis_width = 10
         self.y_axis_height = 7.5
         ax1 = ThreeDAxes().scale(0.65).shift(2.6*RIGHT+DOWN+np.array([0,0,0.5]))
         axes_group = []
 
         self.setup_axes()
-        self.axes.shift(3*RIGHT + 2*UP).scale(0.5)
+        self.axes.shift(3*RIGHT + 2*UP).scale(0.3)
         axes_group.append(self.axes)
 
         self.setup_axes()
-        self.axes.shift(3*RIGHT + 2*DOWN).scale(0.5)
+        self.axes.shift(3*RIGHT + 2*DOWN).scale(0.3)
         axes_group.append(self.axes)
 
         axes_group = VGroup(*axes_group)
@@ -33,8 +33,8 @@ class parametricHelix(ThreeDScene, GraphScene):
                     t,
                     np.sin(t),
                     0
-                    ]), t_min = -np.pi, t_max = np.pi, color = GREEN_E
-                    ).shift(3*RIGHT + 2*UP).scale(0.4)
+                    ]), t_min = -4*np.pi, t_max = 4*np.pi, color = GREEN_E
+                    ).shift(3*RIGHT + 2*UP).scale(0.12)
 
         acost_text = TextMobject(r'$y = a\cos{t}$').scale(0.7).shift(4*RIGHT + DOWN)
         ylabel1 = TextMobject(r'$y$').shift(3.3*RIGHT+0.3*DOWN).scale(0.7)
@@ -45,11 +45,11 @@ class parametricHelix(ThreeDScene, GraphScene):
                     t,
                     np.cos(t),
                     0
-                    ]), t_min = -np.pi, t_max = np.pi, color = BLUE
-                    ).shift(3*RIGHT + 2*DOWN).scale(0.4)
+                    ]), t_min = -4*np.pi, t_max = 4*np.pi, color = BLUE
+                    ).shift(3*RIGHT + 2*DOWN).scale(0.12)
 
-        up_dot = Dot(color = RED)
-        down_dot = Dot(color = RED)
+        up_dot = Dot(color = RED).scale(0.6)
+        down_dot = Dot(color = RED).scale(0.6)
         helix_dot = Dot(radius = 0.16, color = RED)
 
         zlabel = TextMobject(r'$z$').scale(0.7).shift(3*UP + 2.8*LEFT)
@@ -62,12 +62,12 @@ class parametricHelix(ThreeDScene, GraphScene):
                 np.cos(TAU*t),
                 np.sin(TAU*t),
                 0.4*t
-                ]), t_min = -np.pi, t_max = np.pi, color = WHITE
+                ]), t_min = -2*np.pi/3, t_max = 1.8*np.pi/3, color = WHITE
                 ).shift(ax1.get_center())
 
         self.set_camera_orientation(phi = 75*DEGREES, theta=45*DEGREES)
 
-        t_tracker = ValueTracker(-3.14)
+        t_tracker = ValueTracker(-12.56)
         t=t_tracker.get_value
 
         t_label = TexMobject(
@@ -86,6 +86,6 @@ class parametricHelix(ThreeDScene, GraphScene):
         self.play(FadeIn(ax1), FadeIn(axes_group), FadeIn(asint), FadeIn(acost), FadeIn(helix), FadeIn(up_text), FadeIn(down_text), FadeIn(main_text))
         #self.begin_ambient_camera_rotation(rate = 0.06)
         self.add_fixed_in_frame_mobjects(up_dot, down_dot, group)
-        self.play(MoveAlongPath(up_dot, asint, run_time = 7), MoveAlongPath(down_dot, acost, run_time = 7), MoveAlongPath(helix_dot, helix, run_time = 7), t_tracker.set_value,3.14, rate_func=linear, run_time=7)
+        self.play(MoveAlongPath(up_dot, asint, run_time = 8), MoveAlongPath(down_dot, acost, run_time = 8), MoveAlongPath(helix_dot, helix, run_time = 8), t_tracker.set_value,12.56, rate_func=linear, run_time=8)
         self.play(FadeOut(VGroup(*[ax1, axes_group, asint, acost, helix, up_text, down_text, main_text, up_dot, down_dot, helix_dot, group])))
         self.wait(1)

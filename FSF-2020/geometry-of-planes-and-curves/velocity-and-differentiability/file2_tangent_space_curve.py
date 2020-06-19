@@ -13,7 +13,7 @@ class tangent(ThreeDScene):
         ).shift(5*LEFT)
         tgtR = Line((4,3,-2*np.log(2)), (19.5, 16, -4.772588), color=YELLOW)
         tgtL =Line((4,3,-2*np.log(2)), (-11.5, -10, 2), color=YELLOW)
-        dot = Dot((4,3,-2*np.log(2)), color=RED, radius=0.2)
+        dot = Dot((4,3,-2*np.log(2)), color=RED, radius=0.08)
         self.play(FadeIn(axes),FadeIn(h), FadeIn(dot))
         self.begin_ambient_camera_rotation(rate=0.4)
         self.wait(2)

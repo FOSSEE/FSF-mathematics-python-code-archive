@@ -1,11 +1,30 @@
 from manimlib.imports import *
 
-class parametricCircle(ThreeDScene):
+class parametricCircle(ThreeDScene, GraphScene):
     def construct(self):
-        ax1 = ThreeDAxes().scale(0.5).shift(3*LEFT)
-        ax2 = ThreeDAxes().scale(0.3).shift(3*RIGHT + 2*UP)
-        ax3 = ThreeDAxes().scale(0.3).shift(3*RIGHT + 2*DOWN)
+        self.x_min = -5
+        self.y_min = -5
+        self.graph_origin = ORIGIN
+        self.x_max = 5
+        self.y_max = 5
+        self.x_axis_label =  ""
+        self.y_axis_label =  ""
+        self.x_axis_width = 10
+        self.y_axis_height = 10
 
+        axes = []
+
+        self.setup_axes()
+        self.axes.scale(0.5).shift(3*LEFT)
+        axes.append(self.axes)
+        self.setup_axes()
+        self.axes.scale(0.3).shift(3*RIGHT + 2*UP)
+        axes.append(self.axes)
+        self.setup_axes()
+        self.axes.scale(0.3).shift(3*RIGHT + 2*DOWN)
+        axes.append(self.axes)
+
+        axes = VGroup(*axes)
         t_value = ValueTracker(-3.14)
         t_tex = DecimalNumber(t_value.get_value()).add_updater(lambda v: v.set_value(t_value.get_value()))
         t_label = TexMobject("t = ")
@@ -51,9 +70,9 @@ class parametricCircle(ThreeDScene):
                 0
                 ]), t_min = -np.pi, t_max = np.pi, color = WHITE
                 ).shift(3*LEFT)
-        self.play(FadeIn(ax1), FadeIn(ax2), FadeIn(ax3), FadeIn(asint), FadeIn(acost), FadeIn(circle), FadeIn(up_text), FadeIn(down_text), FadeIn(main_text), FadeIn(group))
+        self.play(FadeIn(axes), FadeIn(asint), FadeIn(acost), FadeIn(circle), FadeIn(up_text), FadeIn(down_text), FadeIn(main_text), FadeIn(group))
         self.wait(1)
         self.play(MoveAlongPath(up_dot, asint, run_time = 7), MoveAlongPath(down_dot, acost, run_time = 7), MoveAlongPath(circle_dot, circle, run_time = 7), t_value.set_value,3.14, rate_func=linear, run_time=7)
         self.wait(1)
-        self.play(FadeOut(VGroup(*[ax1, ax2, ax3, asint, acost, circle, up_text, down_text, main_text, up_dot, down_dot, circle_dot, group])))
+        self.play(FadeOut(VGroup(*[axes, asint, acost, circle, up_text, down_text, main_text, up_dot, down_dot, circle_dot, group])))
         self.wait(1)
