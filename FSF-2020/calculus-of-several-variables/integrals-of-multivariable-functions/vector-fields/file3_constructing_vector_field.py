@@ -45,7 +45,9 @@ class VectorFields(GraphScene):
         ) 
         
         self.show_points()
+        self.wait(.5)
         self.show_func_machine()
+        self.wait(1)
         self.produce_vectors(vector_field)
         self.wait(2)
     
@@ -102,14 +104,14 @@ class VectorFields(GraphScene):
     def go_to_machine(self,dot):
         self.play(ApplyMethod(
                 dot.move_to,
-                self.func_machine,
+                self.func_machine,[0,1,0],
                 ),
         run_time=self.run_time
         )
         self.play(FadeOut(dot),run_time=self.run_time)
         
     def take_vec_from_machine(self,vect,position):
-        vect.next_to(self.func_machine,DL,buff=-.4)
+        vect.next_to(self.func_machine,DOWN,buff=-.4)
         self.play(ApplyMethod(
             vect.move_to,position
             ),
@@ -131,4 +133,3 @@ class VectorFields(GraphScene):
 #uploaded by Somnath Pandit. FSF2020_Vector_fields
 
 
-       
