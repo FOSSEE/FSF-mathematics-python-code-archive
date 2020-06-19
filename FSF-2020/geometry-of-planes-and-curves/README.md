@@ -6,4 +6,4 @@ __Sub-topics covered__:
 * Space Curves (an Intro to Coordinates in 3D)
 * Velocity and Differentiability
 * Finding Arc Length and Curvature
-* Flatland (an Intro to Higer Dimentional Functions)
+* TNB Frame and Serret-Frenet Formulae
