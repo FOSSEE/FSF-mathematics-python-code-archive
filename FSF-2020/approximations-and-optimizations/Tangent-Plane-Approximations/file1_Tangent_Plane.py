@@ -48,5 +48,3 @@ class firstScene(ThreeDScene):
         self.wait(2)
         self.play(ReplacementTransform(f,s),ReplacementTransform(d,d2),ReplacementTransform(r,r2))
         self.wait(2)
-
-            
