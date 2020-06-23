@@ -102,20 +102,41 @@ class VectorFields(GraphScene):
             i+=1
             
     def go_to_machine(self,dot):
-        self.play(ApplyMethod(
-                dot.move_to,
-                self.func_machine,[0,1,0],
+        if self.run_time>.5:
+         self.play(ApplyMethod(
+                dot.next_to,
+                self.func_machine,4*UP,
                 ),
-        run_time=self.run_time
-        )
-        self.play(FadeOut(dot),run_time=self.run_time)
+         run_time=self.run_time
+         )
+        self.dot=dot
         
     def take_vec_from_machine(self,vect,position):
-        vect.next_to(self.func_machine,DOWN,buff=-.4)
-        self.play(ApplyMethod(
+        vect.next_to(self.func_machine,DOWN,buff=.1)
+        if self.run_time>.5:
+          self.play(
+            ApplyMethod(
+            self.dot.shift,DOWN,
+            run_time=self.run_time
+          )),
+          self.play(
+            FadeOut(self.dot),
+            run_time=.2
+          )
+          self.play(
+            FadeIn(vect),
+            run_time=.4
+          )
+        else:
+            self.remove(self.dot)
+            self.add(vect)
+            self.wait(.1)
+ 
+        self.play(
+            ApplyMethod(
             vect.move_to,position
             ),
-        run_time=self.run_time
+            run_time=self.run_time
         )
         
     def get_vector_field(self,func,**kwargs):
@@ -133,3 +154,4 @@ class VectorFields(GraphScene):
 #uploaded by Somnath Pandit. FSF2020_Vector_fields
 
 
+       
