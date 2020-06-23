@@ -1,4 +1,4 @@
-**file1_line_eqn.py**<br><br>
+**file1_line_eqn.py**<br>
 ![file1_line_eqn.py](https://raw.githubusercontent.com/saarthdeshpande/FSF-mathematics-python-code-archive/master/FSF-2020/calculus-of-several-variables/geometry-of-planes-and-curves/equations-of-planes-and-lines/file1_line_eqn.gif)
 
 **file2_point_normal_form_plane.py**
