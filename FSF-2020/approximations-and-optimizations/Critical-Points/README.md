@@ -1,6 +1,6 @@
-<b>SubTopic: Critical Points</b>
+<h2><div align=”center”><b>SubTopic: Critical Points</b></h2>
 <br/></br>
--------- Animations --------
+<h4>-------- Animations --------</h4>
 
 <br/></br>
 <br/></br>
@@ -33,7 +33,7 @@
  ![file5_f(x,y)=(y-x)(1-2x-3y)](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file5_f(x%2Cy)%3D(y-x)(1-2x-3y).gif?raw=true)
 <br/></br>
 <br/></br>
-
+</div>
 
  
  
