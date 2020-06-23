@@ -6,8 +6,8 @@ class firstScene(ThreeDScene):
     def construct(self):
     
         axes = ThreeDAxes().scale(1)
-        label_x= TextMobject("$x$").shift([5.8,-0.5,0])
-        label_y= TextMobject("$y$").shift([-0.5,-5.6,0]).rotate(-4.5)
+        label_x = TextMobject("$x$").shift([5.8,-0.5,0])
+        label_y = TextMobject("$y$").shift([-0.5,-5.6,0]).rotate(-4.5)
         
         #---- graph of f(x,y) = -x^2-y^2
         surface = ParametricSurface(
@@ -50,8 +50,8 @@ class secondScene(ThreeDScene):
     def construct(self):
     
         axes = ThreeDAxes().scale(1)
-        label_x= TextMobject("$x$").shift([5.8,-0.5,0])
-        label_y= TextMobject("$y$").shift([-0.5,-5.6,0]).rotate(-4.5)
+        label_x = TextMobject("$x$").shift([5.8,-0.5,0])
+        label_y = TextMobject("$y$").shift([-0.5,-5.6,0]).rotate(-4.5)
         
         #---- graph of f(x,y) = -x^2-y^2
         surface = ParametricSurface(
