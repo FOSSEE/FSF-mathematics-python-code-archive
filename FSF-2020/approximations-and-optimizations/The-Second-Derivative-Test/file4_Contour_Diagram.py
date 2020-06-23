@@ -50,8 +50,7 @@ class ContourDiagram(ThreeDScene):
                 np.cos(TAU * v),
                 np.sin(TAU * v),
                 2*(1 - 1.5*u)
-            ]),
-            resolution=(6, 32)).fade(0.5).scale(0.61).shift([0,0,0.4]).set_color(YELLOW)
+            ])).fade(0.5).scale(0.61).shift([0,0,0.4]).set_color(YELLOW)
         
         #---- third contour line
         c_3 = Circle(color = YELLOW).scale(0.61).shift([0,0,0])
@@ -111,7 +110,7 @@ class ContourDiagram(ThreeDScene):
         self.wait(1)
         self.play(Write(c_5))
         self.wait(1)
-        self.play(FadeOut(contour5),FadeOut(axes),FadeOut(f),FadeOut(contour5),FadeOut(contour4),FadeOut(contour3),FadeOut(contour2),FadeOut(contour1))
+        self.play(FadeOut(contour5),FadeOut(axes),FadeOut(label_x),FadeOut(label_y),FadeOut(surface),FadeOut(contour5),FadeOut(contour4),FadeOut(contour3),FadeOut(contour2),FadeOut(contour1))
         self.wait(1)
         self.move_camera(phi=0 * DEGREES,theta= 90*DEGREES)
         self.wait(1)
