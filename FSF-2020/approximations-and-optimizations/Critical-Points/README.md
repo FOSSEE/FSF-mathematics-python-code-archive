@@ -1,9 +1,5 @@
 <h1><div align=”center”><b>SubTopic: Critical Points</b></h1></div>
 <br/></br>
-<h2> Animations </h2>
-
-<br/></br>
-<br/></br>
 
 <tab>file1_Critical_Point_of_a_function
 
