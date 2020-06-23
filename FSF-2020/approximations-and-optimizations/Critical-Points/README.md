@@ -1,34 +1,38 @@
-<h2><div align=”center”><b>SubTopic: Critical Points</b></h2>
+<h2><div align=”center”><b>SubTopic: Critical Points</b></h2></div>
 <br/></br>
-<h4>-------- Animations --------</h4>
+<h4> Animations </h4>
 
 <br/></br>
 <br/></br>
 
- <tab>file1_Critical_Point_of_a_function
+<div align=”center”> <tab>file1_Critical_Point_of_a_function
 
 ![file1_Critical_Point_of_a_function](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file1_Critical_Point_of_a_function.gif?raw=true)
 <br/></br>
 <br/></br>
+</div>
 
-<tab>file2_Traces_and_Tangent
+<div align=”center”><tab>file2_Traces_and_Tangent
  
  ![file2_Traces_and_Tangent](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file2_Traces_and_Tangent.gif?raw=true)
 <br/></br>
 <br/></br>
+</div>
 
-<tab>file3_Tangent_plane_at_extrema_of_a_function
+<div align=”center”><tab>file3_Tangent_plane_at_extrema_of_a_function
   ![file3_Tangent_plane_at_extrema_of_a_function](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file3_Tangent_plane_at_extrema_of_a_function.gif?raw=true)
 <br/></br>
 <br/></br>
+</div>
 
-<tab>file4_Types_of_critical_points
+<div align=”center”><tab>file4_Types_of_critical_points
  
  ![file4_Types_of_critical_points](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file4_Types_of_critical_points.gif?raw=true)
 <br/></br>
 <br/></br>
+</div>
 
-<tab>file5_f(x,y)=(y-x)(1-2x-3y)
+<div align=”center”><tab>file5_f(x,y)=(y-x)(1-2x-3y)
  
  ![file5_f(x,y)=(y-x)(1-2x-3y)](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/approximations-and-optimizations/Critical-Points/file5_f(x%2Cy)%3D(y-x)(1-2x-3y).gif?raw=true)
 <br/></br>
