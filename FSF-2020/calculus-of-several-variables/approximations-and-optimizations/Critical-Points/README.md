@@ -21,12 +21,18 @@
 
 <tab>file4_Types_of_critical_points
  
-![file4_Types_of_critical_points](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file4_Types_of_critical_points.gif?raw=true)
+![file4_Relative_Maxima_and_Relative_Minima](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file4_Relative_Maxima_and_Relative_Minima.gif?raw=true)
 <br/></br>
 <br/></br>
 
-<tab>file5_f(x,y)=(y-x)(1-2x-3y)
+<tab>file5_Saddle_Point
  
-![file5_f(x,y)=(y-x)(1-2x-3y)](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file5_f(x%2Cy)%3D(y-x)(1-2x-3y).gif?raw=true)
+![file5_Saddle_Point](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file5_Saddle_Point.gif?raw=true)
+<br/></br>
+<br/></br>
+
+<tab>file6_f(x,y)=(y-x)(1-2x-3y)
+ 
+![file6_f(x,y)=(y-x)(1-2x-3y)](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file6_f(x%2Cy)%3D(y-x)(1-2x-3y).gif?raw=true)
 <br/></br>
 <br/></br>
