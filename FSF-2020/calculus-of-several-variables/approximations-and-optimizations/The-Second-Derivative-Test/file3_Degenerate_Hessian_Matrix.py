@@ -54,4 +54,3 @@ class DegenerateHessian(ThreeDScene):
         self.wait(2)
         self.play(Write(plane))
         self.wait(1)
-        
