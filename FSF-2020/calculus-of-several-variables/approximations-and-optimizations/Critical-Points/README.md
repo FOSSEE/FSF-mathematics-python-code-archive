@@ -21,7 +21,7 @@
 
 <tab>file4_Relative_Maximum_and_Relative_Minimum
  
-![file4_Relative_Maxima_and_Relative_Minima](?raw=true)
+![file4_Relative_Maxima_and_Relative_Minima](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Critical-Points/file4_Relative_Maximum_and_Relative_Minimum.gif?raw=true)
 <br/></br>
 <br/></br>
 
