@@ -1,52 +1,57 @@
 from manimlib.imports import*
-
-class firstscene(Scene):
+import math as m
+ 
+class DegenerateHessian(ThreeDScene):
     def construct(self):
 
-        h_text = TextMobject("Degenerate Hessian Matrix", color = RED).scale(1).shift(UP)
-        
+        heading = TextMobject("Degenerate Hessian Matrix",color = BLUE)
 
-        f_text = TextMobject("$f(x,y) = 2x^3+y^3$", color = TEAL).scale(1).to_corner(UL) 
-        c_text = TextMobject("Critical Point: $(0,0)$", color = TEAL).scale(1).next_to(f_text).shift(DOWN+4.3*LEFT)
-        m_text = TextMobject("\\begin{equation*} D_2(x,y)= \\begin{vmatrix} 12x\\space & 0\\space \\\\ 0 & 6y \\end{vmatrix} \\end{equation*}",color = YELLOW)
-        d_text = TextMobject("\\begin{equation*} D_2(0,0)= \\begin{vmatrix} 0 \\space & 0\\space \\\\ 0 & 0 \\end{vmatrix} \\end{equation*}",color = PURPLE)
+        h_text = TextMobject("For $det \\hspace{1mm} H = 0$, the surface of the function at the critical point would be flat.").scale(0.7)
 
-
-        t_text = TextMobject("$D_2 = 0$(Inconclusive)", color = TEAL).scale(1).shift(2*DOWN)
-
-        self.play(ShowCreation(h_text))
-        self.wait(1)
-        self.play(FadeOut(h_text))
-        self.wait(1)
-        self.play(ShowCreation(f_text))
-        self.wait(1)
-        self.play(ShowCreation(c_text))
-        self.wait(1)
-        self.play(ShowCreation(m_text))
-        self.wait(2)
-        self.play(ReplacementTransform(m_text,d_text))
-        self.wait(1)
-        self.play(ShowCreation(t_text))
-        self.wait(2)
-
-
-class SecondScene(ThreeDScene):
-    def construct(self):
         axes = ThreeDAxes()
-        
-        f = ParametricSurface(
+        label_x = TextMobject("$x$").shift([5.5,-0.3,0]) #---- x axis
+        label_y = TextMobject("$y$").shift([-0.3,5.5,0]).rotate(-4.5) #---- y axis
+
+        #---- function f(x,y)
+        f_surface = ParametricSurface(
             lambda u, v: np.array([
                 u,
                 v,
-                (2*u**3)+v**3
-            ]),v_min=-1,v_max=1,u_min=-1,u_max=1,checkerboard_colors=[TEAL_C,YELLOW_D,BLUE_E],
-            resolution=(20, 20)).scale(1)        
-
-        self.set_camera_orientation(phi=25 * DEGREES,theta = 80*DEGREES)
-        self.begin_ambient_camera_rotation(rate=0.1)
-
-        f_text = TextMobject("$f(x,y) = 2x^3+y^3$",color = ORANGE).shift(2*DOWN+2*RIGHT).scale(0.8)
-        self.add_fixed_in_frame_mobjects(f_text)
-        self.add(axes)
-        self.play(Write(f))
+                -4*u**3-v**3
+            ]),u_min = -0.8, u_max = 0.8, v_min = -0.8, v_max = 0.8).set_color(TEAL).shift([0,1,0]).scale(1.3)
+        
+        #---- function f(x,y)
+        zoom_surface = ParametricSurface(
+            lambda u, v: np.array([
+                u,
+                v,
+                -4*u**3-v**3
+            ]),u_min = -0.8, u_max = 0.8, v_min = -0.8, v_max = 0.8).set_color(TEAL).shift([0,1,0]).scale(2.5)
+        
+        f_text= TextMobject("surface of the function").to_corner(UL).scale(0.5)
+        
+        d = Dot(color = "#800000").shift([0,1,0]) #---- critical point 
+        d2 = Dot(color = "#800000").shift([0,0.7,0]) #---- critical point 
+        plane = Rectangle(color = YELLOW,fill_opacity= 0.3).shift([0,0.6,0]).rotate(m.radians(90)).scale(0.4)
+        
+        self.set_camera_orientation(phi = 70*DEGREES, theta = 45*DEGREES) 
+        self.add_fixed_in_frame_mobjects(heading)
+        self.wait(1)
+        self.play(FadeOut(heading))
+        self.add_fixed_in_frame_mobjects(h_text)
         self.wait(2)
+        self.play(FadeOut(h_text))
+        self.wait(1)
+        self.add(axes)     
+        self.add(label_x)
+        self.add(label_y)
+        self.play(Write(f_surface)) 
+        self.add_fixed_in_frame_mobjects(f_text)
+        self.wait(1)
+        self.play(Write(d))
+        self.wait(1) 
+        self.play(ReplacementTransform(f_surface,zoom_surface),ReplacementTransform(d,d2))
+        self.wait(2)
+        self.play(Write(plane))
+        self.wait(1)
+        
