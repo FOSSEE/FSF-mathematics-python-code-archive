@@ -5,7 +5,7 @@ import math as m
 class Extrema(ThreeDScene):
     def construct(self):
 
-        h_text = TextMobject("Relative Maxima and Relative Minima",color = GREEN)
+        h_text = TextMobject("Relative Maximum and Relative Minimum",color = GREEN)
     
         axes = ThreeDAxes()
         label_x = TextMobject("$x$").shift([5.5,-0.3,0]) #---- x axis
@@ -25,8 +25,8 @@ class Extrema(ThreeDScene):
         d2 = Dot(color = YELLOW).shift([-1.15,0,-2.98]) #---- critical point for minima
         l2 = Line([-1.15,0,0],[-1.15,0,-2.98],color = YELLOW)
 
-        max_text = TextMobject("Relative Maxima").shift(3.1*UP+1.5*RIGHT).scale(0.5)
-        min_text = TextMobject("Relative Minima").shift(3.1*DOWN+1.5*LEFT).scale(0.5)
+        max_text = TextMobject("Relative Maximum").shift(3.1*UP+1.5*RIGHT).scale(0.5)
+        min_text = TextMobject("Relative Minimum").shift(3.1*DOWN+1.5*LEFT).scale(0.5)
 
         self.add_fixed_in_frame_mobjects(h_text)
         self.wait(1)
