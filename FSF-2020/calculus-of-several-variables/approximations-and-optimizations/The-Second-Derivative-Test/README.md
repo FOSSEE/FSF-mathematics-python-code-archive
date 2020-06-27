@@ -15,7 +15,7 @@
 
 <tab>file3_Degenerate_Hessian_Matrix
  
-![file3_Degenerate_Hessian_Matrix](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/The-Second-Derivative-Test/file3_Degenerate_Hessian_Matrix.gif?raw=true)
+![file3_Degenerate_Hessian_Matrix](?raw=true)
 <br/></br>
 <br/></br>
 
