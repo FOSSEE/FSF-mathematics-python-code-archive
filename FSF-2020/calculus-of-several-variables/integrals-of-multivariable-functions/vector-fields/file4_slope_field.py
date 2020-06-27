@@ -13,20 +13,17 @@ class SlopeFields(GraphScene):
         "x_tick_frequency": 1,
         "y_tick_frequency": 1,
         "default_slope_field_config": {
-            "delta_x": .25,
-            "delta_y": .25,
-            "min_magnitude": -PI,
-            "max_magnitude": PI,
-            "colors": [BLUE_B,GREEN_B,YELLOW,ORANGE],
-            "length_func": lambda norm : .6*sigmoid(norm),
-            "opacity": .75,
-            "slope_config": {
-                "stroke_width":6,
-                "max_stroke_width_to_length_ratio":6
+            "delta_x": .2,
+            "delta_y": .2,
+            "opacity": 1,
+            "color": BLUE_A,
+            "slope_length_factor": .2,
+            "line_config": {
+                "stroke_width":2.5,
             },
         },
         
-        "a":-3 ,"b": 3, "c": -3 ,"d": 3,
+        "a":-1.9 ,"b": 2, "c": -1.9 ,"d": 2,
     }  
 
     def construct(self):
@@ -37,25 +34,28 @@ class SlopeFields(GraphScene):
         self.setup_axes(animate=False)
         
         slope_field=self.get_slope_field(
-            lambda x,y:-2*(x-self.graph_origin[0])*(y-self.graph_origin[1]),
-            x_min=self.a-2.5,
-            x_max=self.b-2.5,
-            y_min=self.c,
-            y_max=self.d,
+            lambda x,y:-2.0*(x-self.graph_origin[0])*(y-self.graph_origin[1]),
+            x_min=self.graph_origin[0]+self.a,
+            x_max=self.graph_origin[0]+self.b,
+            y_min=self.graph_origin[1]+self.c,
+            y_max=self.graph_origin[1]+self.d,
+            color= GREEN_B
         )
-        self.add(slope_field)
-        '''self.show_points()
+        
+        self.show_points()
         self.wait(.5)
         self.show_func_machine()
         self.wait(1)
-        self.produce_slopes(slope_field)'''
+        self.produce_slopes(slope_field)
+      #  self.add(slope_field)
+        self.glimpse_of_solutions()
         self.wait(2)
     
     
     
         
     def show_points(self):
-        dn=1
+        dn=1.0/5
         x_vals=np.arange(self.a,self.b,dn)
         y_vals=np.arange(self.c,self.d,dn)
         dots=VGroup()
@@ -63,7 +63,7 @@ class SlopeFields(GraphScene):
           for y_val in y_vals:
             dot=Dot(
                 self.coords_to_point(x_val,y_val),
-                radius=.05,
+                radius=.04,
                 color=TEAL,
             )
             dots.add(dot)
@@ -83,16 +83,15 @@ class SlopeFields(GraphScene):
             stroke_width=1.2,
             color=BLUE
         ).next_to(machine,IN)
-        machine_label[1].set_color_by_gradient(
-            *self.default_slope_field_config["colors"]
-        )
-        self.add(machine, machine_label)
+        machine_label[1].set_color(GREEN)
+        machine=VGroup(machine, machine_label)
+        self.play(FadeIn(machine))
         
         self.func_machine = machine
         
     
     def produce_slopes(self,slope_field):
-        count,i=1,0
+        count,i=3,0
         self.run_time=1
         for dot in self.dots:
             if i==count:
@@ -114,8 +113,9 @@ class SlopeFields(GraphScene):
         self.dot=dot
         
     def take_line_from_machine(self,vect,position):
-        vect.next_to(self.func_machine,DOWN,buff=.1)
+        
         if self.run_time>.5:
+          vect.next_to(self.func_machine,DOWN,buff=.1)
           self.play(
             ApplyMethod(
             self.dot.shift,DOWN,
@@ -129,17 +129,17 @@ class SlopeFields(GraphScene):
             FadeIn(vect),
             run_time=.4
           )
-        else:
-            self.remove(self.dot)
-            self.add(vect)
-            self.wait(.1)
- 
-        self.play(
+          self.play(
             ApplyMethod(
             vect.move_to,position
             ),
             run_time=self.run_time
         )
+        else:
+            self.remove(self.dot)
+            self.add(vect)
+            vect.move_to(position)
+        
         
     def get_slope_field(self,func,**kwargs):
         config = dict()
@@ -147,7 +147,52 @@ class SlopeFields(GraphScene):
         config.update(kwargs)
         slope_field= SlopeField(func,**config)
         
-        return slope_field  
+        return slope_field
+        
+    def glimpse_of_solutions(self):
+        sol_text= TextMobject(
+            r"The solution curves\\ seem to be like...", 
+            color= BLUE, 
+            stroke_width=1.2
+        )
+        sol_text.to_corner(UR, buff=1)
+        condition_text= TextMobject(
+            r"for different\\ initial conditions", 
+            color= GOLD, 
+            stroke_width=1.1
+        )
+        condition_text.next_to(sol_text,DOWN,buff=1)
+        solution1 = self.get_graph(
+            lambda x : np.exp(-x**2),
+            x_min = self.a,
+            x_max = self.b,
+            color = PINK)
+        solution2 = self.get_graph(
+            lambda x : .5*np.exp(-x**2),
+            x_min = self.a,
+            x_max = self.b,
+            color = YELLOW)
+        solution3 = self.get_graph(
+            lambda x : 1.5*np.exp(-x**2),
+            x_min = self.a,
+            x_max = self.b,
+            color = BLUE)
+        solution4 = self.get_graph(
+            lambda x : -np.exp(-x**2),
+            x_min = self.a,
+            x_max = self.b,
+            color = RED_E)
+            
+        self.play(FadeOut(self.func_machine))
+        self.play(Write(sol_text))
+        self.wait(.6)
+        self.play(ShowCreation(solution1))
+        self.play(Write(condition_text))
+        self.play(ShowCreation(solution2))
+        self.wait(.5)
+        self.play(ShowCreation(solution3))
+        self.wait(.5)
+        self.play(ShowCreation(solution4))
         
          
 class SlopeField(VGroup):
@@ -158,23 +203,16 @@ class SlopeField(VGroup):
         "x_max": int(np.ceil(FRAME_WIDTH / 2)),
         "y_min": int(np.floor(-FRAME_HEIGHT / 2)),
         "y_max": int(np.ceil(FRAME_HEIGHT / 2)),
-        "min_magnitude": 0,
-        "max_magnitude": 2,
-        "slope_length_factor": .2,
-        "colors": DEFAULT_SCALAR_FIELD_COLORS,
         "opacity": 1.0,
+        "color": WHITE,
+        "slope_length_factor": .25,
         "line_config": {},
     }
 
     def __init__(self, func, **kwargs):
         VGroup.__init__(self, **kwargs)
         self.func = func
-        self.rgb_gradient_function = get_rgb_gradient_function(
-            self.min_magnitude,
-            self.max_magnitude,
-            self.colors,
-            flip_alphas=False
-        )
+        
         x_range = np.arange(
             self.x_min,
             self.x_max + self.delta_x,
@@ -195,11 +233,9 @@ class SlopeField(VGroup):
         line_config = dict(self.line_config)
         line_config.update(kwargs)
         line = Line(ORIGIN,self.slope_length_factor*RIGHT, **line_config)
-        line.move_to(point).rotate(np.arctan(slope))
-        fill_color = rgb_to_color(
-            self.rgb_gradient_function(np.array([slope]))[0]
-        )
-        line.set_color(fill_color)
+        line.move_to(point).rotate(np.arctan(slope/3.2))
+        
+        line.set_color(self.color)
         return line
  
         
