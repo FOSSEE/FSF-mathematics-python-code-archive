@@ -1,7 +1,8 @@
 from manimlib.imports import*
 import math as m
 
-class firstScene(ThreeDScene):
+#---- optimizing funtion f(x,y) w.r.t to g(x,y)
+class ConstrainedExtrema(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes().fade(0.4)        
         label_x = TextMobject("$x$").shift([5.5,-0.5,0]).fade(0.4)  #---- x axis
