@@ -17,22 +17,13 @@ class DegenerateHessian(ThreeDScene):
             lambda u, v: np.array([
                 u,
                 v,
-                -4*u**3-v**3
-            ]),u_min = -0.8, u_max = 0.8, v_min = -0.8, v_max = 0.8).set_color(TEAL).shift([0,1,0]).scale(1.3)
-        
-        #---- function f(x,y)
-        zoom_surface = ParametricSurface(
-            lambda u, v: np.array([
-                u,
-                v,
-                -4*u**3-v**3
-            ]),u_min = -0.8, u_max = 0.8, v_min = -0.8, v_max = 0.8).set_color(TEAL).shift([0,1,0]).scale(2.5)
+                -u**4-v**4
+            ]),u_min = -0.8, u_max = 0.8, v_min = -0.8, v_max = 0.8).set_color(TEAL).shift([0,0,-0.5]).scale(2)
         
         f_text= TextMobject("surface of the function").to_corner(UL).scale(0.5)
         
-        d = Dot(color = "#800000").shift([0,1,0]) #---- critical point 
-        d2 = Dot(color = "#800000").shift([0,0.7,0]) #---- critical point 
-        plane = Rectangle(color = YELLOW,fill_opacity= 0.3).shift([0,0.6,0]).rotate(m.radians(90)).scale(0.4)
+        d = Dot(color = "#800000").shift([0,0,-0.5]) #---- critical point 
+        plane = Square(color = YELLOW,fill_opacity= 0.2).shift([0,0,-0.5]).scale(1.3)
         
         self.set_camera_orientation(phi = 70*DEGREES, theta = 45*DEGREES) 
         self.add_fixed_in_frame_mobjects(heading)
@@ -49,8 +40,6 @@ class DegenerateHessian(ThreeDScene):
         self.add_fixed_in_frame_mobjects(f_text)
         self.wait(1)
         self.play(Write(d))
-        self.wait(1) 
-        self.play(ReplacementTransform(f_surface,zoom_surface),ReplacementTransform(d,d2))
-        self.wait(2)
+        self.wait(1)
         self.play(Write(plane))
         self.wait(1)

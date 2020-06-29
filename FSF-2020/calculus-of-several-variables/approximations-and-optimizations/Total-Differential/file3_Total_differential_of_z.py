@@ -1,8 +1,16 @@
 from manimlib.imports import*
 
-class firstScene(ThreeDScene):
+#---- visualization of total differential definition
+class totaldifferential(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes().fade(0.5)
+        surface = ParametricSurface(
+            lambda u, v: np.array([
+                u,
+                v,
+                u**2+v**2
+            ]),u_min=-1,u_max=1, v_min=-1,v_max=1).set_color("#FF69B4").fade(0.6).shift([1,0.8,1.5]).scale(2)
+
         plane = Rectangle(color = '#E6E6FA',fill_opacity = 1).scale(3).shift(-1*RIGHT+3*UP).fade(0.9)
         label_x = TextMobject("$x$").shift(5*RIGHT+0.4*DOWN).rotate(1.571)
         label_y = TextMobject("$y$").shift(0.3*DOWN+5.6*RIGHT).scale(0.5)
@@ -57,17 +65,19 @@ class firstScene(ThreeDScene):
         self.add_fixed_in_frame_mobjects(label_y)
         self.add_fixed_in_frame_mobjects(label_z)
         self.wait(1)
+        self.play(Write(surface))
+        self.play(ShowCreation(d1))
+        self.add_fixed_in_frame_mobjects(d1_text)
+        self.play(ShowCreation(d2))
+        self.add_fixed_in_frame_mobjects(d2_text)
+        self.wait(1) 
         self.play(Write(s2))
         self.wait(1)
         self.play(Write(l1),Write(l2),Write(l3))
         self.wait(1)
         self.play(Write(s1))
         self.wait(1)
-        self.play(ShowCreation(d1))
-        self.add_fixed_in_frame_mobjects(d1_text)
-        self.play(ShowCreation(d2))
-        self.add_fixed_in_frame_mobjects(d2_text)
-        self.wait(1)        
+        self.play(FadeOut(surface))      
         self.play(ShowCreation(d3))
         self.add_fixed_in_frame_mobjects(d3_text)
         self.play(ShowCreation(m1_line))
@@ -88,4 +98,3 @@ class firstScene(ThreeDScene):
         self.play(ShowCreation(delx))
         self.add_fixed_in_frame_mobjects(delx_text)
         self.wait(1)
-

@@ -1,11 +1,14 @@
 from manimlib.imports import*
 
-
-class firstScene(ThreeDScene):
+#---- approximation value of function between two points using total differentials
+class approximation(ThreeDScene):
     
     def construct(self):
     
-        axes = ThreeDAxes().rotate(1.571)
+        axes = ThreeDAxes()        
+        label_x = TextMobject("$x$").shift([5.5,-0.3,0]).fade(0.4)  #---- x axis
+        label_y = TextMobject("$y$").shift([-0.5,5.5,0]).rotate(-4.5).fade(0.4)  #---- y axis
+
         surface = ParametricSurface(
             lambda u, v: np.array([
                 np.sin(u),
@@ -29,9 +32,10 @@ class firstScene(ThreeDScene):
 
         label = TextMobject("$z = f(x,y)$").scale(0.6).shift(4*RIGHT+3*UP)
 
-        
-        self.add(axes)
         self.set_camera_orientation(phi=75*DEGREES,theta=-10*DEGREES)
+        self.add(axes)
+        self.add(label_x)
+        self.add(label_y)
         self.wait(1)
         self.play(Write(plane))
         self.wait(1)
