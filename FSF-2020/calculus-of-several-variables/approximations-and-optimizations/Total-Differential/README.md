@@ -9,6 +9,7 @@
 
 <tab>file2_Differentials
  
+![file2_Differentials](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Total-Differential/file2_Differentials.gif?raw=true)
 
 <br/></br>
 <br/></br>
@@ -27,6 +28,7 @@
 
 <tab>file5_Total_differential_approximation
  
+ ![file5_Total_differential_approximation](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Total-Differential/file5_Total_differential_approximation.gif?raw=true)
 
 <br/></br>
 <br/></br>
