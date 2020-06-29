@@ -27,6 +27,6 @@
 
 <tab>file5_Total_differential_approximation
  
-![file5_Total_differential_approximation](?raw=true)
+![file5_Total_differential_approximation]
 <br/></br>
 <br/></br>
