@@ -2,6 +2,7 @@
 <br/></br>
 
 <tab>file1_Tangent_Plane
+ 
 ![file1_Tangent_Plane](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Tangent-Plane-Approximations/file1_Tangent_Plane.gif?raw=true)
 <br/></br>
 <br/></br>
