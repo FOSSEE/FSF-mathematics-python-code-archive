@@ -1,5 +1,8 @@
 #### Convergence Intuition
-![GIF1](gifs/file1_convergence_Intuition.gif)
+![GIF1a](gifs/file1_convergence_Intuition.gif)
+
+#### Convergence Intuition
+![GIF1b](gifs/file1a_convergence_Intuition.gif)
 
 #### Convergence of a function
 ![GIF2](gifs/file2_convergence_of_a_function.gif)
