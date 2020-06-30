@@ -79,15 +79,16 @@ class tnb(ThreeDScene):
         self.play(FadeIn(helix), FadeIn(text))
         self.play(ApplyMethod(helix.scale, 4))
         self.add_fixed_in_frame_mobjects(bnm0)
-        self.play(FadeIn(point0), MoveAlongPath(helix_dot, helix1, run_time=5))
+        self.play(FadeIn(point0))
+        self.play(ApplyMethod(point0.set_color, GRAY, opacity = 0.1), MoveAlongPath(helix_dot, helix1, run_time=5))
 
         self.add_fixed_in_frame_mobjects(bnm1)
-        self.play(ApplyMethod(point0.set_color, GRAY), FadeIn(point1))
-        self.play(MoveAlongPath(helix_dot, helix2, run_time = 5))
+        self.play(FadeIn(point1))
+        self.play(ApplyMethod(point1.set_color, GRAY, opacity = 0.1), ApplyMethod(bnm1.set_color, GRAY, opacity = 0.1), MoveAlongPath(helix_dot, helix2, run_time = 5))
 
         self.add_fixed_in_frame_mobjects(bnm2)
-        self.play(ApplyMethod(point1.set_color, GRAY), ApplyMethod(bnm1.set_color, GRAY), FadeIn(point2))
-        self.play(MoveAlongPath(helix_dot, helix3, run_time=5))
+        self.play(FadeIn(point2))
+        self.play(ApplyMethod(point2.set_color, GRAY, opacity = 0.1), MoveAlongPath(helix_dot, helix3, run_time=5))
 
         dot3 = Dot(np.array([np.cos(-np.pi/3), np.sin(-np.pi/3), -0.4*np.pi/3]) + np.array([3.3,-0.25,0]), radius = 0.16, color=RED)
         tgt3 = Arrow((0,0,0), (0,2,0), color = YELLOW).shift(helix_dot.get_center() - np.array([-0.05,0.2,0]))
@@ -111,15 +112,15 @@ class tnb(ThreeDScene):
         point5 = VGroup(*[tgt5, nm5, bnm5, plane5])
 
         self.add_fixed_in_frame_mobjects(bnm3)
-        self.play(ApplyMethod(point2.set_color, GRAY), FadeIn(point3))
-        self.play(MoveAlongPath(helix_dot, helix4, run_time=5))
+        self.play(FadeIn(point3))
+        self.play(ApplyMethod(point3.set_color, GRAY, opacity = 0.1), MoveAlongPath(helix_dot, helix4, run_time=5))
 
         self.add_fixed_in_frame_mobjects(bnm4)
-        self.play(ApplyMethod(point3.set_color, GRAY), FadeIn(point4))
-        self.play(MoveAlongPath(helix_dot, helix5, run_time=5))
+        self.play(FadeIn(point4))
+        self.play(ApplyMethod(point4.set_color, GRAY, opacity = 0.1), MoveAlongPath(helix_dot, helix5, run_time=5))
 
         self.add_fixed_in_frame_mobjects(bnm5)
-        self.play(ApplyMethod(point4.set_color, GRAY), FadeIn(point5))
+        self.play(FadeIn(point5))
         self.wait(2)
 
-        self.play(FadeOut(VGroup(*[helix, bnm1, point0, point1, point2, point3, point4, point5, helix_dot])))
+        self.play(FadeOut(VGroup(*[text, helix, bnm1, point0, point1, point2, point3, point4, point5, helix_dot])))

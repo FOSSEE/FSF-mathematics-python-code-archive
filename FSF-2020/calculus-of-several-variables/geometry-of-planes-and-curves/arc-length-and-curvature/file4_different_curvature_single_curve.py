@@ -47,10 +47,24 @@ class GR(GraphScene):
             line.move_to(p0)
             return line
 
+        circle1 = Circle(radius = 0.8, color = GREY, opacity = 0.2).shift(2.2*UP)
+        tgt1 = Line((-2,3,0), (2,3,0), color = GREY, opacity = 0.2).scale(0.4)
+
+        curvature1 = VGroup(*[circle1, tgt1])
+
+        circle2 = Circle(radius = 0.6, color = GREY, opacity = 0.2).shift(0.4*DOWN + 4*RIGHT)
+        tgt2 = Line((4,-2,0), (6, -2, 0), color = GREY, opacity = 0.2).scale(0.5).shift(LEFT + UP)
+
+        curvature2 = VGroup(*[circle2, tgt2])
+
         line = always_redraw(get_tangent_line)
 
         self.add(graph,line, dots, text)
         self.wait(1.2)
-        self.play(tracker.set_value, 6, rate_func=smooth, run_time=13)
-        self.play(FadeOut(VGroup(*[graph, self.axes, line, dots, text])))
+        self.play(tracker.set_value, 0, rate_func=smooth, run_time=5)
+        self.play(FadeIn(curvature1))
+        self.play(tracker.set_value, 4, rate_func=smooth, run_time=5)
+        self.play(FadeIn(curvature2))
+        self.play(tracker.set_value, 6, rate_func=smooth, run_time=3)
+        self.play(FadeOut(VGroup(*[curvature1, curvature2, graph, self.axes, line, dots, text])))
         self.wait()
