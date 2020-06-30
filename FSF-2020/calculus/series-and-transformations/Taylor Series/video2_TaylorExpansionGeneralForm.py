@@ -59,6 +59,18 @@ class graphScene(GraphScene):
         x_each_unit = self.x_axis_width / (self.x_max - self.x_min)
         y_each_unit = self.y_axis_height / (self.y_max - self.y_min)   
 
+        equation=TextMobject("$f(x)=$","${ e }^{ -x^{ 2 } }$")
+        equation.scale(0.55)
+        equation.set_color_by_tex_to_color_map({"${ e }^{ -x^{ 2 } }$":RED})
+        text=TextMobject("$a=1$")
+        text.scale(0.55)
+        equation.shift(3.39*UP+5*LEFT)
+        text.shift(3*UP+5*LEFT)
+
+        self.add(equation)
+        self.add(text)
+
+
         generalized_eq_coeff=[]
         variables_eq=[]
         eq,generalized_eq_coeff=formFormula(generalized_eq_coeff,variables_eq)
