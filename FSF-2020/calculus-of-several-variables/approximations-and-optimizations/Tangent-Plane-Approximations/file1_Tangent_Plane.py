@@ -1,7 +1,7 @@
 from manimlib.imports import*
 
 #---- tangent plane is parallel to the surface of the funtion at a point
-class firstScene(ThreeDScene):
+class tangentplane(ThreeDScene):
     def construct(self):
 
         s1_text=TextMobject("Suppose, the point $(x,y)$ lies on the surface of the function.").scale(0.5).shift(2*UP)
