@@ -1,20 +1,20 @@
 **file1_scalar_function**
 ![file1_scalar_function](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file1_scalar_functions.gif)
 
-**file2_volume_under_surface**
-![file2_volume_under_surface](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file2_volume_under_surface.gif)
+**file2_domain_range**
+![file2_domain_range](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file2_domain_range.gif)
 
-**file3_y_limit_dependent_on_x**
-![file3_y_limit_dependent_on_x](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file3_y_limit_dependent_on_x.gif)
+**file3_parabola_example**
+![file3_parabola_example](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file3_parabola_example.gif)
 
-**file4_non_rect_region**
-![file4_non_rect_region](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file4_non_rect_region.gif)
+**file4_level_curves**
+![file4_non_rect_region](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file4_level_curves.gif)
 
-**file5_elementary_area**
-![file5_elementary_area](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file5_elementary_area.gif)
+**file5_level_surface**
+![file5_level_surface](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file5_level_surface.gif)
 
-**file6_doing_integration**
-![file6_doing_integration](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file6_doing_integration.gif)
+**file6_scalar_function_application**
+![file6_scalar_function_application](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file6_scalar_function_application.gif)
 
-**file7_int_process_of_example**
-![file7_int_process_of_example](https://github.com/panditsomnath10016git/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/integrals-of-multivariable-functions/double-integrals/file7_int_process_of_example.gif)
+**file7_neural_nets**
+![file7_neural_nets](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file7_neural_nets.gif)
