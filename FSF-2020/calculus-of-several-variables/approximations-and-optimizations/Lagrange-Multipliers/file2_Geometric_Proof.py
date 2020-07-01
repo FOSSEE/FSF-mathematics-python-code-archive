@@ -1,7 +1,7 @@
 from manimlib.imports import*
 
 #---- visualization of geometric proof of Lagrange multiplier
-class GeometricProof(ThreeDScene):
+class firstScene(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes().scale(0.7).rotate(math.radians(180))       
         label_x = TextMobject("$x$").shift(4*RIGHT).fade(0.4)  #---- x axis
@@ -12,19 +12,18 @@ class GeometricProof(ThreeDScene):
                 1*np.sin(u)*np.cos(v),
                 1*np.sin(u)*np.sin(v),
                 -1*np.sin(u)*np.sin(u)+2
-            ]),u_min=0,u_max=PI/2,v_min=0,v_max=2*PI,checkerboard_colors=[GREEN_C, GREEN_E]).scale(1).shift([-1.5,-1.5,0])
+            ]),u_min=0,u_max=PI/2,v_min=0,v_max=2*PI).set_color(GREEN).scale(1).shift([-1.5,-1.5,0])
          
         d = Dot([-2,-2.55,0],color = '#800000')
-        a_df = Arrow(color = '#00FFFF').rotate(-2).shift(3.2*DOWN+2.3*LEFT) #---- f parallel to g at maxima
-        a_dg = Arrow(color = '#FF00FF').scale(0.8).shift(3.2*DOWN+2.3*LEFT).rotate(-2) #---- g parallel to f at maxima
+        a_df = Arrow(color = '#00FFFF').rotate(-2).shift(3.2*DOWN+2.3*LEFT) #---- f parallel to g
+        a_dg = Arrow(color = '#FF00FF').scale(0.8).shift(3.2*DOWN+2.3*LEFT).rotate(-2) #---- f parallel to g
 
-        b_dg = Arrow(color = '#00FFFF').rotate(1.1).shift(0.82*LEFT+0.15*UP) #---- g parallel to f at minima
-        b_df = Arrow(color = '#FF00FF').scale(0.6).rotate(-2).shift(1.43*LEFT+1.1*DOWN) #---- f parallel to g at minima
+        b_dg = Arrow(color = '#00FFFF').rotate(1.1).shift(0.82*LEFT+0.15*UP) #---- f parallel to g
+        b_df = Arrow(color = '#FF00FF').scale(0.6).rotate(-2).shift(1.43*LEFT+1.1*DOWN) #---- f parallel to g
 
 
         qd = Dot(color = '#800000').shift(1.2*LEFT+0.6*DOWN)
 
-        #---- level curves
         l1 = Line([-1,-3.1,0],[-4,-3.1,0],color = PINK).rotate(-0.3).fade(0.6)
         l2 = Line([-0.9,-2.9,0],[-4,-2.9,0],color = PINK).rotate(-0.3).fade(0.6)
         l3= Line([-0.8,-2.7,0],[-4,-2.7,0],color = PINK).rotate(-0.3).fade(0.6)
@@ -48,7 +47,6 @@ class GeometricProof(ThreeDScene):
 
         p_text= TextMobject("$P$").shift([1.8,2.6,0]).scale(0.5)
 
-        #---- labelling of level curves
         l1_text = TextMobject("$w=$ 17").rotate(math.radians(180)).scale(0.4).shift(2.7*DOWN+4.36*LEFT)
         l2_text = TextMobject("$w=$ 16").rotate(math.radians(180)).scale(0.4).shift(2.46*DOWN+4.36*LEFT)
         l3_text = TextMobject("$w=$ 15").rotate(math.radians(180)).scale(0.4).shift(2.2*DOWN+4.36*LEFT)
@@ -70,8 +68,9 @@ class GeometricProof(ThreeDScene):
         self.set_camera_orientation(phi=0 * DEGREES, theta = 90*DEGREES)
         self.add(axes)
         self.add(label_x)
-        self.add(label_y)      
-        self.play(Write(surface))
+        self.add(label_y) 
+        self.wait(1)     
+        self.add(surface)
         self.wait(1)
         self.play(ShowCreation(level_Curve))
         self.wait(1)
