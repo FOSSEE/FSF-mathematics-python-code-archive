@@ -2,7 +2,7 @@ from manimlib.imports import*
 import math
 
 
-class graphScene(GraphScene):
+class graphScene(GraphScene,MovingCameraScene):
     CONFIG = {
         "x_min": -8,
         "x_max": 8,
@@ -16,12 +16,15 @@ class graphScene(GraphScene):
         "exclude_zero_label": True,
         "x_labeled_nums": range(-8, 8, 1),
     }
+    def setup(self):
+        GraphScene.setup(self)
+        MovingCameraScene.setup(self)
     def construct(self):
 
         x_each_unit = self.x_axis_width / (self.x_max - self.x_min)
         y_each_unit = self.y_axis_height / (self.y_max - self.y_min)
         
-        self.setup_axes(animate=True)
+        self.setup_axes(animate=True,scalee=1)
 
         lnx=self.get_graph(lambda x:math.log2(x),color=RED,x_min=0.01,x_max=8)
 
@@ -98,14 +101,23 @@ class graphScene(GraphScene):
 
         circle=Circle(radius=ORIGIN+x_each_unit*2,color=PURPLE_E)
         circle.shift(ORIGIN+RIGHT*x_each_unit*2)
-        radiusLine=Line(start=ORIGIN+x_each_unit*RIGHT*2,end=ORIGIN+x_each_unit*4*RIGHT,color=PURPLE_E)
+        radiusLine=Line(start=ORIGIN+x_each_unit*RIGHT*2,end=ORIGIN+x_each_unit*2*RIGHT+y_each_unit*3*UP,color=PURPLE_E)
         radius=TextMobject("$R$")
         radius.set_color(RED)
         radius.scale(0.5)
-        radius.shift(ORIGIN+RIGHT*x_each_unit*2.45+DOWN*y_each_unit*0.6)
+        radius.shift(ORIGIN+RIGHT*x_each_unit*2.45+UP*y_each_unit*2.2)
+        rText=TextMobject("R",":","Radius of Convergence").scale(0.3).shift(x_each_unit*RIGHT*2+UP*y_each_unit*3.3).set_color_by_tex_to_color_map({"R":RED,"Radius of Convergence":YELLOW})
 
         self.play(FadeOut(equations[6]),Write(circle))
         self.wait(0.6)
         self.play(Write(radiusLine))
         self.play(FadeIn(radius))
-        self.wait(2)
+        self.wait(0.7)
+        self.camera_frame.save_state()
+        self.play(self.camera_frame.set_width, 8,
+                  self.camera_frame.move_to, y_each_unit*UP+x_each_unit*2*RIGHT)
+        self.play(Write(rText))
+        self.wait(1)
+        self.play(self.camera_frame.set_width, 15,
+                    self.camera_frame.move_to,0)
+        self.wait(2)        
