@@ -1,4 +1,4 @@
-**file1_area_under_func**
+**file1_scalar_function**
 ![file1_scalar_function](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file1_scalar_functions.gif)
 
 **file2_volume_under_surface**
