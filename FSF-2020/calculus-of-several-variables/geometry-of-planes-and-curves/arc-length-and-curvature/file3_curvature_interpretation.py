@@ -20,7 +20,7 @@ class interpretation(Scene):
 
         # self.play(FadeIn(VGroup(*[tgt, tgt2, nm, nm2, nmText, tgtText, square, arrow, arrowText])))
         tgt2text = TextMobject(r'$\frac{r\prime (t)}{\left| r\prime (t)\right|}$').shift(1.1*UP).scale(0.7).rotate(63*DEGREES  )
-        nm2text = TextMobject(r'$\frac{dT}{dt} = \frac{r\prime\prime (t)}{\left| r\prime (t)\right|}$').scale(0.6).shift(0.5*RIGHT+0.6*DOWN).rotate(-25*DEGREES)
+        nm2text = TextMobject(r'$\frac{r\prime\prime (t)}{\left| r\prime (t)\right|}$').scale(0.7).shift(0.7*RIGHT+0.8*DOWN).rotate(-25*DEGREES)
         unit2 = unit.copy().scale(0.5).shift(0.75*LEFT+0.25*DOWN)
 
         self.play(FadeIn(VGroup(*[tgt, tgtText])))
