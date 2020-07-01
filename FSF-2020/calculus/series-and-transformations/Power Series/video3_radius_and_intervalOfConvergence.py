@@ -3,7 +3,7 @@ import math
 
 class intro(Scene):
     def construct(self):
-        introText1=TextMobject("Consider the","above","example..")
+        introText1=TextMobject("Consider the example","above",)
         introText1.scale(0.8)
         introText1.set_color_by_tex_to_color_map({"above":YELLOW})
         self.play(Write(introText1))
@@ -24,12 +24,13 @@ class graphScene(GraphScene,MovingCameraScene):
         "x_labeled_nums": range(-1, 2, 1),
         "y_labeled_nums": range(0,2,1),
         "y_axis_height":7,
-        "x_axis_width":7
+        "x_axis_width":7,
     }
 
     def setup(self):
         GraphScene.setup(self)
         MovingCameraScene.setup(self)
+       
 
     def construct(self):
         x_each_unit = self.x_axis_width / (self.x_max - self.x_min)
@@ -74,15 +75,14 @@ class graphScene(GraphScene,MovingCameraScene):
         radiusText=TextMobject("Radius of convergence")
         radiusText.scale(0.14)
         radiusText.shift(ORIGIN+RIGHT*x_each_unit*0.45+DOWN*y_each_unit*0.2)
-
+        #self.activate_zooming(animate=True)
         self.play(Write(radiusText))
         self.wait(0.6)
 
         self.camera_frame.save_state()
-        self.camera_frame.set_width(5.5)
-        self.play(self.camera_frame.move_to, ORIGIN)
+        self.play(self.camera_frame.set_width,5.5)
         self.wait(1)
-        self.camera_frame.set_width(14)
+        self.play(self.camera_frame.set_width,14)
         self.wait(1.3)
 
         self.play(FadeOut(radiusText),FadeOut(circle),FadeOut(movingPoint))
@@ -101,8 +101,13 @@ class graphScene(GraphScene,MovingCameraScene):
         self.wait(0.6)
 
         self.camera_frame.save_state()
-        self.camera_frame.set_width(5.5)
-        self.play(self.camera_frame.move_to, ORIGIN)
+        self.play(self.camera_frame.set_width,5.5)
         self.wait(1)
-        self.camera_frame.set_width(14)
-        self.wait(1.5)
+        self.play(self.camera_frame.set_width,14)
+        self.wait(1.3)
+        # self.camera_frame.save_state()
+        # self.camera_frame.set_width(5.5)
+        # self.play(self.camera_frame.move_to, ORIGIN)
+        # self.wait(1)
+        # self.camera_frame.set_width(14)
+        # self.wait(1.5)

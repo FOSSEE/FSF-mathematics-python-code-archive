@@ -3,19 +3,19 @@ import math
 
 class uniformlyConvergent(Scene):
     def construct(self):
-        introText1=TextMobject("Again consider the","above","example")
+        #introText1=TextMobject("Again consider the","above","example")
         introText2=TextMobject("Let","$g(x)=\\frac { 1 }{ 1+{ x }^{ 2 } }$","and","x=0.5 $\in$(-1,1)")
         introText3=TextMobject("Lets analyse..","!")
-        introText1.scale(0.8)
+        #introText1.scale(0.8)
         introText2.scale(0.7)
         introText3.scale(0.9)
         introText3.shift(DOWN)
-        introText1.set_color_by_tex_to_color_map({"above":YELLOW})
+        #introText1.set_color_by_tex_to_color_map({"above":YELLOW})
         introText2.set_color_by_tex_to_color_map({"$g(x)=\\frac { 1 }{ 1+{ x }^{ 2 } }$":BLUE,"x=0.5 $\in$(-1,1)":YELLOW})
         introText3.set_color_by_tex_to_color_map({"!":GREEN})
-        self.play(Write(introText1))
-        self.wait(0.5)
-        self.play(FadeOut(introText1))
+        #self.play(Write(introText1))
+        #self.wait(0.5)
+        #self.play(FadeOut(introText1))
         self.play(Write(introText2))
         self.play(FadeIn(introText3))
         self.wait(2)
@@ -45,7 +45,7 @@ def makeLines(x,numPoints,x_each_unit,y_each_unit):
         lines[i]=Line(start=ORIGIN+RIGHT*x_each_unit*i+UP*y_each_unit*y,end=ORIGIN+RIGHT*x_each_unit*(i+1)+UP*y_each_unit*y_next,color=RED)
     return lines
 
-class graphScene(GraphScene,MovingCameraScene):
+class graphScene(GraphScene,ZoomedScene):
     CONFIG = {
         "x_min": -6,
         "x_max": 6,
@@ -58,12 +58,15 @@ class graphScene(GraphScene,MovingCameraScene):
         "y_axis_label": "$f(\\frac{1}{2})_k$",
         "exclude_zero_label": True,
         "x_axis_width":7,
-        "y_axis_height":7    
+        "y_axis_height":7,
+        "zoomed_camera_frame_starting_position": 0.5*UP+0.5*RIGHT,
+        "zoom_factor": 0.4,    
     }
     
     def setup(self):
         GraphScene.setup(self)
-        MovingCameraScene.setup(self)
+        #MovingCameraScene.setup(self)
+        ZoomedScene.setup(self)
 
 
     def construct(self):
@@ -87,6 +90,14 @@ class graphScene(GraphScene,MovingCameraScene):
         makeSeries(0.5,points,x_each_unit,y_each_unit)
         lines=makeLines(0.5,6,x_each_unit,y_each_unit)
 
+        func1=TextMobject("$g(x)=\\frac { 1 }{ 1+{ x }^{ 2 } }$")
+        func2=TextMobject("x=0.5 $\in$(-1,1)")
+        func1.scale(0.4)
+        func2.scale(0.4)
+        func1.shift(5.3*LEFT+3.3*UP)        
+        func2.shift(5.3*LEFT+2.9*UP)
+        self.add(func1)
+        self.add(func2)
 
         self.add(sequence)
         self.add(formula)
@@ -95,22 +106,26 @@ class graphScene(GraphScene,MovingCameraScene):
         self.add(fLineText)
         for p in points:
             self.add(p)
+        self.setup()
+        self.activate_zooming(animate=True)
         for p in range(0,5):
             self.play(Write(lines[p]))
-        self.wait(0.5)
-        self.camera_frame.save_state()
-        self.camera_frame.set_width(0.6)
-        self.play(self.camera_frame.move_to, points[0])
-        self.wait(0.4)
-        self.play(self.camera_frame.move_to, points[1])
-        self.wait(0.4)
-        self.play(self.camera_frame.move_to, points[2])
-        self.wait(0.3)
-        self.play(self.camera_frame.move_to, points[3])
+        # self.wait(0.5)
+        # self.camera_frame.save_state()
+        # self.camera_frame.set_width(0.6)
+        # self.play(self.camera_frame.move_to, points[0])
+        # self.wait(0.4)
+        # self.play(self.camera_frame.move_to, points[1])
+        # self.wait(0.4)
+        # self.play(self.camera_frame.move_to, points[2])
+        # self.wait(0.3)
+        # self.play(self.camera_frame.move_to, points[3])
+        # self.wait(1)
+        # self.play(self.camera_frame.move_to,ORIGIN)
+        # self.camera_frame.set_width(14)
+        
         self.wait(1)
-        self.play(self.camera_frame.move_to,ORIGIN)
-        self.camera_frame.set_width(14)
-        self.wait(1)
+        self.get_zoomed_display_pop_out_animation()
 
         explanation1=TextMobject("Since the series","converges","to")
         explanation1.set_color_by_tex_to_color_map({"converges":YELLOW})

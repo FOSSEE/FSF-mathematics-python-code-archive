@@ -31,7 +31,7 @@ class intro(Scene):
         self.wait(0.7)
         self.play(FadeOut(equation),FadeOut(text))
 
-class graphScene(GraphScene):
+class graphScene(GraphScene,MovingCameraScene):
     CONFIG = {
         "x_min": -8,
         "x_max": 8,
@@ -45,9 +45,24 @@ class graphScene(GraphScene):
         "exclude_zero_label": True,
         "x_labeled_nums": range(-8, 8, 1),
     }
+    def setup(self):
+        GraphScene.setup(self)
+        MovingCameraScene.setup(self)
     def construct(self):
         x_each_unit = self.x_axis_width / (self.x_max - self.x_min)
         y_each_unit = self.y_axis_height / (self.y_max - self.y_min)   
+
+        equation=TextMobject("$f(x)=$","${ e }^{ -x^{ 2 } }$")
+        equation.scale(0.55)
+        equation.set_color_by_tex_to_color_map({"${ e }^{ -x^{ 2 } }$":RED})
+        text=TextMobject("$a=0$")
+        text.scale(0.55)
+
+        equation.shift(3.39*UP+5*LEFT)
+        text.shift(2.9*UP+5*LEFT)
+
+        self.add(equation)
+        self.add(text)
 
         generalized_eq_coeff=[]
         variables_eq=[]
@@ -58,7 +73,7 @@ class graphScene(GraphScene):
         trTextGrup.scale(0.5)
         trTextGrup.to_corner(UP+RIGHT)
         self.play(Write(trTextGrup))
-        self.setup_axes(animate=True)
+        self.setup_axes(animate=True,scalee=1)
         
         fx=TextMobject("${ e }^{ -x^{ 2 } }$")
         fx.scale(0.5)
@@ -66,18 +81,21 @@ class graphScene(GraphScene):
         mainfunction=self.get_graph(lambda x:math.exp(-1*pow(x,2)),color=RED,x_min=-8,x_max=8)
         self.play(ShowCreation(mainfunction))
         self.play(FadeIn(fx))
-        self.wait(1.4)
+        self.wait(1)
 
         coeff=[TextMobject("$1$"),TextMobject("$f'(x)$"),TextMobject("$\\frac { f''(x) }{ 2! } $")]
         coeff[0].shift(3.39*UP+4.88*RIGHT)
         coeff[0].scale(0.5)
-        coeff[1].shift(3.39*UP+5.3*RIGHT)
+        coeff[1].shift(3.39*UP+5.4*RIGHT)
         coeff[1].scale(0.275)
-        coeff[2].shift(3.39*UP+5.98*RIGHT)
+        coeff[2].shift(3.39*UP+6*RIGHT)
         coeff[2].scale(0.28)
 
         for obj in coeff:
             obj.set_color(GOLD_A)
+        group=VGroup(coeff[0],coeff[1],coeff[2])
+
+        #group.shift(2*LEFT+2*DOWN)
 
         firstApprox=[self.get_graph(lambda x:1,color=BLUE)]
         secondApprox=[self.get_graph(lambda x:1,color=BLUE),
@@ -124,16 +142,44 @@ class graphScene(GraphScene):
         bottomText8.scale(0.5)
 
         bottomText1.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText2.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText3.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText4.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText5.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText6.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText7.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText8.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText2.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText3.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText4.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText5.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText6.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText7.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText8.shift(4.5*RIGHT+2.5*DOWN)
+        bottomText2.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText3.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText4.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText5.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText6.shift(3.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText7.shift(3.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText8.shift(3.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+
+        bottomText2.scale(0.7)
+        bottomText3.scale(0.7)
+        bottomText4.scale(0.7)
+        bottomText5.scale(0.7)
+        bottomText6.scale(0.7)
+        bottomText7.scale(0.7)
+        bottomText8.scale(0.7)
 
         self.play(Write(bottomText1))
-        self.wait(1)
+        self.wait(0.8)
+        #self.activate_zooming(animate=True)
+        self.camera_frame.save_state()
+        group.move_to(4*y_each_unit*UP+4.6*RIGHT*x_each_unit).scale(0.7)
+        self.play(self.camera_frame.set_width, 8,
+                self.camera_frame.move_to, x_each_unit*UP,
+                ApplyMethod(trTextGrup.move_to,4*y_each_unit*UP+4.1*RIGHT*x_each_unit),
+                ApplyMethod(bottomText1.move_to,3.4*RIGHT*x_each_unit+2.5*DOWN*y_each_unit),
+                ApplyMethod(equation.shift,1.39*DOWN+2*RIGHT),
+                ApplyMethod(text.shift,1.39*DOWN+2*RIGHT),)
+        self.play(ApplyMethod(text.scale,0.5),ApplyMethod(equation.scale,0.5),ApplyMethod(bottomText1.scale,0.6),ApplyMethod(trTextGrup.scale,0.7))
+        self.play(ApplyMethod(text.shift,0.3*UP))
+        self.wait(0.6)
+        
         self.play(ShowCreation(firstApprox[0]),ReplacementTransform(bottomText1,bottomText2))
         #change coeff in tn(x)
         self.play(ReplacementTransform(generalized_eq_coeff[0],coeff[0]))
@@ -170,10 +216,12 @@ class graphScene(GraphScene):
         self.wait(2)
 
         textFinal=TextMobject("And so on..!")
-        textFinal.scale(0.7)
-        textFinal.shift(4.5*RIGHT+2.5*DOWN)
+        textFinal.scale(0.35)
+        textFinal.shift(3.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
         self.play(ReplacementTransform(bottomText8,textFinal))
-        self.wait(2.5)
+        self.wait(1)
+        self.play(FadeOut(equation),FadeOut(text))
+        self.play(self.camera_frame.set_width, 15)
 
         finalFormula=TextMobject("Hence","$T_{ n }(x)$","=","$f(0)+f'(0)x+\\frac { f''(0) }{ 2! }x^2+..+\\frac { { f }^{ n }(0) }{ n! } { x }^{ n }$")
         finalFormula.scale(0.8)
