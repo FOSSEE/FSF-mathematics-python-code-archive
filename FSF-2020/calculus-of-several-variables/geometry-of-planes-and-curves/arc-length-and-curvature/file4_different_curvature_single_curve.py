@@ -8,7 +8,9 @@ class GR(GraphScene):
         "x_max": 6,
         "y_min": -6,
         "y_max": 10,
-        "graph_origin": ORIGIN
+        "graph_origin": ORIGIN,
+        'x_tick_frequency': 20,
+        'y_tick_frequency': 20
     }
 
     def construct(self):
@@ -21,7 +23,7 @@ class GR(GraphScene):
 
         tracker = ValueTracker(-3)
 
-        text = TextMobject(r'The curvature at point $P_{1}$ is \\ lesser than that at point $P_{2}$: \\ as $\kappa = \frac{1}{R}$').shift(3.2*RIGHT+3*UP).scale(0.6)
+        text = TextMobject(r'$\because R_{1} > R_{2}$, the curvature at \\ point $P_{1}$ is less than that \\ at point $P_{2}$ as $\kappa = \frac{1}{R}$').shift(3.2*RIGHT+3*UP).scale(0.6)
 
         dot1 = Dot((0,3,0), color = YELLOW)
         dot1label = TextMobject(r'$P_{1}$').next_to(dot1, UP+RIGHT, buff = 0.1)
@@ -50,12 +52,18 @@ class GR(GraphScene):
         circle1 = Circle(radius = 0.8, color = GREY, opacity = 0.2).shift(2.2*UP)
         tgt1 = Line((-2,3,0), (2,3,0), color = GREY, opacity = 0.2).scale(0.4)
 
-        curvature1 = VGroup(*[circle1, tgt1])
+        r1 = Line(circle1.get_center(), circle1.get_center() + np.array([0,0.8,0]), color=GREEN_SCREEN)
+        r1label = TextMobject(r'$R_{1}$',color=WHITE).next_to(r1, RIGHT, buff = 0.1).scale(0.6)
+
+        curvature1 = VGroup(*[circle1, tgt1, r1, r1label])
 
         circle2 = Circle(radius = 0.6, color = GREY, opacity = 0.2).shift(0.4*DOWN + 4*RIGHT)
         tgt2 = Line((4,-2,0), (6, -2, 0), color = GREY, opacity = 0.2).scale(0.5).shift(LEFT + UP)
 
-        curvature2 = VGroup(*[circle2, tgt2])
+        r2 = Line(circle2.get_center(), circle2.get_center() + np.array([0,-0.6,0]), color=GREEN_SCREEN)
+        r2label = TextMobject(r'$R_{2}$', color=WHITE).next_to(r2, 0.9*RIGHT, buff = 0).scale(0.6)
+
+        curvature2 = VGroup(*[circle2, tgt2, r2, r2label])
 
         line = always_redraw(get_tangent_line)
 
