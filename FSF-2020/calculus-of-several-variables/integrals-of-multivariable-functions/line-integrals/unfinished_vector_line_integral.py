@@ -146,34 +146,29 @@ class LineIntegrationProcess(SpecialThreeDScene):
         
         
     def get_vector_and_tangent(self):
-        dot=self.dots[self.index]
-        self.show_specific_vectors(dot)
-        self.play(Write(self.func_val))
-        self.wait(1)
-        self.show_tangent(dot)
-        self.play(FadeIn(VGroup(*[
-            dot.set_color(ORANGE).scale(1.4)
-                for dot in self.dots ]
-        )))
+        t_tracker = ValueTracker(0)
+        self.t_tracker = t_tracker
+        t = t_tracker.get_value
+        coord = [np.cos(t()), np.sin(t())]
+        self.show_vectors(coord)
+        self.show_tangent(coord)
         
         
-    def show_specific_vectors(self,dots):
-        for dot in dots:
-            vector=self.vector_field.get_vector(dot.get_center()) 
-            vector.set_color(ORANGE)
-
-            self.play(Write(vector),run_time=.2)
-
+    def show_vector(self,coord):
+        vector = self.vector_field.get_vector(coord)
+        vector.set_color(ORANGE)
         
-    def show_tangent(self,dot):
+        self.add(vector)
+       # self.play(Write(vector),run_time=.2)
+        
+    def show_tangent(self,coord):
         tangent_sym=TextMobject("$\\vec T(x_i,y_i)$",color="#DC75CD").scale(.8)
-        x=dot.get_center()
-        angle=self.angle_of_tangent( 
-             self.point_to_coords(x)[0],
-             self.curve, 
+        angle=self.angle_of_tangent(
+             coord[0],
+             self.line_of_int, 
              dx=0.01
         )
-        vect = Vector().rotate(angle,about_point=x)
+        vect = Vector().rotate(angle,about_point=coord)
         vect.set_color("#DC75CD")
         tangent=vect.next_to(x,DR,buff=0)
         tangent_sym.next_to(tangent,DOWN,buff=.1)
