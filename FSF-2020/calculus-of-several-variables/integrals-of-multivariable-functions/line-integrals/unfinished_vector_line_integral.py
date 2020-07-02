@@ -84,7 +84,7 @@ class LineIntegrationProcess(SpecialThreeDScene):
         self.get_line_of_int()
       #  self.begin_ambient_camera_rotation(rate=0.04)
         self.get_dot_product_values()
-        '''self.get_field_values_on_line()
+        '''self.get_dot_prod_values_on_line()
         self.wait(1.5)
         self.area=self.get_area()
         area_text=TextMobject("Line"," Integral in the",r" scalar field\\"," means this" ,"area")
@@ -132,7 +132,7 @@ class LineIntegrationProcess(SpecialThreeDScene):
         )
         
         self.add_fixed_in_frame_mobjects(line_of_int_text) 
-        self.play(Write(line_of_int_text))
+      #  self.play(Write(line_of_int_text))
         self.wait(.5)
         self.play(ShowCreation(line_of_int),run_time=1.5)
       #  self.add(line_of_int)
@@ -142,15 +142,20 @@ class LineIntegrationProcess(SpecialThreeDScene):
     
     def get_dot_product_values(self):    
         self.get_vector_and_tangent()
-        
+        self.play(ApplyMethod(
+            t_tracker.set_value, PI/2,
+                rate_func=linear,
+                run_time=.5,
+            ) 
+        )
         
         
     def get_vector_and_tangent(self):
         t_tracker = ValueTracker(0)
         self.t_tracker = t_tracker
         t = t_tracker.get_value
-        coord = [np.cos(t()), np.sin(t())]
-        self.show_vectors(coord)
+        coord = [np.cos(t()), np.sin(t()), 0]
+        self.show_vector(coord)
         self.show_tangent(coord)
         
         
@@ -193,7 +198,8 @@ class LineIntegrationProcess(SpecialThreeDScene):
         ))
 
         self.dot_sym=dot_sym
-    def get_field_values_on_line(self):
+        
+    """def get_dot_prod_values_on_line(self):
         self.remove(self.line_of_int_text)
           
         values_on_line_text=TextMobject("Values"," of"," function","on the ","line")
@@ -217,8 +223,8 @@ class LineIntegrationProcess(SpecialThreeDScene):
      #   self.add(values_on_surface)
         
         self.values_on_surface=values_on_surface
-        self.values_on_line_text=values_on_line_text
-       
+        self.values_on_line_text=values_on_line_text"""
+        
      
     def trasform_to_graphs(self):        
         on_surface_graph=(self.get_graph(
