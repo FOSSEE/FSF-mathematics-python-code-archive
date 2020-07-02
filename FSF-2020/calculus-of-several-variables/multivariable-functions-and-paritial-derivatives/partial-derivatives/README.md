@@ -19,5 +19,5 @@
 **file7_partial_deriv_clariant_rule**
 ![file7_partial_deriv_clariant_rule](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/partial-derivatives/gifs/file7_partial_deriv_clariant_rule.gif)
 
-**file7_neural_nets**
+**file8_chain_rule**
 ![file8_chain_rule](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/partial-derivatives/gifs/file8_chain_rule.gif)
