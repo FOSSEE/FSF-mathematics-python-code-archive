@@ -1,8 +1,8 @@
-**file1_scalar_function**
-![file1_scalar_function](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file1_scalar_functions.gif)
+**file1_epsilon_delta_defn**
+![file1_epsilon_delta_defn](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/multivariable-limits-and-continuity/gifs/file1_epsilon_delta_defn.gif)
 
 **file2_domain_range**
-![file2_domain_range](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file2_domain_range.gif)
+![file2_domain_range](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/multivariable-limits-and-continuity/gifs/file2_domain_range.gif)
 
 **file3_parabola_example**
 ![file3_parabola_example](https://github.com/nishanpoojary/FSF-mathematics-python-code-archive/blob/master/FSF-2020/calculus-of-several-variables/multivariable-functions-and-paritial-derivatives/scalar-functions/gifs/file3_parabola_example.gif)
