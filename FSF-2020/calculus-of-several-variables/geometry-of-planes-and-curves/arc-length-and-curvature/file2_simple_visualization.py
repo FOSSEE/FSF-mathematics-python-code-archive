@@ -1,8 +1,8 @@
 from manimlib.imports import *
 
-class randomcurve(GraphScene):
+class a(GraphScene):
     CONFIG = {
-    "x_min": -4,
+    "x_min": -3,
     "x_max": 6,
     "y_min": -6,
     "y_max": 10,
@@ -10,11 +10,14 @@ class randomcurve(GraphScene):
     }
     def construct(self):
         intro = TextMobject('Consider the following curve.')
-        mid = TextMobject(r'Notice how the direction of the unit tangent vectors\\changes with respect to the arc length.')
-        outro = TextMobject(r'The rate of change of unit tangents with \\ respect to the arc length $ds$ is called curvature.\\Mathematically, curvature $ = k = \left|{\frac{dT}{ds}}\right|$')
+        mid = TextMobject(r'Notice how the direction of the unit tangent vector\\changes with respect to the arc length.')
+        outro = TextMobject(r'The rate of change of unit tangent with \\ respect to the arc length $ds$ is called curvature.\\Mathematically, curvature $ = k = \left|{\frac{dT}{ds}}\right|$')
 
         XTD = self.x_axis_width/(self.x_max- self.x_min)
         YTD = self.y_axis_height/(self.y_max- self.y_min)
+
+        circle = Circle(radius = 0.95, color = GRAY, fill_opacity = 0.2, fill_color = RED)
+        circle.set_stroke(width = 0.1)
 
         tgt1 = Arrow((-2.2*XTD,-0.5*YTD,0),(-1*XTD,1,0))
         tgt2 = Arrow((-1.2*XTD, 1.93*YTD,0),(0*XTD,1.6,0)).scale(1.2)
@@ -40,30 +43,49 @@ class randomcurve(GraphScene):
         ds_text = TextMobject(r'$ds$').next_to(ds, UP, buff = 0.1).shift(1.3*LEFT)
 
         self.setup_axes(hideaxes=True)
-        graphobj = self.get_graph(self.curve)
+
+        def curve(x):
+            return 3 - (3653*x**2)/5292 + (2477*x**3)/31752 + (13*x**4)/784 - (17*x**5)/5292 + (17*x**6)/63504
+
+        # parabola_x_out = FunctionGraph(curve, x_min=-2, x_max=6, stroke_width = 2, color = BLUE)
+        parabola_x_out = self.get_graph(curve)
+
+        dot_x = Dot().rotate(PI/2).set_color(YELLOW_E)
+        alpha_x = ValueTracker(-2)
+        vector_x = self.get_tangent_vector(alpha_x.get_value(),parabola_x_out,scale=1.5)
+        dot_x.add_updater(lambda m: m.move_to(vector_x.get_center()))
+        vector_x.add_updater(
+            lambda m: m.become(
+                    self.get_tangent_vector(alpha_x.get_value()%1,parabola_x_out,scale=1.5)
+                )
+            )
+
         self.play(FadeIn(intro))
         self.wait(2)
         self.play(FadeOut(intro))
         self.setup_axes(hideaxes=False)
-        self.play(ShowCreation(graphobj), FadeIn(dots), FadeIn(ds), FadeIn(ds_text), FadeIn(arc))
-        self.wait(1)
-        self.play(FadeOut(self.axes), FadeOut(arc), FadeOut(graphobj),FadeIn(mid), FadeOut(dots), FadeOut(ds), FadeOut(ds_text))
+        self.play(ShowCreation(parabola_x_out), FadeIn(dots), FadeIn(ds), FadeIn(ds_text), FadeIn(arc))
+        self.wait(2)
+        self.play(FadeOut(self.axes), FadeOut(arc), FadeOut(parabola_x_out),FadeIn(mid), FadeOut(dots), FadeOut(ds), FadeOut(ds_text))
         self.wait(3)
         self.play(FadeOut(mid))
-        self.play(FadeIn(self.axes), FadeIn(graphobj), FadeIn(dots))
-
-        tangents = [tgt1, tgt2, tgt3, tgt4, tgt5, tgt6, tgt7]
-        for tangent in tangents:
-            self.play(ShowCreation(tangent), run_time = 0.2)
-            self.wait(1)
-        tangents = VGroup(*tangents)
-        self.play(FadeOut(self.axes), FadeOut(graphobj), FadeOut(tangents), FadeOut(dots))
-        self.wait(1)
+        self.play(FadeIn(self.axes), FadeIn(parabola_x_out), FadeIn(dots))
+        self.add(vector_x)
+        self.play(alpha_x.increment_value, 1, run_time=8, rate_func=linear)
+        self.remove(vector_x)
+        self.play(FadeOut(VGroup(*[self.axes, dots, parabola_x_out])))
         self.play(FadeIn(outro))
         self.wait(3)
         self.play(FadeOut(outro))
         self.wait(1)
 
 
-    def curve(self, x):
-        return 3 - (3653*x**2)/5292 + (2477*x**3)/31752 + (13*x**4)/784 - (17*x**5)/5292 + (17*x**6)/63504
+
+
+    def get_tangent_vector(self, proportion, curve, dx=0.001, scale=1):
+        coord_i = curve.point_from_proportion(proportion)
+        coord_f = curve.point_from_proportion(proportion + dx)
+        reference_line = Line(coord_i,coord_f)
+        unit_vector = reference_line.get_unit_vector() * scale
+        vector = Arrow(coord_i , coord_i + unit_vector, color = YELLOW, buff=0)
+        return vector
