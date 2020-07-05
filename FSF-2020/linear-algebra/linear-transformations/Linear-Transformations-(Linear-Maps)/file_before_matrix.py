@@ -1,13 +1,13 @@
 from manimlib.imports import *
 
-class linear(GraphScene):
+class Linear(GraphScene):
 
     CONFIG = {
     "x_min": -5,
     "x_max": 5,
     "y_min": -5,
     "y_max": 5,
-    "graph_origin": ORIGIN+RIGHT,
+    "graph_origin": ORIGIN,
     "x_labeled_nums": list(range(-5, 6)),
     "y_labeled_nums": list(range(-5, 6)),
     "x_axis_width": 7,
@@ -22,6 +22,7 @@ class linear(GraphScene):
         self.setup_axes(animate = True)
         heading = TextMobject(r"$T(x,y) = T(x+2y,x-y)$")
         heading.move_to(UP*3+LEFT*4)
+        heading.scale(0.7)
         self.play(Write(heading))
         self.wait()
 
@@ -34,44 +35,42 @@ class linear(GraphScene):
         dot1.set_color(DARK_BLUE)
         dot2.set_color(DARK_BLUE)
         p1 = TextMobject(r"$P_1$")
+        p1.scale(0.75)
         p1.set_color(DARK_BLUE)
-        p1.move_to(self.graph_origin+1*XTD*RIGHT+2*YTD*UP)
+        p1.move_to(self.graph_origin+1*XTD*RIGHT+1.5*YTD*UP)
         p2 = TextMobject(r"$P_2$")
         p2.set_color(DARK_BLUE)
-        p2.move_to(self.graph_origin+2*XTD*RIGHT+2*YTD*UP)
+        p2.scale(0.75)
+        p2.move_to(self.graph_origin+2*XTD*RIGHT+1.5*YTD*UP)
 
         after = TextMobject("After applying Linear Transformation")
         after.set_color(RED)
         after.move_to(3*UP+4.5*RIGHT)
-        after.scale(0.75)
+        after.scale(0.5)
         dot3 = Dot().shift(self.graph_origin+3*XTD*RIGHT+0*YTD*UP)
         dot4 = Dot().shift(self.graph_origin+4*XTD*RIGHT+1*YTD*UP)
         dot3.set_color(RED)
         dot4.set_color(RED)
-        p3 = TextMobject(r"$P_3$")
+        p3 = TextMobject(r"$T(P_1)$")
+        p3.scale(0.7)
         p3.set_color(RED)
         p3.move_to(self.graph_origin+3*XTD*RIGHT-1.1*YTD*UP)
-        p4 = TextMobject(r"$P_4$")
+        p4 = TextMobject(r"$T(P_2)$")
+        p4.scale(0.7)
         p4.set_color(RED)
-        p4.move_to(self.graph_origin+4*XTD*RIGHT+2*YTD*UP)
-
-        tp1 = TextMobject(r"$T(P_1) = P_3$")
-        tp1.set_color(RED)
-        tp1.move_to(DOWN+4*LEFT)
-        tp2 = TextMobject(r"$T(P_2) = P_4$")
-        tp2.set_color(RED)
-        tp2.move_to(2*DOWN+4*LEFT)
+        p4.move_to(self.graph_origin+4*XTD*RIGHT+1.5*YTD*UP)
 
         self.play(Write(before), ShowCreation(dot1), ShowCreation(dot2),Write(p1), Write(p2))
         self.wait(3)
-        self.play(Transform(before,after), Transform(dot1,dot3), Transform(dot2,dot4), Transform(p2,p4), Transform(p1,p3), Write(tp1), Write(tp2))
+        self.play(Transform(before,after), Transform(dot1,dot3), Transform(dot2,dot4), Transform(p2,p4), Transform(p1,p3))
         self.wait(3)
 
 
 class withgrid(LinearTransformationScene):
     def construct(self):
 
-        heading = TextMobject(r"$T(x,y) = (x+2y,x-y)$")
+        heading = TextMobject(r"Now, Imagine this happening for all the vectors")
+        heading.scale(0.5)
         heading.move_to(UP*2.5+LEFT*4)
         self.play(Write(heading))
         self.wait()
@@ -93,9 +92,11 @@ class withgrid(LinearTransformationScene):
         self.add_transformable_mobject(dot2_c)
         
         p1 = TextMobject(r"$P_1$")
+        p1.scale(0.75)
         p1.set_color(DARK_BLUE)
         p1.move_to(1*RIGHT+1.5*UP)
         p2 = TextMobject(r"$P_2$")
+        p2.scale(0.75)
         p2.set_color(DARK_BLUE)
         p2.move_to(2*RIGHT+1.5*UP)
 
@@ -107,10 +108,12 @@ class withgrid(LinearTransformationScene):
         dot4 = Dot().shift(4*RIGHT+1*UP)
         dot3.set_color(RED)
         dot4.set_color(RED)
-        p3 = TextMobject(r"$P_3$")
+        p3 = TextMobject(r"$T(P_1)$")
+        p3.scale(0.75)
         p3.set_color(RED)
         p3.move_to(3*RIGHT-0.6*UP)
-        p4 = TextMobject(r"$P_4$")
+        p4 = TextMobject(r"$T(P_2)$")
+        p4.scale(0.75)
         p4.set_color(RED)
         p4.move_to(4*RIGHT+1.5*UP)
 
@@ -118,6 +121,7 @@ class withgrid(LinearTransformationScene):
         self.wait(3)
         matrix = [[1,2],[1,-1]]
         self.apply_matrix(matrix)
+        self.play(FadeOut(dot1),FadeOut(dot2))
         self.play(Transform(before,after), Transform(p2,p4), Transform(p1,p3))
         self.play(Transform(before,after))
         self.wait(3)
@@ -141,17 +145,28 @@ class ThreeDExplanation(ThreeDScene):
 
         before = TextMobject("Before Linear Transformation")
         self.add_fixed_in_frame_mobjects(before)
-        before.set_color(GREEN_E)
+        before.set_color(YELLOW)
         before.move_to(3.5*UP+4*RIGHT)
         before.scale(0.75)
+
+        p1 = TextMobject(r"$P_1$")
+        p2 = TextMobject(r"$P_2$")
+        p3 = TextMobject(r"$P_3$")
+        p1.scale(0.75)
+        p2.scale(0.75)
+        p3.scale(0.75)
         dot1 = Dot().shift(1*RIGHT+1*UP)
         dot2 = Dot().shift(2*RIGHT+1*UP)
-        dot3 = Dot().shift(1*RIGHT+1*UP)
-        dot1.set_color(GREEN_E)
-        dot2.set_color(GREEN_E)
-        dot3.set_color(GREEN_E)
+        dot3 = Dot().shift(1*RIGHT+1*DOWN)
+        dot1.set_color(YELLOW)
+        dot2.set_color(YELLOW)
+        dot3.set_color(YELLOW)
         self.play(ShowCreation(before))
-
+        
+        p1.move_to(1*RIGHT+1*UP+[0,0,0.5])
+        p2.move_to(2*RIGHT+1*UP+[0,0,0.5])
+        p3.move_to(1*RIGHT-1*UP+[0,0,0.5])
+        
         dot1_c = Dot(radius = 0.05).shift(1*RIGHT+1*UP)
         dot2_c = Dot(radius = 0.05).shift(0*RIGHT+2*UP)
         dot3_c = Dot(radius = 0.05).shift(1*RIGHT-1*UP)
@@ -168,6 +183,9 @@ class ThreeDExplanation(ThreeDScene):
         self.stop_ambient_camera_rotation()
 
         plane = NumberPlane()
+        self.add_fixed_orientation_mobjects(p1)
+        self.add_fixed_orientation_mobjects(p2)
+        self.add_fixed_orientation_mobjects(p3)
         self.play(ShowCreation(dot1),ShowCreation(dot3),ShowCreation(dot2),ShowCreation(plane))
         
         self.play(FadeOut(before))
@@ -177,8 +195,23 @@ class ThreeDExplanation(ThreeDScene):
         after.move_to(3.5*UP+3.5*RIGHT)
         after.scale(0.75)
       
+        self.play(FadeOut(p1),FadeOut(p2),FadeOut(p3))
         matrix = [[1,1],[1,-1],[2,1]]
         self.play(FadeOut(dot1),FadeOut(dot2),FadeOut(dot3),ApplyMethod(plane.apply_matrix,matrix),ApplyMethod(dot1_c.apply_matrix,matrix),ApplyMethod(dot3_c.apply_matrix,matrix),ApplyMethod(dot2_c.apply_matrix,matrix))
+        
+        p4 = TextMobject(r"$T(P_1)$")
+        p5 = TextMobject(r"$T(P_2)$")
+        p6 = TextMobject(r"$T(P_3)$")
+        p4.scale(0.75)
+        p5.scale(0.75)
+        p6.scale(0.75)
+        p4.move_to(2*RIGHT+0*UP+[0,0,3.5])
+        p5.move_to(2*RIGHT-2*UP+[0,0,2.5])
+        p6.move_to(0*RIGHT+2*UP+[0,0,1.5])
+        self.add_fixed_orientation_mobjects(p5)
+        self.add_fixed_orientation_mobjects(p4)
+        self.add_fixed_orientation_mobjects(p6)
+        
         self.begin_ambient_camera_rotation(rate=0.3)
         self.wait(3)
         self.stop_ambient_camera_rotation()
@@ -188,4 +221,6 @@ class ThreeDExplanation(ThreeDScene):
         ending.move_to(-UP*2+LEFT*4)
         self.play(Transform(text,ending))
         self.add_fixed_in_frame_mobjects(ending)
+
+        self.play(FadeOut(plane))
         self.wait(9)

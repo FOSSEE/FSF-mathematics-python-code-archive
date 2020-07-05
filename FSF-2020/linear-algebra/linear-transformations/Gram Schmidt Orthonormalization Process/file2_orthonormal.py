@@ -1,18 +1,153 @@
 from manimlib.imports import *
 
-from manimlib.imports import *
-
-class Orthogonal(ThreeDScene):
+class Algo(ThreeDScene):
     def construct(self):
 
-        text = TextMobject(r"These are two Orthogonal Basis $\alpha_{1}$ and $\alpha_{2}$")
+        axes = ThreeDAxes(x_min = -5,x_max=5,y_min=-3,y_max=3,z_min=-4,z_max=4)
+        self.play(ShowCreation(axes))
+
+        text = TextMobject(r"This is the vector $\beta_1(=\left[\begin{array}{c} 4\\0\\0 \end{array}\right])$")
+        text.set_color(GREEN)
+        text.scale(0.6)
+        text.move_to(3*UP+5*LEFT)
+        self.play(Write(text))
+
+        arrow_a = Arrow(start = ORIGIN, end = 4*RIGHT)
+        arrow_a.set_color(GREEN)
+        arrow_a.scale(1.15)
+        self.play(ShowCreation(arrow_a))
+
+        text_a = TextMobject(r"$\beta_1$")
+        text_a.move_to(0.4*DOWN+3*RIGHT)
+        text_a.set_color(GREEN)
+        text_a.scale(0.75)
+        self.play(Write(text_a))
+        self.wait()
+        self.play(FadeOut(text))
+
+        text = TextMobject(r"Normalize $\beta_1$ to get $\alpha_1$")
+        text.set_color(DARK_BLUE)
         text.scale(0.75)
+        text.move_to(3*UP+5*LEFT)
+        self.play(Write(text))
+
+        alpha_1 = Arrow(start = ORIGIN,end = RIGHT)
+        alpha_1.scale(1.9)
+        alpha_1.set_color(DARK_BLUE)
+        text_alpha_1 = TextMobject(r"$\alpha_1$")
+        text_alpha_1.move_to(0.4*DOWN+RIGHT)
+        text_alpha_1.set_color(DARK_BLUE)
+        text_alpha_1.scale(0.75)
+        self.play(Transform(text_a,text_alpha_1), Transform(arrow_a,alpha_1))
+        self.wait()
+        self.play(FadeOut(text))
+
+        text = TextMobject(r"Consider another vector $\beta_2(=\left[\begin{array}{c} 2\\2\\0 \end{array}\right])$")
+        text1 = TextMobject(r"which is linearly independent to $\beta_1$")
+        text.set_color(GREEN)
+        text1.set_color(GREEN)
+        text.scale(0.6)
+        text1.scale(0.6)
+        text.move_to(3*UP+4*LEFT)
+        text1.move_to(2*UP+4*LEFT)
+        self.play(Write(text))
+        self.play(Write(text1))
+
+        arrow_b = Arrow(start = ORIGIN, end = 2*UP+2*RIGHT)
+        arrow_b.scale(1.2)
+        arrow_b.set_color(GREEN)
+        text_b = TextMobject(r"$\beta_2$")
+        text_b.move_to(1.5*UP+RIGHT)
+        text_b.set_color(GREEN)
+        text_b.scale(0.75)
+ 
+        self.play(ShowCreation(arrow_b), Write(text_b))
+        self.wait()
+
+        arrow_b_copy = Arrow(start = ORIGIN, end = 2*UP+2*RIGHT)
+        arrow_b_copy.scale(1.2)
+
+        arrow_p = Arrow(start = ORIGIN, end = 2*RIGHT)
+        arrow_p.scale(1.35)
+        arrow_p.set_color(GOLD_E)
+
+        text_p = TextMobject("p")
+        text_p.move_to(0.25*DOWN+RIGHT)
+        text_p.set_color(GOLD_E)
+
+        self.play(FadeOut(text), FadeOut(text1), Transform(arrow_b_copy,arrow_p), FadeOut(text_a), FadeOut(text_b))
+        text = TextMobject(r"$p$ is the projection of $\beta_2$ on $\alpha_1$")
+        text.set_color(GOLD_E)
+        text.move_to(3*UP+4*LEFT)
+        text.scale(0.8)
+        self.play(Write(text),Write(text_p))
+        self.wait()
+        
+        self.play(FadeIn(text_b))
+
+        arrow_o = Arrow(start = 2*RIGHT, end = 2*UP+2*RIGHT)
+        arrow_o.scale(1.35)
+        arrow_o.set_color(PURPLE_E)
+
+        text_o = TextMobject(r"$\beta_2-p$")
+        text_o.move_to(UP+2.7*RIGHT)
+        text_o.scale(0.75)
+        text_o.set_color(PURPLE_E)
+
+        self.play(ShowCreation(arrow_o))
+        self.play(FadeOut(text),Write(text_o))
+        
+        text = TextMobject(r"$\beta_2-p$ is orthogonal to p")
+        text1 = TextMobject(r"(and hence orthogonal to $\alpha_1$ also)")
+        text.set_color(PURPLE_E)
+        text1.set_color(PURPLE_E)
+        text.scale(0.7)
+        text1.scale(0.7)
+        text.move_to(3*UP+4*LEFT)
+        text1.move_to(2.5*UP+4*LEFT)
+        self.play(Write(text))
+        self.play(Write(text1))
+        self.wait(2)
+
+        self.play(FadeOut(text_p), FadeIn(arrow_a), FadeOut(text), FadeOut(text1), FadeOut(arrow_b_copy), FadeOut(arrow_p), FadeOut(text_b), FadeOut(arrow_b))
+        self.play(ApplyMethod(arrow_o.move_to,UP), ApplyMethod(text_o.move_to,RIGHT+UP))
+
+        text = TextMobject(r"Now, Normalize $\beta_2-p$")
+        text.set_color(DARK_BLUE)
+        text.scale(0.6)
+        text.move_to(3*UP+4*LEFT)
+        self.play(Write(text))
+
+        alpha_2 = Arrow(start = ORIGIN,end = UP)
+        alpha_2.scale(1.9)
+        alpha_2.set_color(DARK_BLUE)
+        text_alpha_2 = TextMobject(r"$\alpha_2$")
+        text_alpha_2.move_to(0.4*LEFT+UP)
+        text_alpha_2.set_color(DARK_BLUE)
+        text_alpha_2.scale(0.75)
+        self.play(Transform(text_o,text_alpha_2), Transform(arrow_o,alpha_2), FadeIn(text_a))
+        self.wait()
+        self.play(FadeOut(text),FadeOut(text_a),FadeOut(text_o))
+
+        self.add(axes)
+        #############################################################################
+        axis = TextMobject(r"$\alpha_1$",r"$\alpha_2$",r"$\alpha_3$",r"$\beta_3$",r"$\alpha_3$",r"$\alpha_3$",r"$\alpha_3$",r"$\alpha_3$")
+        axis.scale(0.5)
+        axis[0].move_to(0.5*RIGHT+[0,0,-0.5])
+        axis[1].move_to(0.5*UP+[0,0,-0.5])
+        axis[2].move_to(np.array([0,0,0.5]))
+        axis[3].move_to(np.array([1,1,1.5]))
+        self.add_fixed_orientation_mobjects(axis[0])
+        self.add_fixed_orientation_mobjects(axis[1])
+        #############################################################################
+
+        text = TextMobject(r"These are the same two orthonormal vectors $\alpha_{1}$ and $\alpha_{2}$")
+        text.scale(0.6)
+        text.set_color(DARK_BLUE)
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
 
-        axes = ThreeDAxes()
-        self.play(ShowCreation(axes))
         self.move_camera(phi=60*DEGREES,theta=45*DEGREES,run_time=3)
         self.begin_ambient_camera_rotation(rate=0.3)
         
@@ -31,7 +166,7 @@ class Orthogonal(ThreeDScene):
         tip2.set_color(DARK_BLUE)
         arrow2.set_color(DARK_BLUE)
 
-        self.play(ShowCreation(line1), ShowCreation(tip1), ShowCreation(arrow2), ShowCreation(tip2))
+        self.play(ShowCreation(line1), ShowCreation(tip1), ShowCreation(arrow2), ShowCreation(tip2), FadeOut(arrow_a), FadeOut(arrow_o))
         self.wait()
 
         a_line = Line(start = ORIGIN,end = 2*UP+2*RIGHT+[0,0,2])
@@ -50,9 +185,11 @@ class Orthogonal(ThreeDScene):
 
         self.play(FadeOut(text), ShowCreation(a_line), ShowCreation(a_tip), ShowCreation(a_line_c1), ShowCreation(a_tip_c1))
         
-        text = TextMobject(r"There is a vector $\beta_3$")
-        text.scale(0.75)
+        text = TextMobject(r"Now, we have a vector $\beta_3(=\left[\begin{array}{c} 2\\2\\2 \end{array}\right])$")
+        text.set_color(GOLD_E)
+        text.scale(0.7)
         self.add_fixed_in_frame_mobjects(text)
+        self.add_fixed_orientation_mobjects(axis[3])
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
         self.wait()
@@ -69,7 +206,8 @@ class Orthogonal(ThreeDScene):
         self.play(Transform(a_line_c1,p_line1),Transform(a_tip_c1,p_tip1))
 
         text = TextMobject(r"Take projection of $\beta_3$ on $\alpha_1$")
-        text.scale(0.75)
+        text.scale(0.6)
+        text.set_color(GOLD_E)
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
@@ -98,14 +236,15 @@ class Orthogonal(ThreeDScene):
         a_tip1_c1.set_color(GREEN_E)
 
         text = TextMobject(r"$\beta_3$-(projection of $\beta_3$ on $\alpha_1$)")
-        text.scale(0.75)
+        text.set_color(GREEN_E)
+        text.scale(0.6)
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
         self.play(ShowCreation(o_line1), ShowCreation(o_tip1))
         self.wait(2)
         self.play(FadeOut(a_line_c1), FadeOut(a_tip_c1), 
-        FadeOut(a_line), FadeOut(a_tip),
+        FadeOut(a_line), FadeOut(a_tip), FadeOut(axis[3]),
         Transform(o_line1,a_line1), Transform(o_tip1,a_tip1))
 
         self.wait()
@@ -120,16 +259,17 @@ class Orthogonal(ThreeDScene):
         p_arrow2.set_color(GOLD_E)
 
         last_a = Line(start = 2*UP,end = [0,2,2])
-        last_a.set_color(GOLD_E)
+        last_a.set_color(PURPLE_E)
         last_a_tip = Polygon([0,0,2],[0,0,1.8]+0.2*RIGHT,[0,0,1.8]+0.2*LEFT)
         last_a_tip.move_to([0,2,2])
         last_a_tip.set_opacity(1)
-        last_a_tip.set_fill(GOLD_E)
-        last_a_tip.set_color(GOLD_E)
+        last_a_tip.set_fill(PURPLE_E)
+        last_a_tip.set_color(PURPLE_E)
 
         self.wait()
         text = TextMobject(r"Take projection on $\alpha_2$")
-        text.scale(0.75)
+        text.scale(0.6)
+        text.set_color(GOLD_E)
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
@@ -138,9 +278,10 @@ class Orthogonal(ThreeDScene):
         self.play(FadeOut(text))
 
         text = TextMobject(r"$\beta_3$-(projection of $\beta_3$ on $\alpha_1$ + projection of $\beta_3$ on $\alpha_2$)")
-        text.scale(0.75)
+        text.set_color(PURPLE_E)
+        text.scale(0.6)
         self.add_fixed_in_frame_mobjects(text)
-        text.move_to(3*DOWN+2*RIGHT)
+        text.move_to(3*DOWN+3.5*RIGHT)
         self.play(Write(text))
         self.play(ShowCreation(o_line1), ShowCreation(o_tip1))
         self.wait(2)
@@ -149,19 +290,26 @@ class Orthogonal(ThreeDScene):
         self.play(FadeOut(text))
 
         larrow3 = Line(start = ORIGIN,end = [0,0,2])
-        larrow3.set_color(GOLD_E)
+        larrow3.set_color(PURPLE_E)
         ltip3 = Polygon([0,0,2],[0,0,1.8]+0.2*RIGHT,[0,0,1.8]+0.2*LEFT)
         ltip3.set_opacity(1)
-        ltip3.set_fill(GOLD_E)
-        ltip3.set_color(GOLD_E)
+        ltip3.set_fill(PURPLE_E)
+        ltip3.set_color(PURPLE_E)
         self.wait()
         self.play(FadeOut(o_line1), FadeOut(o_tip1), FadeOut(a_line1_c1), FadeOut(a_tip1_c1), Transform(last_a,larrow3), Transform(last_a_tip,ltip3))
         
-        text = TextMobject(r"Normalisation of the orthogonal vector")
-        text.scale(0.75)
+        text = TextMobject(r"Normalize, the vector")
+        text1 = TextMobject(r"$\beta_3$-(projection of $\beta_3$ on $\alpha_1$ + projection of $\beta_3$ on $\alpha_2$")
+        text.set_color(PURPLE_E)
+        text1.set_color(PURPLE_E)
+        text.scale(0.6)
+        text1.scale(0.6)
         self.add_fixed_in_frame_mobjects(text)
-        text.move_to(3*DOWN+2*RIGHT)
+        self.add_fixed_in_frame_mobjects(text1)
+        text.move_to(3*DOWN+3*RIGHT)
+        text1.move_to(3.5*DOWN+3*RIGHT)
         self.play(Write(text))
+        self.play(Write(text1))
         
         arrow3 = Line(start = ORIGIN,end = [0,0,1])
         arrow3.set_color(DARK_BLUE)
@@ -170,5 +318,16 @@ class Orthogonal(ThreeDScene):
         tip3.set_fill(DARK_BLUE)
         tip3.set_color(DARK_BLUE)
         self.play(Transform(last_a,arrow3), Transform(last_a_tip,tip3))
+        self.add_fixed_orientation_mobjects(axis[2])
+
+        self.wait()
+        self.play(FadeOut(text),FadeOut(text1))
+
+        text = TextMobject(r"These are the three orthonormal vectors $\alpha_1, \alpha_2, \alpha_3$")
+        text.set_color(DARK_BLUE)
+        self.add_fixed_in_frame_mobjects(text)
+        text.scale(0.6)
+        text.move_to(3*DOWN+3.5*RIGHT)
+        self.play(Write(text))
 
         self.wait(3)
