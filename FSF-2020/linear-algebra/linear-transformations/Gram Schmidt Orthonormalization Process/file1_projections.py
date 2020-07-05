@@ -23,10 +23,10 @@ class Projections(GraphScene):
         arrow_b.set_color(DARK_BLUE)
         self.play(ShowCreation(arrow_a), ShowCreation(arrow_b))
 
-        text = TextMobject(r"Let there be 2 vectors $a$ and $b$")
+        text = TextMobject(r"Consider 2 linearly independent vectors $a$ and $b$")
         text.set_color(DARK_BLUE)
-        text.scale(0.75)
-        text.move_to(2*YTD*DOWN+4*XTD*LEFT)
+        text.scale(0.6)
+        text.move_to(3*YTD*UP+5*XTD*LEFT)
         text_a = TextMobject("a")
         text_a.move_to(0.4*YTD*DOWN+3*XTD*RIGHT)
         text_a.set_color(DARK_BLUE)
@@ -51,7 +51,7 @@ class Projections(GraphScene):
         self.play(FadeOut(text), Transform(arrow_b_copy,arrow_p), FadeOut(text_a), FadeOut(text_b))
         text = TextMobject(r"$p$ is the projection of $b$ on $a$")
         text.set_color(GOLD_E)
-        text.move_to(2*DOWN+3*LEFT)
+        text.move_to(3*UP+4*LEFT)
         text.scale(0.8)
         self.play(Write(text),Write(text_p))
         self.wait()
@@ -77,9 +77,3 @@ class Projections(GraphScene):
         self.wait(2)
 
         self.play(FadeOut(self.axes), FadeOut(arrow_a), FadeOut(arrow_b), FadeOut(arrow_b_copy), FadeOut(arrow_o), FadeOut(text_a), FadeOut(text_b), FadeOut(text_o), FadeOut(text_p), FadeOut(text))
-        
-        text = TextMobject(r"Therefore, unit vectors of $b-p$ and $a$ are orthonormal to each other")
-        text.scale(0.75)
-        self.play(Write(text))
-        self.wait(2)
-        self.play(FadeOut(text))
