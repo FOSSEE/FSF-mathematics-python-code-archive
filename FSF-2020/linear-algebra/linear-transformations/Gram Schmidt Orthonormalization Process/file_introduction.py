@@ -1,0 +1,33 @@
+from manimlib.imports import *
+
+class Orthonormal(Scene):
+    def construct(self):
+        Centre = DOWN
+        arrow_1 = Arrow(start = Centre+ORIGIN,end = Centre+1.414*(UP+RIGHT))
+        arrow_2 = Arrow(start = Centre+ORIGIN,end = Centre+2*UP)
+        arrow_1.scale(1.35)
+        arrow_2.scale(1.35)
+        text = TextMobject("This is a set of linearly independent vectors")
+        text.scale(0.75)
+        text.move_to(3*UP+3*LEFT)
+        text.set_color(PURPLE_E)
+        arrow_1.set_color(PURPLE_E)
+        arrow_2.set_color(PURPLE_E)
+        self.play(Write(text))
+        self.play(ShowCreation(arrow_1), ShowCreation(arrow_2))
+        self.wait(2)
+        text1 = TextMobject("After we apply Gram-Schmidt Orthogonalization Process to set of linearly independent vectors")
+        text1.scale(0.6)
+        text1.move_to(3*UP+2*LEFT)
+        text1.set_color(GREEN)
+        arrow_a = Arrow(start = Centre+ORIGIN,end = Centre+0.707*(UP+RIGHT))
+        arrow_a.set_color(GREEN)
+        arrow_a.scale(2)
+        self.play(Transform(text,text1))
+        self.wait(2)
+        self.play(Transform(arrow_1,arrow_a))
+        arrow_b = Arrow(start = Centre+ORIGIN,end = Centre+0.707*(UP+LEFT))
+        arrow_b.set_color(GREEN)
+        arrow_b.scale(2)
+        self.play(Transform(arrow_2,arrow_b))
+        self.wait(2)
