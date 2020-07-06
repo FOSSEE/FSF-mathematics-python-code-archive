@@ -5,7 +5,7 @@ class null_space(LinearTransformationScene):
         self.setup()
         self.wait()
         
-        o = TextMobject(r"This is the original $2D$ vector space(before Linear Transformation)")
+        o = TextMobject(r"This is the original vector space $R^2$(before Linear Transformation)")
         o.move_to(DOWN)
         o.scale(0.75)
         o.add_background_rectangle()
