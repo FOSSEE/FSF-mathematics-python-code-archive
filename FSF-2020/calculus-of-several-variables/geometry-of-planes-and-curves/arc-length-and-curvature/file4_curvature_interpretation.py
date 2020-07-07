@@ -30,7 +30,7 @@ class interpretation(ZoomedScene):
         dsl = TextMobject(r'$ds$', color = GREEN_SCREEN).scale(0.2).next_to(ds, RIGHT, buff = 0)
 
 
-        tgtText = TextMobject(r'$r\prime (t)$').next_to(tgt, UP, buff = 0).scale(0.7)
+        tgtText = TextMobject(r'$r\prime (t) = \left\langle 1, 2, 0\right\rangle$').next_to(tgt, UP, buff = 0).scale(0.7)
         tgt2 = DashedLine((0,0,0),(1, 2, 0), color = GRAY).shift(DOWN + 2*RIGHT)
         circle = Circle(radius = 0.9, color = GREEN_SCREEN).shift(0.85*RIGHT + 0.38*DOWN)
         circle.set_stroke(opacity = 1)
@@ -49,13 +49,17 @@ class interpretation(ZoomedScene):
             "$ds$": GREEN_SCREEN
         })
 
+        main5 = TextMobject(r'$\kappa = 0.357$').scale(0.7).shift(main.get_center() + np.array([2.4,-0.18,0]))
+
         nm = Vector((2, -1, 0), color = BLUE).shift(0.005*RIGHT + 0.007*DOWN)
-        nmText = TextMobject(r'$r\prime\prime (t)$').next_to(nm, DOWN+RIGHT, buff = 0).scale(0.7)
+        nmText = TextMobject(r'$r\prime\prime (t) = \left\langle 2,0,0\right\rangle$').next_to(nm, DOWN+RIGHT, buff = 0).scale(0.7)
         nm2 = DashedLine((0,0,0),(2, -1, 0), color = GRAY).shift(2*UP + RIGHT)
         square = Square(fill_color = WHITE, fill_opacity = 0.2).rotate(63*DEGREES).shift(0.5*UP +1.5*RIGHT).scale(1.1)
         square.set_stroke(width = 0.1)
+        square2 = Square(fill_color = PINK, fill_opacity = 0.2).scale(0.55).rotate(63*DEGREES).move_to((square.get_center() - dot.get_center()) / 2)
+        square2.set_stroke(width = 0.1)
         arrow = CurvedArrow(square.get_center() + np.array([2,1,0]), square.get_center() + np.array([0.5,0,0]))
-        arrowText = TextMobject(r'$r\prime (t)\times r\prime\prime (t)$').next_to(arrow.get_start(), DOWN+1*RIGHT, buff = 0).scale(0.7)
+        arrowText = TextMobject(r'$r\prime (t)\times r\prime\prime (t) = 4$').next_to(arrow.get_start(), DOWN+1*RIGHT, buff = 0).scale(0.7)
 
         text1 = TextMobject(r'$\left|\frac{dT}{ds}\right| = \frac{\left|\frac{dT}{dt}\right|}{\left|\frac{ds}{dt}\right|}$').shift(UP+3*LEFT).scale(0.7)
         text2 = TextMobject(r'$\left|\frac{dT}{ds}\right| = \frac{\frac{r\prime\prime (t)}{\left| r\prime (t)\right|}\times\frac{r\prime (t)}{\left| r\prime (t)\right|}}{\left|r\prime (t)\right|}$').next_to(text1, DOWN, buff = 0.1).scale(0.7)
@@ -74,7 +78,7 @@ class interpretation(ZoomedScene):
         self.play(FadeIn(main2), FadeIn(dot))
         self.play(FadeIn(circle), FadeIn(dl), FadeIn(dltext))
         self.wait()
-        self.play(ReplacementTransform(main2, main3), FadeOut(circle), FadeOut(dl), FadeOut(dltext), FadeIn(VGroup(*[tgt, tgtText])))
+        self.play(ReplacementTransform(main2, main5), FadeIn(main3), FadeOut(circle), FadeOut(dl), FadeOut(dltext), FadeIn(VGroup(*[tgt, tgtText])))
         self.wait(1)
         self.play(FadeIn(VGroup(*[nm, nmText])))
         self.wait(1)
@@ -95,7 +99,7 @@ class interpretation(ZoomedScene):
         self.wait(1)
         self.play(FadeIn(VGroup(*[square, arrow, arrowText])))
         self.wait(1)
-        self.play(FadeIn(unit2))
+        self.play(FadeIn(unit2), FadeIn(square2))
         self.wait(1)
         self.play(FadeIn(VGroup(*[tgt2text, nm2text])))
         self.wait(1)
@@ -107,4 +111,4 @@ class interpretation(ZoomedScene):
         self.wait(1)
         self.play(FadeIn(text4))
         self.wait(2)
-        self.play(FadeOut(VGroup(*[main, curve, dot, tgt2text, nm2text, text1, text2, text3, text4, tgt, tgtText,nm, nmText,tgt2, nm2,square, arrow, arrowText,unit2])))
+        self.play(FadeOut(VGroup(*[main, main5, square2, curve, dot, tgt2text, nm2text, text1, text2, text3, text4, tgt, tgtText,nm, nmText,tgt2, nm2,square, arrow, arrowText,unit2])))
