@@ -6,7 +6,7 @@ class null_space(LinearTransformationScene):
         self.wait()
         
         o = TextMobject(r"This is the original vector space $R^2$(before Linear Transformation)")
-        o.move_to(DOWN)
+        o.move_to(3*DOWN)
         o.scale(0.75)
         o.add_background_rectangle()
         self.play(Write(o))
@@ -64,7 +64,7 @@ class null_space(LinearTransformationScene):
         self.add_transformable_mobject(arrow6)
         self.add_transformable_mobject(arrow7)
 
-        o1 = TextMobject("Notice, entire set of vectors which belong to the vector")
+        o1 = TextMobject("Notice, entire set of vectors which belongs to the vector")
         o2 = TextMobject(r"subspace(Linear Span of $\left(\begin{array}{c} 1 \\ 1 \end{array}\right)$) transforms to zero")
         o1.move_to(2*DOWN+2.5*RIGHT)
         o2.move_to(2.75*DOWN+2.5*RIGHT)
@@ -83,7 +83,7 @@ class null_space(LinearTransformationScene):
         self.play(FadeOut(o1), FadeOut(o2))
 
         o = TextMobject(r"Hence, the vector space formed by linear span of $\left(\begin{array}{c} 1 \\ 1 \end{array}\right)$ is the null space of $A$")
-        o.move_to(DOWN)
+        o.move_to(3*DOWN)
         o.scale(0.75)
         o.add_background_rectangle()
         self.play(Write(o))

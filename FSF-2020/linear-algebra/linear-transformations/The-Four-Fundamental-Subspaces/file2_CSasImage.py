@@ -3,30 +3,31 @@ from manimlib.imports import *
 class Column_Space(Scene):
     def construct(self):
 
-        A = TextMobject(r"$A = $",r"$\left( \begin{array}{c c c} 1 & 2 & 1 \\ 1 & 3 & 1 \\ 2 & 1 & 4 \\ 3 & 2 & 3 \end{array} \right)$")
+        A = TextMobject(r"$A = $",r"$\left( \begin{array}{c c} 1 & 2 \\ 3 & 4 \end{array} \right)$")
         A.move_to(2*UP)
         A[1].set_color(color = DARK_BLUE)
         A.scale(0.75)
 
-        self.play(Write(A),run_time = 1)      
+        self.play(Write(A),run_time = 1)
 
-        CS_A = TextMobject(r"Column Space of $A = x_{1}$",r"$\left( \begin{array}{c} 1 \\ 1 \\ 2 \\ 3 \end{array} \right)$",r"$+x_{2}$",r"$ \left( \begin{array}{c} 2 \\ 3 \\ 1 \\ 2 \end{array} \right)$",r"$ + x_{3}$",r"$\left( \begin{array}{c} 1 \\ 1 \\ 4 \\ 3 \end{array} \right)$")
+        CS_A = TextMobject(r"Column Space of $A = x_{1}$",r"$\left( \begin{array}{c} 1 \\ 3 \end{array} \right)$",r"$+x_{2}$",r"$ \left( \begin{array}{c} 2 \\ 4\end{array} \right)$")
         CS_A.move_to(1.5*LEFT+1*DOWN)
         CS_A[1].set_color(color = DARK_BLUE)
         CS_A[3].set_color(color = DARK_BLUE)
-        CS_A[5].set_color(color = DARK_BLUE)
         CS_A.scale(0.75)
 
         self.play(Write(CS_A),run_time = 2)
 
-        arrow1 = Arrow(start = 1.25*UP,end = 0.25*DOWN+1.75*LEFT)
-        arrow2 = Arrow(start = 1.35*UP+0.5*RIGHT,end = 0.25*DOWN+0.5*RIGHT)
-        arrow3 = Arrow(start = 1.25*UP+0.75*RIGHT,end = 0.25*DOWN+2.9*RIGHT)
+        arrow1 = Arrow(start = 1.25*UP,end = (0.25*DOWN+1.75*LEFT+0.25*DOWN+1.2*RIGHT)/2)
+        arrow3 = Arrow(start = 1.25*UP+0.75*RIGHT,end = (0.25*DOWN+2.9*RIGHT+0.25*DOWN)/2)
+
+        arrow1.scale(1.5)
+        arrow3.scale(1.5)
 
         Defn = TextMobject("Linear Combination of Columns of Matrix")
         Defn.move_to(3*DOWN)
 
-        self.play(Write(Defn), ShowCreation(arrow1), ShowCreation(arrow2), ShowCreation(arrow3),run_time = 1)
+        self.play(Write(Defn), ShowCreation(arrow1), ShowCreation(arrow3),run_time = 1)
         self.wait(1)
 
 class solution(LinearTransformationScene):
@@ -43,7 +44,7 @@ class solution(LinearTransformationScene):
         self.wait()
         self.play(FadeOut(o))
 
-        A = TextMobject(r"Let $A$(= ",r"$\left[\begin{array}{c c} 1 & -1 \\ 1 & -1 \end{array}\right]$",r")denote the matrix the of this linear transformation.")
+        A = TextMobject(r"Let $A$ be ",r"$\left[\begin{array}{c c} 1 & -1 \\ 1 & -1 \end{array}\right]$",r". $A$ denotes the matrix the of this linear transformation.")
         A.move_to(2*DOWN)
         A.scale(0.75)
         A.add_background_rectangle()
@@ -116,8 +117,8 @@ class solution2nd(LinearTransformationScene):
         arrow2 = Arrow(start = ORIGIN,end = UP+LEFT)
         arrow3 = Arrow(start = ORIGIN,end = 3*UP+4*RIGHT)
         arrow1.set_color(YELLOW)
-        arrow2.set_color(YELLOW)
-        arrow3.set_color(YELLOW)
+        arrow2.set_color(ORANGE)
+        arrow3.set_color(PURPLE)
         arrow1.scale(1.3)
         arrow2.scale(1.5)
         arrow3.scale(1.1)
@@ -135,7 +136,7 @@ class solution2nd(LinearTransformationScene):
         self.wait()
         self.play(FadeOut(o))
 
-        A = TextMobject(r"Matrix the of this linear transformation is $A$(= ",r"$\left[\begin{array}{c c} 1 & -1 \\ 1 & -1 \end{array}\right]$",r") again.")
+        A = TextMobject(r"Let the matrix the of this linear transformation be $A$ =",r"$\left[\begin{array}{c c} 1 & -1 \\ 1 & -1 \end{array}\right]$",r" again.")
         A.move_to(2*DOWN)
         A.scale(0.75)
         A.add_background_rectangle()
