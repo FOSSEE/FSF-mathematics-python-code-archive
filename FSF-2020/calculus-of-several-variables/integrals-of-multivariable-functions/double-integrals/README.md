@@ -2,7 +2,7 @@
 ![file1_area_under_func](gifs/file1_area_under_func.gif)
 
 **file2_volume_under_surface**
-![file2_volume_under_surface](gifsfile2_volume_under_surface.gif)
+![file2_volume_under_surface](gifs/file2_volume_under_surface.gif)
 
 **file3_y_limit_dependent_on_x**
 ![file3_y_limit_dependent_on_x](gifs/file3_y_limit_dependent_on_x.gif)
