@@ -3,28 +3,28 @@ My Github Account : <a href="https://github.com/architsangal">architsangal</a>
 <br/></br>
 
 ## Sub-Topics Covered:
-+ Linear Transformations (Linear Maps)
++ The Four Fundamental Subspaces
 
-#### Video 1: Visually understanding linear transformation(using grid)
-![GIF1](file12.gif)
+#### Video 1: Video 1: Writing System of linear equations in form of Ax=b
+![GIF1](file11.gif)
 
-#### Video 2: Linear Transformation when form 1 is given
-![GIF2](file11.gif)
+#### Video 2: Column Space is same as the image of Linear Transformation
+![GIF2](file14.gif)
 
-#### Video 3: Matrix Representation Of Linear Transformation
-![GIF3](file9.gif)
+#### Video 3: Existance of Solution w.r.t. vector b
+![GIF3](file17.gif)
 
-#### Video 4: Understand Linear Transformations visually
-![GIF4](file13.gif)
+#### Video 4: Null Space (Visually)
+![GIF4](file12.gif)
 
-#### Video 5: Uniform Scaling
-![GIF5](file14.gif)
+#### Video 5: Definition 1 is equivalent to Definition 2
+![GIF5](file13.gif)
 
-#### Fig.1 Horizontal Shear
-![GIF6](file6_Horizontal_Shear_gif.gif)
+#### Video 6: Relation between Row Space and Null Space
+![GIF6](file16.gif)
 
-#### Fig.2 Vertical Shear
-![GIF7](file7_Vertical_Shear_gif.gif)
+#### Fig. 1 Naming of the left null space
+![GIF7](file10_Left_Null_Space_pSv8iio_d5Sy9qS.gif)
 
-#### Video 6: Rotation by an angle of in anticlockwise direction
-![GIF8](file10.gif)
+#### Video 7: Left Null Space(Visually)
+![GIF8](file15.gif)
