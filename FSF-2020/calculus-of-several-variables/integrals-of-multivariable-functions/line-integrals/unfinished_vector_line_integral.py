@@ -8,9 +8,9 @@ class LineIntegrationProcess(GraphScene):
         "y_min" : -0,
         "y_max" : 1,
         "axes_color":WHITE,
-        "graph_origin": ORIGIN+5*LEFT+3*DOWN,
-        "x_axis_width": 5,
-        "y_axis_height": 5,
+        "graph_origin": ORIGIN+6.5*LEFT+3*DOWN,
+        "x_axis_width": 6,
+        "y_axis_height": 6,
         "x_tick_frequency": 1,
         "y_tick_frequency": 1,
         "default_vector_field_config": {
@@ -18,8 +18,8 @@ class LineIntegrationProcess(GraphScene):
             "delta_y": .5,
             "min_magnitude": 0,
             "max_magnitude": 15,
-            "colors": [GREEN,YELLOW,RED],
-            "length_func": lambda norm : .45*sigmoid(norm),
+            "colors": [BLUE],
+            "length_func": lambda norm : norm/35,
             "opacity": 1.0,
             "vector_config": {
                 "stroke_width":2
@@ -40,11 +40,12 @@ class LineIntegrationProcess(GraphScene):
         self.setup_axes(animate=False)
     
         fn_text=TexMobject(
-            r"\vec F = x^2\hat i-xy\hat j"
+            r"\vec F = x^2\hat i-xy\hat j",
+            stroke_width=2.5
         ).set_color_by_gradient(
             *self.default_vector_field_config["colors"]
         )
-        fn_text.to_corner(UR,buff=.8).shift(DOWN)
+        fn_text.to_corner(UR,buff=.8).shift(2*LEFT)
         
         origin=self.graph_origin
         v_field=self.get_vector_field(
@@ -53,10 +54,10 @@ class LineIntegrationProcess(GraphScene):
             -(v[0]-origin[0])*(v[1]-origin[1]),  
             0,
             ]),
-            x_min= 0+origin[0],
-            x_max= 5+origin[0],
+            x_min= -.001+origin[0],
+            x_max= 5.8+origin[0],
             y_min= -0+origin[1],
-            y_max= 5+origin[1],
+            y_max= 6.+origin[1],
         )
         
      #   self.play(Write(surface))  
@@ -93,8 +94,8 @@ class LineIntegrationProcess(GraphScene):
             x_max=0,
         )
         line_of_int.set_style(
-            stroke_width=5,
-            stroke_color=BLUE,
+            stroke_width=3,
+            stroke_color=PINK,
         )
         
       #  self.play(Write(line_of_int_text))
@@ -105,46 +106,81 @@ class LineIntegrationProcess(GraphScene):
         self.line_of_int=line_of_int
         self.line_of_int_text=line_of_int_text
     
-    def get_dot_product_values(self):    
+    def get_dot_product_values(self):
+        t_tracker = ValueTracker(0)
+        self.t_tracker = t_tracker  
         self.get_vector_and_tangent()
+        self.get_dot_product_graph()
+        self.wait(1.5)
         self.play(ApplyMethod(
             self.t_tracker.set_value, PI/2,
                 rate_func=linear,
-                run_time=.5,
+                run_time=2,
             ) 
         )
         
+    def get_dot_product_graph(self):
+        pass
         
+            
     def get_vector_and_tangent(self):
-        t_tracker = ValueTracker(0)
-        self.t_tracker = t_tracker
-        t = t_tracker.get_value
-        coord = [np.cos(t()), np.sin(t()), 0]
-        self.show_vector(coord)
-        self.show_tangent(coord)
+        self.play(FadeOut(self.axes))
+        self.show_vector()
+        self.show_tangent()
         
         
-    def show_vector(self,coord):
-        vector = self.vector_field.get_vector(coord)
+    def show_vector(self):
+        t = self.t_tracker.get_value
+        vect_label=TextMobject(
+            "$\\vec F(x_i,y_i)$",
+            color=YELLOW,
+            stroke_width=2
+        ).scale(.8)
+        
+        vector = always_redraw( lambda: 
+            self.vector_field.get_vector(
+                self.coords_to_point(
+                np.cos(t()), np.sin(t())
+                ),
+                stroke_width=6,
+                max_stroke_width_to_length_ratio= 8,
+            ).set_color(YELLOW),
+        )
         vector.set_color(ORANGE)
-        
-        self.add(vector)
+        vect_label.next_to(vector,RIGHT,buff=.1)
+        self.add(vector,vect_label)
        # self.play(Write(vector),run_time=.2)
         
-    def show_tangent(self,coord):
-        tangent_sym=TextMobject("$\\vec T(x_i,y_i)$",color="#DC75CD").scale(.8)
-        angle=self.angle_of_tangent(
-             coord[0],
-             self.line_of_int, 
-             dx=0.01
-        )
-        vect = Vector().rotate(angle,about_point=coord)
-        vect.set_color("#DC75CD")
-        tangent=vect.next_to(coord,DR,buff=0)
-        tangent_sym.next_to(tangent,DOWN,buff=.1)
-        self.play(Write(VGroup(tangent,tangent_sym)))
+        self.vect_label = vect_label
         
-        self.tangent_sym=tangent_sym
+    def show_tangent(self):
+        tangent_label=TextMobject("$\\vec T(x_i,y_i)$",color="#DC75CD",stroke_width=2).scale(.8)
+        
+        t = self.t_tracker.get_value
+        
+        tangent = always_redraw(lambda: 
+            Vector(
+                color="#DC75CD",
+                stroke_width=6,
+                ).scale(1).next_to(
+                self.coords_to_point(
+                    np.cos(t()), np.sin(t())
+                ),DR,buff=-.1
+            ).rotate(
+            self.angle_of_tangent(
+                np.cos(t()),
+                self.line_of_int, 
+                dx=-0.00001
+                ),
+            about_point=self.coords_to_point(
+                np.cos(t()), np.sin(t())
+                )
+            )
+        )
+        tangent_label.next_to(tangent,UP,buff=.1)
+        self.play(Write(VGroup(tangent,tangent_label)))
+        
+        self.tangent_label=tangent_label
          
     def dot_product(self):
         
@@ -221,22 +257,9 @@ class LineIntegrationProcess(GraphScene):
             graph_area
             ),
         ]
+            
+    def get_area(self):
         
-        self.move_camera(
-          #  distance=20,
-            phi=90 * DEGREES,
-            theta=-90 * DEGREES,
-            added_anims=into_graph,
-            run_time=2
-        )        
-    def get_area(self,graph=False):
-        axes=self.axes
-        if graph:
-            on_surface=self.on_surface_graph
-            on_base=self.line_graph
-        else:
-            on_surface=self.values_on_surface
-            on_base=self.line_of_int
         area =Polygon(
             *[
             on_surface.get_point_from_function(t)
@@ -253,32 +276,6 @@ class LineIntegrationProcess(GraphScene):
 
         return area
         
-    def get_field_values_on_line(self):
-        self.remove(self.line_of_int_text)
-          
-        values_on_line_text=TextMobject("Values"," of"," function","on the ","line")
-        values_on_line_text.set_color_by_tex_to_color_map({
-            "Values":YELLOW, "function":BLUE,"line":PINK
-        })
-        values_on_line_text.to_edge(TOP,buff=SMALL_BUFF)
-        
-        values_on_surface=(self.get_curve(
-            self.Func,on_surface=True
-        ))
-        values_on_surface.set_style(
-            stroke_width=5,
-            stroke_color=YELLOW,
-        ) 
-        
-        self.add_fixed_in_frame_mobjects(values_on_line_text) 
-        self.play(Write(values_on_line_text))
-    #    self.wait()
-        self.play(ShowCreation(values_on_surface),run_time=3)
-     #   self.add(values_on_surface)
-        
-        self.values_on_surface=values_on_surface
-        self.values_on_line_text=values_on_line_text
-       
      
     
                     
