@@ -1,3 +1,10 @@
+# Contributer: Archit Sangal
+My Github Account : <a href="https://github.com/architsangal">architsangal</a>
+<br/></br>
+
+## Sub-Topics Covered:
++ Linear Transformations (Linear Maps)
+
 #### Video 1: Visually understanding linear transformation(using grid)
 ![GIF1](file12.gif)
 
