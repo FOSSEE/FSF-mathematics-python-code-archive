@@ -8,4 +8,4 @@
 ![file3_constructing_vector_field](gifs/file3_constructing_vector_field.gif)
 
 **file4_slope_field**
-![file4_slope_field](gifs/vector-fields/file4_slope_field.gif)
+![file4_slope_field](gifs/file4_slope_field.gif)
