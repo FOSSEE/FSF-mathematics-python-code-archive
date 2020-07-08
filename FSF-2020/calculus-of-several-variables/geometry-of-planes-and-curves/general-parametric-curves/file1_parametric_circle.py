@@ -11,12 +11,15 @@ class parametricCircle(ThreeDScene, GraphScene):
         self.y_axis_label =  ""
         self.x_axis_width = 10
         self.y_axis_height = 10
+        self.y_tick_frequency = 1.9
+        self.x_tick_frequency = 1.4
 
         axes = []
 
-        self.setup_axes()
-        self.axes.scale(0.5).shift(3*LEFT)
-        axes.append(self.axes)
+        # self.setup_axes()
+        ax = Axes(y_tick_frequency = 1, x_axis_width = 10, y_axis_height = 10, y_min = -5, x_max = 5, y_max = 5, x_tick_frequency = 1, x_axis_label =  "", y_axis_label =  "", x_min = -5, )
+        ax.scale(0.5).shift(3*LEFT)
+        axes.append(ax)
         self.setup_axes()
         self.axes.scale(0.3).shift(3*RIGHT + 2*UP)
         axes.append(self.axes)
@@ -38,7 +41,7 @@ class parametricCircle(ThreeDScene, GraphScene):
         asint = ParametricFunction(
         lambda t: np.array([
         t,
-        np.sin(t),
+        2*np.sin(t),
         0
         ]), t_min = -np.pi, t_max = np.pi, color = GREEN_E
         ).shift(3*RIGHT + 2*UP).scale(0.4)
@@ -50,7 +53,7 @@ class parametricCircle(ThreeDScene, GraphScene):
         acost = ParametricFunction(
         lambda t: np.array([
         t,
-        np.cos(t),
+        2*np.cos(t),
         0
         ]), t_min = -np.pi, t_max = np.pi, color = BLUE
         ).shift(3*RIGHT + 2*DOWN).scale(0.4)

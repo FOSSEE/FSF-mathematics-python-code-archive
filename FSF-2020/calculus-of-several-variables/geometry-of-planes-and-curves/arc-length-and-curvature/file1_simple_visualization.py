@@ -32,6 +32,8 @@ class randomcurve(GraphScene):
         dot6 = Dot(tgt6.get_start(), color = RED)
         dot7 = Dot(tgt7.get_start(), color = RED)
 
+        arc = ArcBetweenPoints(dot1.get_center(), dot2.get_center(), color = GREEN_SCREEN, angle = 10*DEGREES).rotate(180*DEGREES)
+
         dots = VGroup(*[dot1, dot2, dot3, dot4, dot5, dot6, dot7])
 
         ds = CurvedArrow((-4, 2, 0), (tgt1.get_start() + tgt2.get_start()) / 2, color = YELLOW)
@@ -43,14 +45,12 @@ class randomcurve(GraphScene):
         self.wait(2)
         self.play(FadeOut(intro))
         self.setup_axes(hideaxes=False)
-        self.play(ShowCreation(graphobj), FadeIn(dots), FadeIn(ds), FadeIn(ds_text))
+        self.play(ShowCreation(graphobj), FadeIn(dots), FadeIn(ds), FadeIn(ds_text), FadeIn(arc))
         self.wait(1)
-        self.play(FadeOut(self.axes), FadeOut(graphobj),FadeIn(mid), FadeOut(dots), FadeOut(ds), FadeOut(ds_text))
-        self.wait(2)
+        self.play(FadeOut(self.axes), FadeOut(arc), FadeOut(graphobj),FadeIn(mid), FadeOut(dots), FadeOut(ds), FadeOut(ds_text))
+        self.wait(3)
         self.play(FadeOut(mid))
         self.play(FadeIn(self.axes), FadeIn(graphobj), FadeIn(dots))
-
-
 
         tangents = [tgt1, tgt2, tgt3, tgt4, tgt5, tgt6, tgt7]
         for tangent in tangents:
@@ -60,7 +60,7 @@ class randomcurve(GraphScene):
         self.play(FadeOut(self.axes), FadeOut(graphobj), FadeOut(tangents), FadeOut(dots))
         self.wait(1)
         self.play(FadeIn(outro))
-        self.wait(2)
+        self.wait(3)
         self.play(FadeOut(outro))
         self.wait(1)
 

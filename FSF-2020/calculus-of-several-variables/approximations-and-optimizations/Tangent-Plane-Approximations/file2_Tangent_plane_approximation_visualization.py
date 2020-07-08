@@ -1,12 +1,13 @@
 from manimlib.imports import*
+import math as m
 
-#---- tangent plane is parallel to the x-y plane
-class MaximaScene(ThreeDScene):
+#---- tangent plane approximation visualization
+class ApproximationScene(ThreeDScene):
     def construct(self):
 
-        axes = ThreeDAxes().scale(1.2)
-        label_x= TextMobject("$x$").shift([5.4,-0.5,0]) #---- x axis
-        label_y= TextMobject("$y$").shift([-0.5,5.2,0]).rotate(-4.5) #---- y axis
+        axes = ThreeDAxes().scale(1.2).fade(0.7)
+        label_x= TextMobject("$x$").shift([5.4,-0.5,0]).fade(0.7) #---- x axis
+        label_y= TextMobject("$y$").shift([-0.5,5.2,0]).rotate(-4.5).fade(0.7) #---- y axis
 
         #---- graph of the function 
         s = ParametricSurface(
@@ -14,61 +15,71 @@ class MaximaScene(ThreeDScene):
                 1.5*np.cos(u)*np.cos(v),
                 1.5*np.cos(u)*np.sin(v),
                 1.5*np.sin(u)
-            ]),u_min=0,u_max=PI,v_min=PI,v_max=2*PI,checkerboard_colors=[BLUE_B,BLUE_C,BLUE_D,BLUE_E]).scale(1.5).shift([-0.8,0.5,1.5])
-
-        d1 = Dot([0.2,2.01,2.24],color = '#800000').rotate(1.1,LEFT) #---- point(x_0,y_0)
-        d1_copy = Dot([1.1,2.2,-0.45],color = '#800000') #---- projection of point(x_0,y_0) on x-y plane
-        d1_text = TextMobject("$(x_0,y_0)$",color = "#8B0000").scale(0.4).shift(1.3*RIGHT+1.1*UP)
-
-        d2 = Dot([1.1,2.2,2.7],color = '#800000').rotate(1,LEFT) #---- point(x,y)
-        d2_copy = Dot([0.1,1.95,0.4],color = '#800000') #---- projection of point(x,y) on x-y plane
-        d2_text = TextMobject("$(x,y)$",color = "#8B0000").scale(0.4).shift(0.6*RIGHT+0.8*UP)
-
-        t_plane = Rectangle(color = PURPLE, fill_opacity=0.3).scale(0.4).rotate(1,LEFT).shift([1.1,2.5,2.9]) #---- tangent plane
-
-        t_text= TextMobject("Tangent Plane",color = RED).scale(0.5).shift(0.3*RIGHT+1.3*UP).rotate(math.radians(5),LEFT)
-
-        l1 = Line([1.1,2.2,2.6],[1.1,2.2,-0.45]).fade(0.2)
-        l2 = Line([0.1,1.95,2.05],[0.1,1.95,0.4]).fade(0.2)
-
-        a1 = Line([0.1,1.95,0.4],[1.1,2.2,-0.45],color ="#00FF7F")
-        a_x = Line([0.1,1.95,0.4],[1.7,1.95,0.4],color ="#9400D3")
-        a_y = Line([0.1,1.95,0.4],[0.1,2.75,0.4],color ="#8B4513")
-        a2 = Line([1.7,1.95,0.4],[1.7,2.75,0.4])
-        a3 = Line([0.1,2.75,0.4],[1.7,2.75,0.4])
+            ]),u_min=0,u_max=PI,v_min=PI,v_max=2*PI,checkerboard_colors=[BLUE_B,BLUE_C,BLUE_D,BLUE_E]).shift([0,1,2.4]).scale(1.3)
         
-        #---- transition of tangent plane
+        d1 = Dot([0.2,2.01,2.24],color = '#800000').rotate(1.1,LEFT) #---- point(x_0,y_0)
+        d1_copy = Dot([0.2,2.01,0],color = '#800000') #---- projection of point(x_0,y_0) on x-y plane
 
-        t2_plane = Rectangle(color = PURPLE, fill_opacity=0.3).scale(0.4).rotate(1,LEFT).shift([1.1,2.5,2]) 
-        t3_plane = Rectangle(color = PURPLE, fill_opacity=0.3).scale(0.4).rotate(math.radians(180),LEFT).shift([1.1,2.5,2])
-        t4_plane = Rectangle(color = PURPLE, fill_opacity=0.3).scale(0.4).rotate(math.radians(180),LEFT).shift([0.9,2.35,0.4])
+        d1_text = TextMobject("$f(x_0,y_0)$",color=ORANGE).scale(0.5).shift([0.2,2.01,2.3])
+        d1_copy_text = TextMobject("$(x_0,y_0)$",color=ORANGE).scale(0.5).shift([0.2,2.01,0],4.1*DOWN)
 
-        #-------------------------------------------
-        self.set_camera_orientation(phi = 50 * DEGREES, theta = 45 * DEGREES)
+        d2 = Dot([2,2.6,3.5],color = '#800000').rotate(1,LEFT) #---- point(x,y)
+        d2_copy = Dot([2,2.6,0],color = '#800000') #---- projection of point(x,y) on x-y plane
+
+        d2_text = TextMobject("$f(x,y)$",color=ORANGE).scale(0.5).shift([0.8,1.4,1.5])
+        d2_copy_text = TextMobject("$(x,y)$",color=ORANGE).scale(0.5).shift([0.8,1.4,0],2.4*DOWN)
+
+        l1 = Line([0.2,2.01,2.21],[0.2,2.01,0],color= YELLOW).fade(0.2)
+        l2 = Line([2,2.6,3.4],[2,2.6,0],color= YELLOW).fade(0.2)
+
+        t_plane = Rectangle(color = PURPLE, fill_opacity=0.3).scale(0.6).rotate(m.radians(45),LEFT).shift([1.1,2.5,3.1]) #---- tangent plane
+        t_text= TextMobject("Tangent Plane",color = PINK).scale(0.5).shift(0.3*RIGHT+2.6*UP).rotate(math.radians(5),LEFT)
+
+        a1 = Line([0.2,2.01,0],[2,2.6,0],color ="#00FF7F")
+        a_x = Line([0.2,2.01,0],[2,2.01,0],color ="#9400D3")
+        a_y = Line([0.2,2.01,0],[0.2,2.6,0],color ="#8B4513")
+        a2 = Line([2,2.01,0],[2,2.6,0])
+        a3 = Line([0.2,2.6,0],[2,2.6,0])
+
+        ax_text = TextMobject("$f_x (x_0 , y_0 )(x – x_0 ) $").scale(0.5).shift(DOWN+0.8*LEFT).rotate(0.4)
+        ay_text = TextMobject("$ f_y (x_0 , y_0 )(y – y_0 ) $").scale(0.5).shift(0.8*DOWN+2.7*RIGHT).rotate(-0.6)
+        a1_text = TextMobject("$f_x (x_0 , y_0 )(x – x_0 ) + f_y (x_0 , y_0 )(y – y_0 )$ ").scale(0.4).rotate(0.7).shift(1.7*DOWN+0.6*RIGHT)
+
+        lines = VGroup(a1,a_y,a_x,a2,a3,d1_copy,d2_copy)
+
+
+        self.set_camera_orientation(phi = 60 * DEGREES, theta = 55 * DEGREES)
         self.wait(1)
         self.add(axes)
         self.add(label_x)
         self.add(label_y)
         self.play(Write(s))
         self.wait(1)
-        self.play(Write(d1))
+        self.play(Write(d2))
         self.add_fixed_in_frame_mobjects(d1_text)
-        self.play(ShowCreation(t_plane))
+        self.wait(1)
+        self.play(Write(t_plane))
         self.add_fixed_in_frame_mobjects(t_text)
         self.wait(1)
-        self.play(FadeOut(t_text),Write(d2))
-        self.add_fixed_in_frame_mobjects(d2_text)        
+        self.play(Write(d1))
+        self.add_fixed_in_frame_mobjects(d2_text)
         self.wait(1)
-        self.play(Write(l1),Write(l2))
-        self.play(Write(d2_copy),Write(d1_copy))
+        self.play(Write(l1),Write(d1_copy))
+        self.add_fixed_in_frame_mobjects(d2_copy_text)
         self.wait(1)
-        self.play(Write(a1),Write(a_x),Write(a_y))
+        self.play(Write(l2),Write(d2_copy))
+        self.add_fixed_in_frame_mobjects(d1_copy_text)
+        self.wait(2)
+        self.play(FadeOut(d1_text),FadeOut(d1_copy_text),FadeOut(d2_text),FadeOut(d2_copy_text),FadeOut(t_text))
         self.wait(1)
-        self.play(Write(a2),Write(a3))
-        self.wait(1)        
-        self.play(ReplacementTransform(t_plane,t2_plane))
+        self.play(Write(a1),Write(a_x),Write(a_y),Write(a2),Write(a3))
         self.wait(1)
-        self.play(ReplacementTransform(t2_plane,t3_plane))
+        self.play(FadeOut(s),FadeOut(d1),FadeOut(d2),FadeOut(l1),FadeOut(l2),FadeOut(t_plane),FadeOut(label_x),FadeOut(label_y))
         self.wait(1)
-        self.play(ReplacementTransform(t3_plane,t4_plane))
-        self.wait(1)         
+        lines.scale(2)
+        axes.scale(1.5)
+        self.wait(1)
+        self.add_fixed_in_frame_mobjects(ax_text)
+        self.add_fixed_in_frame_mobjects(ay_text)
+        self.add_fixed_in_frame_mobjects(a1_text)
+        self.wait(1)
