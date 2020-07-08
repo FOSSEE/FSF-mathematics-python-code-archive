@@ -7,7 +7,7 @@ class intro(Scene):
         equation=TextMobject("$f(x)=$","${ e }^{ -x^{ 2 } }$")
         equation.scale(2)
         equation.set_color_by_tex_to_color_map({"${ e }^{ -x^{ 2 } }$":RED})
-        text=TextMobject("at $a=1$")
+        text=TextMobject("about $x=1$")
         text.scale(0.7)
         text.shift(DOWN)
 
@@ -41,7 +41,7 @@ def formFormula(coeff_list,variable_list):
     return expansion,coeff_list
 
 
-class graphScene(GraphScene):
+class graphScene(GraphScene,MovingCameraScene):
     CONFIG = {
         "x_min": -8,
         "x_max": 8,
@@ -55,6 +55,9 @@ class graphScene(GraphScene):
         "exclude_zero_label": True,
         "x_labeled_nums": range(-8, 8, 1),
     }
+    def setup(self):
+        GraphScene.setup(self)
+        MovingCameraScene.setup(self)
     def construct(self):
         x_each_unit = self.x_axis_width / (self.x_max - self.x_min)
         y_each_unit = self.y_axis_height / (self.y_max - self.y_min)   
@@ -62,7 +65,7 @@ class graphScene(GraphScene):
         equation=TextMobject("$f(x)=$","${ e }^{ -x^{ 2 } }$")
         equation.scale(0.55)
         equation.set_color_by_tex_to_color_map({"${ e }^{ -x^{ 2 } }$":RED})
-        text=TextMobject("$a=1$")
+        text=TextMobject("about $x=1$")
         text.scale(0.55)
         equation.shift(3.39*UP+5*LEFT)
         text.shift(3*UP+5*LEFT)
@@ -80,7 +83,7 @@ class graphScene(GraphScene):
         trTextGrup.scale(0.5)
         trTextGrup.to_corner(UP+RIGHT)
         self.play(Write(trTextGrup))
-        self.setup_axes(animate=True)
+        self.setup_axes(animate=True,scalee=1)
         
         fx=TextMobject("${ e }^{ -x^{ 2 } }$")
         fx.scale(0.5)
@@ -91,29 +94,29 @@ class graphScene(GraphScene):
         self.wait(1.4)
 
         coeff=[TextMobject("$e^{-1}$"),TextMobject("$f'(x)$"),TextMobject("$\\frac { f''(x) }{ 2! } $")]
-        coeff[0].shift(3.33*UP+3.65*RIGHT)
-        coeff[0].scale(0.45)
-        coeff[1].shift(3.33*UP+4.13*RIGHT)
-        coeff[1].scale(0.275)
-        coeff[2].shift(3.33*UP+5.36*RIGHT)
-        coeff[2].scale(0.28)
+        coeff[0].shift(4.1*y_each_unit*UP+5.15*RIGHT*x_each_unit)
+        coeff[0].scale(0.3)
+        coeff[1].shift(4*y_each_unit*UP+5.7*RIGHT*x_each_unit)
+        coeff[1].scale(0.2)
+        coeff[2].shift(4*y_each_unit*UP+7.3*RIGHT*x_each_unit)
+        coeff[2].scale(0.18)
 
         for obj in coeff:
             obj.set_color(GOLD_A)
 
-        firstApprox=[self.get_graph(lambda x:math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5)]
-        secondApprox=[self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5),
-                    self.get_graph(lambda x:math.exp(-1)+3*(x-1)*math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5),
-                    self.get_graph(lambda x:math.exp(-1)-4*(x-1)*math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5)]
-        thirdApprox=[self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)-2*math.exp(-1)*(x-1)**2,color=BLUE,x_max=5.5,x_min=-5.5),
-                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)-0.1*math.exp(-1)*(x-1)**2,color=BLUE,x_max=5.5,x_min=-5.5),
-                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_max=5.5,x_min=-5.5),
-                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+0.5*math.exp(-1)*(x-1)**2,color=BLUE,x_max=5.5,x_min=-5.5),
-                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+2*math.exp(-1)*(x-1)**2,color=BLUE,x_max=5.5,x_min=-5.5)]
+        firstApprox=[self.get_graph(lambda x:math.exp(-1),color=BLUE,x_min=-3,x_max=4)]
+        secondApprox=[self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_min=-3,x_max=4),
+                    self.get_graph(lambda x:math.exp(-1)+3*(x-1)*math.exp(-1),color=BLUE,x_min=-3,x_max=4),
+                    self.get_graph(lambda x:math.exp(-1)-4*(x-1)*math.exp(-1),color=BLUE,x_min=-3,x_max=4)]
+        thirdApprox=[self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)-2*math.exp(-1)*(x-1)**2,color=BLUE,x_max=4,x_min=-3),
+                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)-0.1*math.exp(-1)*(x-1)**2,color=BLUE,x_max=4,x_min=-3),
+                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_max=4,x_min=-3),
+                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+0.5*math.exp(-1)*(x-1)**2,color=BLUE,x_max=4,x_min=-3),
+                    self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+2*math.exp(-1)*(x-1)**2,color=BLUE,x_max=4,x_min=-3)]
                     
-        firstGraph=self.get_graph(lambda x:math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5)
-        secondGraph=self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_min=-5.5,x_max=5.5)
-        thirdGraph=self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+math.exp(-1)*(x-1)**2,color=BLUE,x_max=5.5,x_min=-5.5)
+        firstGraph=self.get_graph(lambda x:math.exp(-1),color=BLUE,x_min=-3,x_max=4)
+        secondGraph=self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1),color=BLUE,x_min=-3,x_max=4)
+        thirdGraph=self.get_graph(lambda x:math.exp(-1)-2*(x-1)*math.exp(-1)+math.exp(-1)*(x-1)**2,color=BLUE,x_max=4,x_min=-3)
 
         bottomText1=TextMobject("Apply","$f(1)=T_{n}(1)$")
         bottomText2=TextMobject("This gives","$a_{ 0 }=e^{-1}$")
@@ -147,16 +150,42 @@ class graphScene(GraphScene):
         bottomText8.scale(0.5)
 
         bottomText1.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText2.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText3.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText4.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText5.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText6.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText7.shift(4.5*RIGHT+2.5*DOWN)
-        bottomText8.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText2.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText3.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText4.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText5.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText6.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText7.shift(4.5*RIGHT+2.5*DOWN)
+        # bottomText8.shift(4.5*RIGHT+2.5*DOWN)
+        bottomText2.shift(5*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText3.shift(5*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText4.shift(5*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText5.shift(5*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText6.shift(5.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText7.shift(5.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+        bottomText8.shift(5.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
+
+        bottomText2.scale(0.7)
+        bottomText3.scale(0.7)
+        bottomText4.scale(0.7)
+        bottomText5.scale(0.7)
+        bottomText6.scale(0.7)
+        bottomText7.scale(0.7)
+        bottomText8.scale(0.7)
 
         self.play(Write(bottomText1))
-        self.wait(1)
+        self.wait(0.8)
+        self.camera_frame.save_state()
+        self.play(self.camera_frame.set_width, 8,
+                self.camera_frame.move_to, x_each_unit*UP+x_each_unit*2*RIGHT,
+                ApplyMethod(trTextGrup.move_to,4*y_each_unit*UP+6.1*RIGHT*x_each_unit),
+                ApplyMethod(bottomText1.move_to,5.4*RIGHT*x_each_unit+2.5*DOWN*y_each_unit),
+                ApplyMethod(equation.shift,1.39*DOWN+2*RIGHT+RIGHT*x_each_unit*2),
+                ApplyMethod(text.shift,1.39*DOWN+2*RIGHT+RIGHT*x_each_unit*2),)
+        self.play(ApplyMethod(text.scale,0.5),ApplyMethod(equation.scale,0.5),ApplyMethod(bottomText1.scale,0.6),ApplyMethod(trTextGrup.scale,0.7))
+        self.play(ApplyMethod(text.shift,0.25*UP))
+        self.wait(0.6)
+
         self.play(ShowCreation(firstApprox[0]),ReplacementTransform(bottomText1,bottomText2))
         #change coeff in tn(x)
         self.play(ReplacementTransform(generalized_eq_coeff[0],coeff[0]))
@@ -193,10 +222,13 @@ class graphScene(GraphScene):
         self.wait(2)
 
         textFinal=TextMobject("And so on..!")
-        textFinal.scale(0.7)
-        textFinal.shift(4.5*RIGHT+2.5*DOWN)
+        textFinal.scale(0.35)
+        textFinal.shift(5.7*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
         self.play(ReplacementTransform(bottomText8,textFinal))
-        self.wait(2.5)
+        self.wait(1)
+        self.play(FadeOut(equation),FadeOut(text))
+        self.play(self.camera_frame.set_width, 15,
+                    self.camera_frame.move_to, 0)
 
         finalFormula=TextMobject("Hence","$T_{ n }(x)$","=","$f(1)+f'(1)(x-1)+\\frac { f''(1) }{ 2! }(x-1)^2+..+\\frac { { f }^{ n }(1) }{ n! } { (x-1) }^{ n }$")
         finalFormula.scale(0.8)
