@@ -7,8 +7,11 @@
 ### Applying the same on Graphs
 ![GIF3](gifs/file2b.gif)
 
-### Fourier series for non-periodic functions
+### Fourier series for non-periodic functions-a
 ![GIF4](gifs/file3.gif)
+
+### Fourier series for non-periodic functions-b
+![GIF4a](gifs/file7.gif)
 
 ### Fourier Series of Square pulse
 ![GIF5](gifs/file4.gif)

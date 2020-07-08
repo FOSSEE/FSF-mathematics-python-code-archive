@@ -11,4 +11,4 @@
 ![GIF3](gifs/file3_radius_and_intervalOfConvergence.gif)
 
 #### Uniform Convergence
-![GIF4](gifs/file4_UniformConvergence.gif)
+![GIF4](gifs/file4a_UniformConvergence.gif)
