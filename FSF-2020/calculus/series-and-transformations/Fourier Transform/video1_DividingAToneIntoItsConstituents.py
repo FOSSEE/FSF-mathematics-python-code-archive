@@ -1,13 +1,6 @@
 from manimlib.imports import*
 import numpy as np
 
-# def func(t,n):
-#     s=0
-#     for i in range(1,n+1):
-#         s+=((-2/(i*np.pi))*((-1)**i)*np.sin(2*np.pi*i*t))
-#     return s
-
-
 class intro(GraphScene):
     CONFIG = {
         "x_min": -3,
