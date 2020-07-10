@@ -125,22 +125,5 @@ class compare(GraphScene,MovingCameraScene):
         self.play(ApplyMethod(left.shift,LEFT*x_each_unit*0.5),ApplyMethod(right.shift,RIGHT*x_each_unit*0.5),ReplacementTransform(result4,result5),ReplacementTransform(coeffResult[2],coeffResult[3]))
 
 
-        # coeffResult=[
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 1 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  }$").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 4 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 10 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     ]
-        # result2a=self.returnPartResult(2,1)
-        # result2b=self.returnPartResult(2,4)
-        # result2c=self.returnPartResult(2,10)
-        # result2d=self.returnPartResult(2,20)
-
-        # self.play(ReplacementTransform(partFunction2,result2a),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2a,result2b),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2b,result2c),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2c,result2d),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.wait(0.5)
-
 
         self.wait(2)
