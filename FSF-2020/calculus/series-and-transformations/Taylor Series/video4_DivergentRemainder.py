@@ -43,7 +43,6 @@ class graphScene(GraphScene):
         bottomText1=TextMobject("$R_{n}(x)=\\frac { d }{ dx } ($","area bounded","$)$")
 
         bottomText1.set_color_by_tex_to_color_map({"area bounded":ORANGE})
-        #bottomText2.set_color_by_tex_to_color_map({"area bounded":BLUE})
         arrow=TextMobject("$\downarrow$")
         arrow.scale(2.5)
         arrow.shift(ORIGIN+x_each_unit*RIGHT*9.5+UP*y_each_unit)
@@ -56,12 +55,8 @@ class graphScene(GraphScene):
         increasingText.scale(0.4)
 
         bottomText1.scale(0.5)
-        #bottomText2.scale(0.5)
-        #bottomText3.scale(0.5)
 
         bottomText1.shift(3.5*LEFT+2*DOWN)
-        #bottomText2.shift(3.5*LEFT+2.4*DOWN)
-        #bottomText3.shift(3.5*LEFT+2.8*DOWN)
 
         dline=DashedLine(start=ORIGIN+8*y_each_unit*UP,end=ORIGIN+8*y_each_unit*DOWN)
         dline.shift(ORIGIN+x_each_unit*4*RIGHT)
@@ -72,8 +67,6 @@ class graphScene(GraphScene):
         self.play(Write(dline))
         self.wait(0.5)
         self.play(ShowCreation(area1),ShowCreation(area2),Write(bottomText1))
-        # self.play(Write(bottomText2))
-        # self.play(FadeIn(bottomText3))
         self.play(Write(arrow))
         self.wait(0.7)
         self.play(Write(increasingText))
