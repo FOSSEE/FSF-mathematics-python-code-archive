@@ -105,9 +105,4 @@ class graphScene(GraphScene,MovingCameraScene):
         self.wait(1)
         self.play(self.camera_frame.set_width,14)
         self.wait(1.3)
-        # self.camera_frame.save_state()
-        # self.camera_frame.set_width(5.5)
-        # self.play(self.camera_frame.move_to, ORIGIN)
-        # self.wait(1)
-        # self.camera_frame.set_width(14)
-        # self.wait(1.5)
+

@@ -69,10 +69,7 @@ class graphScene(GraphScene):
             eqText[i].scale(0.6)
             eqText[i].set_color(BLUE)
             eqText[i].shift(ORIGIN+UP*2*y_each_unit+RIGHT*3.3*x_each_unit)
-        # eqTextTerm=TextMobject("And so on..!")
-        # eqTextTerm.set_color(BLUE)
-        # eqTextTerm.scale(0.6)
-        # eqTextTerm.shift(ORIGIN+UP*2*y_each_unit+3*RIGHT*x_each_unit)
+       
         equation1 = self.get_graph(lambda x : 1,color = RED,x_min = -8,x_max=8)
         equation2 = self.get_graph(lambda x : 1-math.pow(x,2),color = RED,x_min = -1.7,x_max=1.7)
         equation3 = self.get_graph(lambda x : 1-math.pow(x,2)+math.pow(x,4),color = RED,x_min = -1.6,x_max=1.6)

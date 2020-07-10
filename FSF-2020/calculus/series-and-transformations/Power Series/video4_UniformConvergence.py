@@ -3,19 +3,15 @@ import math
 
 class uniformlyConvergent(Scene):
     def construct(self):
-        #introText1=TextMobject("Again consider the","above","example")
         introText2=TextMobject("Let","$g(x)=\\frac { 1 }{ 1+{ x }^{ 2 } }$","and","x=0.5 $\in$(-1,1)")
         introText3=TextMobject("Lets analyse..","!")
-        #introText1.scale(0.8)
+       
         introText2.scale(0.7)
         introText3.scale(0.9)
         introText3.shift(DOWN)
-        #introText1.set_color_by_tex_to_color_map({"above":YELLOW})
+ 
         introText2.set_color_by_tex_to_color_map({"$g(x)=\\frac { 1 }{ 1+{ x }^{ 2 } }$":BLUE,"x=0.5 $\in$(-1,1)":YELLOW})
         introText3.set_color_by_tex_to_color_map({"!":GREEN})
-        #self.play(Write(introText1))
-        #self.wait(0.5)
-        #self.play(FadeOut(introText1))
         self.play(Write(introText2))
         self.play(FadeIn(introText3))
         self.wait(2)
@@ -65,7 +61,7 @@ class graphScene(GraphScene,ZoomedScene):
     
     def setup(self):
         GraphScene.setup(self)
-        #MovingCameraScene.setup(self)
+     
         ZoomedScene.setup(self)
 
 
@@ -110,19 +106,7 @@ class graphScene(GraphScene,ZoomedScene):
         self.activate_zooming(animate=True)
         for p in range(0,5):
             self.play(Write(lines[p]))
-        # self.wait(0.5)
-        # self.camera_frame.save_state()
-        # self.camera_frame.set_width(0.6)
-        # self.play(self.camera_frame.move_to, points[0])
-        # self.wait(0.4)
-        # self.play(self.camera_frame.move_to, points[1])
-        # self.wait(0.4)
-        # self.play(self.camera_frame.move_to, points[2])
-        # self.wait(0.3)
-        # self.play(self.camera_frame.move_to, points[3])
-        # self.wait(1)
-        # self.play(self.camera_frame.move_to,ORIGIN)
-        # self.camera_frame.set_width(14)
+       
         
         self.wait(1)
         self.get_zoomed_display_pop_out_animation()
