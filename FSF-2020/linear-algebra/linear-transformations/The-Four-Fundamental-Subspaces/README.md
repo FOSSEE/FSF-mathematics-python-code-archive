@@ -1,11 +1,11 @@
 # Contributer: Archit Sangal
-My Github Account : <a href="https://github.com/architsangal">architsangal</a>
+My Github Account : <a href="https://github.com/architsangal">architsangal</a> (https://github.com/architsangal)
 <br/></br>
 
 ## Sub-Topics Covered:
 + The Four Fundamental Subspaces
 
-#### Video 1: Video 1: Writing System of linear equations in form of Ax=b
+#### Video 1: Writing System of linear equations in form of Ax=b
 ![GIF1](file11.gif)
 
 #### Video 2: Column Space is same as the image of Linear Transformation
