@@ -6,7 +6,7 @@ class Algo(ThreeDScene):
         axes = ThreeDAxes(x_min = -5,x_max=5,y_min=-3,y_max=3,z_min=-4,z_max=4)
         self.play(ShowCreation(axes))
 
-        text = TextMobject(r"This is the vector $\beta_1(=\left[\begin{array}{c} 4\\0\\0 \end{array}\right])$")
+        text = TextMobject(r"This is the vector $\beta_1 =\left[\begin{array}{c} 4\\0\\0 \end{array}\right]$")
         text.set_color(GREEN)
         text.scale(0.6)
         text.move_to(3*UP+5*LEFT)
@@ -42,7 +42,7 @@ class Algo(ThreeDScene):
         self.wait()
         self.play(FadeOut(text))
 
-        text = TextMobject(r"Consider another vector $\beta_2(=\left[\begin{array}{c} 2\\2\\0 \end{array}\right])$")
+        text = TextMobject(r"Consider another vector $\beta_2=\left[\begin{array}{c} 2\\2\\0 \end{array}\right]$")
         text1 = TextMobject(r"which is linearly independent to $\beta_1$")
         text.set_color(GREEN)
         text1.set_color(GREEN)
@@ -141,15 +141,15 @@ class Algo(ThreeDScene):
         self.add_fixed_orientation_mobjects(axis[1])
         #############################################################################
 
-        text = TextMobject(r"These are the same two orthonormal vectors $\alpha_{1}$ and $\alpha_{2}$")
-        text.scale(0.6)
-        text.set_color(DARK_BLUE)
-        self.add_fixed_in_frame_mobjects(text)
-        text.move_to(3*(DOWN+RIGHT))
-        self.play(Write(text))
+        self.move_camera(phi=70*DEGREES,theta=30*DEGREES,run_time=3)
+        xy_plane = Polygon(5*RIGHT+3*UP,-5*RIGHT+3*UP,-5*RIGHT-3*UP,5*RIGHT-3*UP)
+        xy_plane.set_color("#333333")
+        xy_plane.set_fill("#333333")
+        xy_plane.set_opacity(1)
+        xy_plane.fade(0.7)
+        self.play(ShowCreation(xy_plane))
 
-        self.move_camera(phi=60*DEGREES,theta=45*DEGREES,run_time=3)
-        self.begin_ambient_camera_rotation(rate=0.3)
+        #self.begin_ambient_camera_rotation(rate=0.1)
         
         line1 = Line(start = ORIGIN,end = 1*RIGHT)
         line1.set_color(DARK_BLUE)
@@ -183,9 +183,9 @@ class Algo(ThreeDScene):
         a_tip_c1.set_fill(GOLD_E)
         a_tip_c1.set_color(GOLD_E)
 
-        self.play(FadeOut(text), ShowCreation(a_line), ShowCreation(a_tip), ShowCreation(a_line_c1), ShowCreation(a_tip_c1))
+        self.play(ShowCreation(a_line), ShowCreation(a_tip), ShowCreation(a_line_c1), ShowCreation(a_tip_c1))
         
-        text = TextMobject(r"Now, we have a vector $\beta_3(=\left[\begin{array}{c} 2\\2\\2 \end{array}\right])$")
+        text = TextMobject(r"Now, we have a vector $\beta_3=\left[\begin{array}{c} 2\\2\\2 \end{array}\right]$")
         text.set_color(GOLD_E)
         text.scale(0.7)
         self.add_fixed_in_frame_mobjects(text)
@@ -197,8 +197,8 @@ class Algo(ThreeDScene):
 
         p_line1 = Line(start = ORIGIN,end = 2*RIGHT)
         p_line1.set_color(GOLD_E)
-        p_tip1 = Polygon(RIGHT,0.8*RIGHT+0.2*DOWN,0.8*RIGHT+0.2*UP)
-        p_tip1.move_to(2*RIGHT)
+        p_tip1 = Polygon(2*RIGHT,1.8*RIGHT+0.2*DOWN,1.8*RIGHT+0.2*UP)
+        
         p_tip1.set_opacity(1)
         p_tip1.set_fill(GOLD_E)
         p_tip1.set_color(GOLD_E)
@@ -211,6 +211,7 @@ class Algo(ThreeDScene):
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
+        self.begin_ambient_camera_rotation(rate=0.05)
         self.wait()
         self.play(FadeOut(text))
 
@@ -241,6 +242,7 @@ class Algo(ThreeDScene):
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*(DOWN+RIGHT))
         self.play(Write(text))
+
         self.play(ShowCreation(o_line1), ShowCreation(o_tip1))
         self.wait(2)
         self.play(FadeOut(a_line_c1), FadeOut(a_tip_c1), 
@@ -266,7 +268,7 @@ class Algo(ThreeDScene):
         last_a_tip.set_fill(PURPLE_E)
         last_a_tip.set_color(PURPLE_E)
 
-        self.wait()
+        self.wait(5)
         text = TextMobject(r"Take projection on $\alpha_2$")
         text.scale(0.6)
         text.set_color(GOLD_E)
@@ -283,7 +285,7 @@ class Algo(ThreeDScene):
         self.add_fixed_in_frame_mobjects(text)
         text.move_to(3*DOWN+3.5*RIGHT)
         self.play(Write(text))
-        self.play(ShowCreation(o_line1), ShowCreation(o_tip1))
+        #self.play(ShowCreation(o_line1), ShowCreation(o_tip1))
         self.wait(2)
         self.play(ShowCreation(last_a_tip), ShowCreation(last_a))
         self.wait()
@@ -299,16 +301,16 @@ class Algo(ThreeDScene):
         self.play(FadeOut(o_line1), FadeOut(o_tip1), FadeOut(a_line1_c1), FadeOut(a_tip1_c1), Transform(last_a,larrow3), Transform(last_a_tip,ltip3))
         
         text = TextMobject(r"Normalize, the vector")
-        text1 = TextMobject(r"$\beta_3$-(projection of $\beta_3$ on $\alpha_1$ + projection of $\beta_3$ on $\alpha_2$")
+        text1 = TextMobject(r"$\beta_3$-(projection of $\beta_3$ on $\alpha_1$ + projection of $\beta_3$ on $\alpha_2)$")
         text.set_color(PURPLE_E)
         text1.set_color(PURPLE_E)
-        text.scale(0.6)
-        text1.scale(0.6)
+        text.scale(0.55)
+        text1.scale(0.55)
         self.add_fixed_in_frame_mobjects(text)
-        self.add_fixed_in_frame_mobjects(text1)
         text.move_to(3*DOWN+3*RIGHT)
-        text1.move_to(3.5*DOWN+3*RIGHT)
+        text1.move_to(3.5*DOWN+3.25*RIGHT)
         self.play(Write(text))
+        self.add_fixed_in_frame_mobjects(text1)
         self.play(Write(text1))
         
         arrow3 = Line(start = ORIGIN,end = [0,0,1])
@@ -330,4 +332,4 @@ class Algo(ThreeDScene):
         text.move_to(3*DOWN+3.5*RIGHT)
         self.play(Write(text))
 
-        self.wait(3)
+        self.wait(8)
