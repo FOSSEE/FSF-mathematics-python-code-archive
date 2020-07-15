@@ -155,17 +155,13 @@ class LineIntegrationAsSum(GraphScene):
         sum_up_text.set_color_by_tex("summed",PURPLE)
         sum_up_text.next_to(multiply_text,DOWN)
         
-        dot.set_color(ORANGE).scale(1.2)
         
         self.play(FadeIn(VGroup(
             point_coord,dot
         )))
         self.play(Write(self.evaluate_text))
         self.play(Write(func_val))
-        self.play(FadeIn(VGroup(*[
-            dot.set_color(ORANGE).scale(1.4)
-                for dot in dots ]
-        )))
+        
         self.wait(2)
         self.remove(point_coord)
         self.get_ds(dots,index)
@@ -182,7 +178,11 @@ class LineIntegrationAsSum(GraphScene):
             func_val, RIGHT,buff=.2
         ))
         self.play(Write(sum_up_text))
-        
+        dot.set_color(ORANGE).scale(1.2)
+        self.play(FadeIn(VGroup(*[
+            dot.set_color(ORANGE).scale(1.4)
+                for dot in dots ]
+        )))
         self.func_val=func_val
         self.sum_text_group=VGroup(multiply_text,sum_up_text)
         

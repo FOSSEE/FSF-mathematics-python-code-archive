@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-class GradOfScalar(ThreeDScene):
+class GradOfScalarFunc(ThreeDScene):
 
     CONFIG = {
         "axes_config": {
@@ -27,7 +27,7 @@ class GradOfScalar(ThreeDScene):
             "num_axis_pieces": 1,
         },
         "default_graph_style": {
-            "stroke_width": 2,
+            "stroke_width": 5,
             "stroke_color": WHITE,
         },
         "default_vector_field_config": {
@@ -38,8 +38,8 @@ class GradOfScalar(ThreeDScene):
             "y_min": -3,
             "y_max": 3,
             "min_magnitude": 0,
-            "max_magnitude": 2,
-            "colors": [TEAL,GREEN,GREEN,GREEN,YELLOW,RED],
+            "max_magnitude": 3,
+            "colors": [TEAL,GREEN,YELLOW,RED],
             "length_func": lambda norm : norm*np.exp(-.38*norm)/2,
             "opacity": 1.0,
             "vector_config": {
@@ -49,9 +49,9 @@ class GradOfScalar(ThreeDScene):
         "default_surface_config": {
             "fill_opacity": 0.5,
             "checkerboard_colors": [BLUE_E],
-            "stroke_width": .5,
+            "stroke_width": .2,
             "stroke_color": WHITE,
-            "stroke_opacity": 0.75,
+            "stroke_opacity": 0.5,
         },
     }
 
@@ -66,17 +66,24 @@ class GradOfScalar(ThreeDScene):
             theta=-135 * DEGREES,
         )
         
-        scalar_fn_text=TexMobject("f(x,y,z)=","xy").set_color(BLUE)
+        scalar_fn_text=TexMobject("f(x,y)=","xy").set_color(BLUE)
         scalar_fn_text.to_corner(UR,buff=.6)
         
         operator=TexMobject("\\vec\\nabla").next_to(
             scalar_fn_text,LEFT,buff=.2
         ).set_color(GOLD)
-        grad_text=TexMobject(r"\dfrac{\partial f}{\partial x} \hat i+\dfrac{\partial f}{\partial y} \hat j+\dfrac{\partial f}{\partial z} \hat k").set_color(GOLD)
+        
+        grad_text=TexMobject(r"\dfrac{\partial f}{\partial x} \hat i+\dfrac{\partial f}{\partial y} \hat j").set_color(GOLD)
         grad_text.next_to(scalar_fn_text,DOWN).scale(.9)
         
-        VGroup(grad_text[0][1],grad_text[0][9],grad_text[0][17]).set_color(BLUE)
-        VGroup(grad_text[0][5:8],grad_text[0][13:16],grad_text[0][21:23]).set_color(WHITE)
+        VGroup(
+            grad_text[0][1],
+            grad_text[0][9]
+        ).set_color(BLUE)
+        VGroup(
+            grad_text[0][5:8],
+            grad_text[0][13:16]
+        ).set_color(WHITE)
         
         vector_field_text=TexMobject("\\vec F=y\hat i+x\hat j").set_color_by_gradient(*self.default_vector_field_config["colors"])
         vector_field_text.next_to(scalar_fn_text,DOWN)
@@ -108,30 +115,33 @@ class GradOfScalar(ThreeDScene):
         self.play(Write(grad_text))
         self.wait(2)
         
-        self.play(FadeOut(grad_text))
-        self.add_fixed_in_frame_mobjects(vector_field_text)
-        show_vec_field=[
+        
+        show_vects=[
             FadeIn(v_field1),
-            Write(vector_field_text),
         ]
       
         self.begin_ambient_camera_rotation(rate=.2)
         self.move_camera(
           #  distance=20,
             phi=60 * DEGREES,
-            added_anims=show_vec_field,
+            added_anims=show_vects,
             run_time=4.5
         )
-
+        
+        self.play(FadeOut(grad_text))
         self.wait(2)
         self.stop_ambient_camera_rotation()
         
-        fadeout= [FadeOut(s_field1)]
+        self.add_fixed_in_frame_mobjects(vector_field_text)
+        vector_field= [
+            FadeOut(s_field1),
+            Write(vector_field_text),
+        ]
         self.move_camera(
           #  distance=20,
             phi=0 * DEGREES,
             theta=-90 * DEGREES,
-            added_anims=fadeout,
+            added_anims=vector_field,
             run_time=2
         )
         self.wait(2)
@@ -165,6 +175,7 @@ class GradOfScalar(ThreeDScene):
         config.update(self.default_vector_field_config)
         config.update(kwargs)
         vector_field= VectorField(func,**config)
+        vector_field.move_to(self.axes.c2p(0,0,0))
         self.vector_field=vector_field
         
         if on_surface:
@@ -175,15 +186,14 @@ class GradOfScalar(ThreeDScene):
     
         
     def get_vectors_on_surface(self):
-        config = dict()
-        config.update(self.default_vector_field_config["vector_config"])
         vectors_on_surface = VGroup(*[
-            self.vector_field.get_vector(point,**config) 
+            self.vector_field.get_vector(point) 
             for point in self.surface_points
         ])
 
         return vectors_on_surface
-       
+        
+        
         
     def get_surface(self, func, **kwargs):
         axes=self.axes
@@ -302,7 +312,6 @@ class GradOfScalar(ThreeDScene):
         
         
   #uploaded by Somnath Pandit. FSF2020_Fundamental_Theorem_of_Line_Integrals
-  
   
   
   

@@ -95,7 +95,7 @@ class LineIntegration(GraphScene):
     
     def get_endpoints_of_curve(self):
         points=[[-3,0],[2,2]]
-        point_labels= ["P_i","P_f"]
+        point_labels= ["P_f","P_i"]
         for point,label in zip(points,point_labels):
             dot=Dot(self.coords_to_point(*point)).set_color(RED)
             dot_label=TexMobject(label)

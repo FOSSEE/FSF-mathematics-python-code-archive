@@ -47,8 +47,8 @@ class LineIntegrationProcess(SpecialThreeDScene):
         axes=self.axes
         
         self.set_camera_orientation(distance=35,
-            phi=65 * DEGREES,
-            theta=-65 * DEGREES,
+            phi=60 * DEGREES,
+            theta=-60 * DEGREES,
         )
         
         fn_text=TextMobject("$z=2+x^2y$").set_color(BLUE)
@@ -86,7 +86,14 @@ class LineIntegrationProcess(SpecialThreeDScene):
         self.play(Write(area_text))
         self.play(Write(self.area),run_time=2)
         self.play(FadeOut(VGroup(surface,fn_text)))
-        self.wait()
+        self.move_camera(
+          #  distance=20,
+            phi=90 * DEGREES,
+        #    theta=-90 * DEGREES,
+         #   added_anims=into_graph,
+            run_time=2
+        )
+        self.wait(2)
         
         self.stop_ambient_camera_rotation()
     #    self.get_lines()
@@ -307,7 +314,8 @@ class LineIntegrationProcess(SpecialThreeDScene):
         line=DashedLine(start,end,color=color)
         
         return line
-            
+        
+#-------------------------------------------------------            
     #customize 3D axes        
     def get_three_d_axes(self, include_labels=True, include_numbers=True, **kwargs):
         config = dict(self.axes_config)
@@ -417,5 +425,3 @@ class LineIntegrationProcess(SpecialThreeDScene):
         
         
   #uploaded by Somnath Pandit.FSF2020_Line_Integrals
-  
-  
