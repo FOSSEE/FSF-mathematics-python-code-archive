@@ -34,6 +34,7 @@ class NonLinearTransformation(Scene):
     def construct(self):
         grid = NumberPlane()
         self.play(ShowCreation(grid),run_time =2)
+        # I have taken reference from purusharth's code
         NonLinearTrans = lambda coordinates : coordinates + np.array([np.sin(coordinates[1]),np.sin(coordinates[0]),0,])
         grid.prepare_for_nonlinear_transform()
         self.play(grid.apply_function,NonLinearTrans)
