@@ -3,12 +3,6 @@ class ThreeDExplanation(ThreeDScene):
     
     def construct(self):
 
-        text = TextMobject("Let us consider the example discussed above again. These are the things we know:-")
-        text.scale(0.75)
-        self.add_fixed_in_frame_mobjects(text)
-        text.move_to(3*UP)
-        self.play(Write(text))
-        self.wait(2)
         basis = TextMobject(r"Set of Orthonormal Basis - $\left(\begin{array}{c}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\\0\end{array}\right),\left(\begin{array}{c}\frac{-1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\\0\end{array}\right),\left(\begin{array}{c}0\\0\\1\end{array}\right)$")
         basis.scale(0.75)
         basis.move_to(UP*1.5)
@@ -31,7 +25,7 @@ class ThreeDExplanation(ThreeDScene):
         self.play(Write(eq2))
         self.play(Write(eq3))
         self.wait()
-        self.play(FadeOut(text), FadeOut(basis), FadeOut(eq), FadeOut(v), FadeOut(eq1), FadeOut(eq2), FadeOut(eq3))
+        self.play(FadeOut(basis), FadeOut(eq), FadeOut(v), FadeOut(eq1), FadeOut(eq2), FadeOut(eq3))
         self.wait()
         
         text = TextMobject("These are the 3 mutually orthonormal basis of the set(", r"$v_1$, ", r"$v_2$, ", r"$v_3$",")")
@@ -44,13 +38,20 @@ class ThreeDExplanation(ThreeDScene):
         self.play(Write(text))
         self.wait()
 
-        axes = ThreeDAxes(x_min = -9,x_max=9,y_min=-9,y_max=9,z_min=-9,z_max=9)
+        axes = ThreeDAxes(x_min = -6,x_max=6,y_min=-6,y_max=6,z_min=-6,z_max=6)
         self.play(ShowCreation(axes))
-        self.move_camera(distance = 100, phi=30*DEGREES,theta=45*DEGREES,run_time=3)
-        self.begin_ambient_camera_rotation(rate=0.3)
+        self.move_camera(distance = 100, phi=45*DEGREES,theta=45*DEGREES,run_time=5)
+        self.begin_ambient_camera_rotation(rate=0.1)
 
-        dashedline1 = DashedLine(start = -12*(UP+RIGHT), end = 12*(UP+RIGHT))
-        dashedline2 = DashedLine(start = -12*(UP+LEFT), end = 12*(UP+LEFT))
+        xy_plane = Polygon(6*RIGHT+6*UP,-6*RIGHT+6*UP,-6*RIGHT-6*UP,6*RIGHT-6*UP)
+        xy_plane.set_color("#333333")
+        xy_plane.set_fill("#333333")
+        xy_plane.set_opacity(1)
+        xy_plane.fade(0.7)
+        self.play(ShowCreation(xy_plane))
+
+        dashedline1 = DashedLine(start = -6*(UP+RIGHT), end = 6*(UP+RIGHT))
+        dashedline2 = DashedLine(start = -6*(UP+LEFT), end = 6*(UP+LEFT))
         dashedline3 = DashedLine(start = 4*UP+3*RIGHT+[0,0,5], end = 3.5*UP+3.5*RIGHT)
         dashedline4 = DashedLine(start = 4*UP+3*RIGHT+[0,0,5], end = 0.5*UP+0.5*LEFT)
         dashedline5 = DashedLine(start = 4*UP+3*RIGHT+[0,0,5], end = [0,0,5])
@@ -95,15 +96,17 @@ class ThreeDExplanation(ThreeDScene):
         
         a_line = Line(start = ORIGIN,end = 4*UP+3*RIGHT+[0,0,5])
         a_line.set_color(GOLD_E)
-        a_tip = Polygon(4*UP+3*RIGHT+[0,0,5],3.6*UP+2.7*RIGHT+[0,0,4.5]+0.1*UP+0.1*LEFT,3.6*UP+2.7*RIGHT+[0,0,4.5]+0.1*DOWN+0.1*RIGHT)
+        a_tip = Polygon(3.92*UP+2.94*RIGHT+[0,0,4.9],3.6*UP+2.7*RIGHT+[0,0,4.5]+0.1*UP+0.1*LEFT,3.6*UP+2.7*RIGHT+[0,0,4.5]+0.1*DOWN+0.1*RIGHT)
         a_tip.set_opacity(1)
         a_tip.set_fill(GOLD_E)
         a_tip.set_color(GOLD_E)
 
         self.play(ShowCreation(a_line), ShowCreation(a_tip))
-        self.wait(9)
+        self.stop_ambient_camera_rotation()
+        self.move_camera(distance = 100, phi=45*DEGREES,theta=135*DEGREES,run_time=5)
+
         self.play(ShowCreation(dashedline3),ShowCreation(dashedline4),ShowCreation(dashedline5))
-        self.wait(6)
+        self.wait()
 
         pv1 = Line(start = ORIGIN,end = 4*UP+3*RIGHT+[0,0,5])
         pv1.set_color(GOLD_E)
@@ -142,13 +145,18 @@ class ThreeDExplanation(ThreeDScene):
 
         v3_p = Line(start = ORIGIN,end = [0,0,5])
         v3_p.set_color(YELLOW_E)
-        v3_p_tip = Polygon([0,0,5],[0,0,4.8]+0.2*RIGHT,[0,0,4.8]+0.2*LEFT)
+        v3_p_tip = Polygon([0,0,5.15],[0,0,4.8]+0.2*RIGHT,[0,0,4.8]+0.2*LEFT)
         v3_p_tip.set_opacity(1)
         v3_p_tip.set_fill(YELLOW_E)
         v3_p_tip.set_color(YELLOW_E)
 
-        self.stop_ambient_camera_rotation()
-        self.play(Transform(pv1,v1_p), Transform(pv1tip,v1_p_tip), Transform(pv2,v2_p), Transform(pv2tip,v2_p_tip), Transform(pv3,v3_p), Transform(pv3tip,v3_p_tip))
+        #self.stop_ambient_camera_rotation()
+        self.play(Transform(pv1,v1_p), 
+        Transform(pv1tip,v1_p_tip), 
+        Transform(pv2,v2_p), 
+        Transform(pv2tip,v2_p_tip), 
+        Transform(pv3,v3_p), 
+        Transform(pv3tip,v3_p_tip))
         self.play(FadeOut(dashedline1),
         FadeOut(dashedline2),
         FadeOut(dashedline3),
