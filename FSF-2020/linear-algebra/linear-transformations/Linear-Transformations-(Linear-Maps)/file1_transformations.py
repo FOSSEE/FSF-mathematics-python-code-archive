@@ -2,11 +2,11 @@ from manimlib.imports import *
 
 class text(Scene):
     def construct(self):
-        text1 = TextMobject("For a grid, undergoing a linear transformation, all it's straight lines")
+        text1 = TextMobject("For a grid, undergoing a linear transformation, all its straight lines")
         text1.scale(0.9)
         text2 = TextMobject("must either remain straight lines or sends to a point in the grid formed")
         text2.scale(0.9)
-        text3 = TextMobject("Origin must remains where it was before transformation.")
+        text3 = TextMobject("Origin must remain where it was before transformation.")
         text3.scale(0.9)
         text1.move_to(ORIGIN+UP)
         text2.move_to(ORIGIN)
