@@ -24,7 +24,7 @@ class RiemannRectanglesAnimation(GraphScene):
             "input_sample_type": "right",
         }
         flat_rectangles1 = self.get_riemann_rectangles(self.get_graph(lambda x : 0),dx=self.init_dx,start_color=invert_color(PURPLE),end_color=invert_color(ORANGE),**kwargs)
-        riemann_rectangles_list1 = self.get_riemann_rectangles_list(graph1,8,max_dx=self.init_dx,power_base=2,start_color=PURPLE,end_color=ORANGE,**kwargs)
+        riemann_rectangles_list1 = self.get_riemann_rectangles_list(graph1,6,max_dx=self.init_dx,power_base=2,start_color=PURPLE,end_color=ORANGE,**kwargs)
         self.add(graph1)
         self.graph_origin = ORIGIN+2*DOWN+1*RIGHT
         self.setup_axes()
@@ -37,7 +37,7 @@ class RiemannRectanglesAnimation(GraphScene):
             "input_sample_type": "left",
         }
         flat_rectangles2 = self.get_riemann_rectangles(self.get_graph(lambda x : 0),dx=self.init_dx,start_color=invert_color(PURPLE),end_color=invert_color(ORANGE),**kwargs)
-        riemann_rectangles_list2 = self.get_riemann_rectangles_list(graph2,8,max_dx=self.init_dx,power_base=2,start_color=PURPLE,end_color=ORANGE,**kwargs)
+        riemann_rectangles_list2 = self.get_riemann_rectangles_list(graph2,6,max_dx=self.init_dx,power_base=2,start_color=PURPLE,end_color=ORANGE,**kwargs)
         self.add(graph2)
         text1 = TextMobject("Left Riemann sum").move_to(np.array([-3,-2.5,0]))
         text2 = TextMobject("Right Riemann sum").move_to(np.array([4,-2.5,0]))
@@ -50,15 +50,17 @@ class RiemannRectanglesAnimation(GraphScene):
         self.play(ReplacementTransform(flat_rectangles1,riemann_rectangles_list1[0]), ReplacementTransform(flat_rectangles2, riemann_rectangles_list2[0]))
         self.wait()
         self.play(ShowCreation(grp1))
-        for r in range(1,len(riemann_rectangles_list1)-5):
+        for r in range(1,len(riemann_rectangles_list1)-3):
             self.transform_between_riemann_rects(riemann_rectangles_list1[r-1],riemann_rectangles_list1[r],replace_mobject_with_target_in_scene = True,)
             self.transform_between_riemann_rects(riemann_rectangles_list2[r-1],riemann_rectangles_list2[r],replace_mobject_with_target_in_scene = True,)
         self.play(ShowCreation(text3))
-        for r in range(len(riemann_rectangles_list1)-5,len(riemann_rectangles_list1)):
+        for r in range(len(riemann_rectangles_list1)-3,len(riemann_rectangles_list1)):
             self.transform_between_riemann_rects(riemann_rectangles_list1[r-1],riemann_rectangles_list1[r],replace_mobject_with_target_in_scene = True,)
             self.transform_between_riemann_rects(riemann_rectangles_list2[r-1],riemann_rectangles_list2[r],replace_mobject_with_target_in_scene = True,)
         self.wait(2)
+        grp3 = VGroup(graph1, riemann_rectangles_list1[5])
+        grp4 = VGroup(graph2, riemann_rectangles_list2[5])
         self.play(ReplacementTransform(grp2, text4))
         self.wait(2)
-        self.play(ReplacementTransform(text4, text5))
+        self.play(ReplacementTransform(text4, text5), ApplyMethod(grp4.shift, 7*LEFT), ApplyMethod(self.axes.shift, 7*LEFT), )
         self.wait(4)
