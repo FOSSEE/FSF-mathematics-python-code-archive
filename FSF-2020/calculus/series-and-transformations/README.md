@@ -4,9 +4,9 @@ GitHub Handle: <a href="https://github.com/GSri30/">GSri30</a>
 
 Sub-Topics Covered: 
                     <ul>
-                      <li>Power Series
-                      <li>Taylor Series
-                      <li>Laplace Transformation
-                      <li>Fourier Transformation
-                      <li>z-Transform
+                      <li><a href="https://math.animations.fossee.in/contents/series-and-transformations/series/taylor-series">Taylor Series<\a>
+                      <li><a href="https://math.animations.fossee.in/contents/series-and-transformations/series/power-series">Power Series<\a>
+                      <li><a href="https://math.animations.fossee.in/contents/series-and-transformations/transformations/fourier-transform">Fourier Transformation<\a>
+                      <li><a href="https://math.animations.fossee.in/contents/series-and-transformations/transformations/laplace-transform">Laplace Transformation<\a>
+                      <li><a href="https://math.animations.fossee.in/contents/series-and-transformations/transformations/z-transform">Z-Transform<\a>
                     </ul>
