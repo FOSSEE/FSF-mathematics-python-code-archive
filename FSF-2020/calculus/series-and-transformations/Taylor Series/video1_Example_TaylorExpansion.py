@@ -95,7 +95,6 @@ class graphScene(GraphScene,MovingCameraScene):
             obj.set_color(GOLD_A)
         group=VGroup(coeff[0],coeff[1],coeff[2])
 
-        #group.shift(2*LEFT+2*DOWN)
 
         firstApprox=[self.get_graph(lambda x:1,color=BLUE)]
         secondApprox=[self.get_graph(lambda x:1,color=BLUE),
@@ -142,13 +141,6 @@ class graphScene(GraphScene,MovingCameraScene):
         bottomText8.scale(0.5)
 
         bottomText1.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText2.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText3.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText4.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText5.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText6.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText7.shift(4.5*RIGHT+2.5*DOWN)
-        # bottomText8.shift(4.5*RIGHT+2.5*DOWN)
         bottomText2.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
         bottomText3.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
         bottomText4.shift(3*RIGHT*x_each_unit+2.5*DOWN*y_each_unit)
@@ -230,16 +222,7 @@ class graphScene(GraphScene,MovingCameraScene):
         self.play(FadeOut(self.axes),FadeOut(textFinal),FadeOut(secondGraph),FadeOut(trTextGrup),FadeOut(mainfunction),FadeOut(fx),FadeOut(coeff[0]),FadeOut(coeff[1]),FadeOut(coeff[2]))
         self.play(Write(finalFormula))
         self.wait(2)
-        # self.play(ReplacementTransform(secondApprox[2],secondApprox[3]))
-        # self.wait(0.5)
-        # self.play(ReplacementTransform(secondApprox[3],secondApprox[4]))
-        # self.wait(0.5)
-        # self.play(ReplacementTransform(secondApprox[4],secondApprox[5]))
-        # self.wait(0.5)
-        # self.play(ReplacementTransform(secondApprox[0],secondApprox[0]))
-        # self.wait(0.5)
-        # self.play(ReplacementTransform(secondApprox[0],secondApprox[0]))
-        # self.wait(0.5)
+  
 
 
 

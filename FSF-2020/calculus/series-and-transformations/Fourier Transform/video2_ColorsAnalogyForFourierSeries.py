@@ -101,27 +101,27 @@ class divideColors(GraphScene):
                 self.get_graph(lambda x:func(x,6,24),x_min=-1,x_max=1).set_color([DARK_BROWN,RED_C]),
                 self.get_graph(lambda x:func(x,7,24),x_min=-1,x_max=1).set_color(DARK_BROWN)
                 ]
-        #self.y_axis_label="$\\frac { 2 }{ \pi } sin(2\pi t)$"
+  
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph1=self.get_graph(lambda x:func(x,1,1),x_min=-1,x_max=1,color=GREEN_E)
-        #self.y_axis_label="$\\frac { -1 }{ \pi  } sin(4\pi t)$"
+        
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph2=self.get_graph(lambda x:func(x,2,2),x_min=-1,x_max=1,color=GREEN_C)
-        #self.y_axis_label="$\\frac { 2 }{ 3\pi  } sin(6\pi t)$"
+        
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph3=self.get_graph(lambda x:func(x,3,3),x_min=-1,x_max=1,color=GOLD_E)
-        #self.y_axis_label="$\\frac { -1 }{ 2\pi  } sin(8\pi t)$"
+        
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph4=self.get_graph(lambda x:func(x,4,4),x_min=-1,x_max=1,color=GOLD_C)
-        #self.y_axis_label="$\\frac { 2 }{ 5\pi  } sin(10\pi t)$"
+    
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph5=self.get_graph(lambda x:func(x,5,5),x_min=-1,x_max=1,color=ORANGE)
-        #self.y_axis_label="$\\frac { -1 }{ 3\pi  } sin(12\pi t)$"
+        
         self.setup_axes(scalee=1)
         axes.append(self.axes)
         graph6=self.get_graph(lambda x:func(x,6,6),x_min=-1,x_max=1,color=RED_C)
@@ -132,9 +132,7 @@ class divideColors(GraphScene):
         self.play(ShowCreation(graphs[0]))
         self.play(Write(coeff[0]))
         self.wait(1)
-        # self.play(ApplyMethod(axes[0].scale,0.4),ApplyMethod(graphs[0].scale,0.4),ApplyMethod(axes[1].scale,0.4),
-        #         ApplyMethod(axes[2].scale,0.4),ApplyMethod(axes[3].scale,0.4),
-        #         ApplyMethod(axes[4].scale,0.4),ApplyMethod(axes[5].scale,0.4),ApplyMethod(axes[6].scale,0.4))
+       
         self.play(ReplacementTransform(graphs[0],graphs[1]),ApplyMethod(groups[0].shift,4*LEFT+UP),ReplacementTransform(coeff[0],coeff[2]),FadeIn(coeff[1]))
         self.play(ReplacementTransform(graphs[1],graphs[2]),ApplyMethod(groups[1].shift,4*RIGHT+UP),ReplacementTransform(coeff[2],coeff[4]),FadeIn(coeff[3]))
         self.play(ReplacementTransform(graphs[2],graphs[3]),ApplyMethod(groups[2].shift,4*LEFT+2*DOWN),ReplacementTransform(coeff[4],coeff[6]),FadeIn(coeff[5]))
@@ -142,24 +140,7 @@ class divideColors(GraphScene):
         self.play(ReplacementTransform(graphs[4],graphs[5]),ApplyMethod(groups[4].shift,2.5*UP),ReplacementTransform(coeff[8],coeff[10]),FadeIn(coeff[9]))
         self.play(ReplacementTransform(graphs[5],graphs[6]),ApplyMethod(groups[5].shift,2.5*DOWN),ReplacementTransform(coeff[10],coeff[12]),FadeIn(coeff[11]))
 
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),ApplyMethod(groups[0].shift,3*LEFT))
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),)
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),)
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),)
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),)
-        # self.play(ReplacementTransform(graphs[0],graphs[1]),)
-
-        
+      
 
         self.wait(2)
-        # self.play(ReplacementTransform(function,const))
-        # self.play(ShowCreation(sinx),ShowCreation(cosx))
-        # self.play(ShowCreation(sin2x),ShowCreation(cos2x))
-        # self.play(ShowCreation(sin3x),ShowCreation(cos3x))
-        # self.play(ShowCreation(sin4x),ShowCreation(cos4x))
-        # sintext=TextMobject("Infinite","sines").shift(5*RIGHT).set_color_by_tex_to_color_map({"Infinite":[YELLOW,RED],"sines":BLUE})
-        # costext=TextMobject("Infinite","cosines").shift(5*LEFT).set_color_by_tex_to_color_map({"Infinite":[YELLOW,RED],"cosines":BLUE})
-        # sintext.scale(0.6)
-        # costext.scale(0.6)
-        # self.play(FadeIn(sintext),FadeIn(costext))
-        # self.wait(2)        
+       

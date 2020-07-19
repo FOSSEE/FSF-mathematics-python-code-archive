@@ -1,7 +1,7 @@
 from manimlib.imports import *
 import numpy as np
 
-class compare(GraphScene):
+class compare(GraphScene,MovingCameraScene):
     CONFIG = {
         "x_min": -3,
         "x_max": 3,
@@ -14,6 +14,9 @@ class compare(GraphScene):
         "exclude_zero_label": True,
         "x_labeled_nums": range(-2, 3, 1),
     }
+    def setup(self):
+        GraphScene.setup(self)
+        MovingCameraScene.setup(self)
     def returnPairLines(self,left,right,y_each_unit):
         lineLeft=DashedLine(start=(0,5*y_each_unit,0),end=(0,-5*y_each_unit,0)).shift(left)
         lineRight=DashedLine(start=(0,5*y_each_unit,0),end=(0,-5*y_each_unit,0)).shift(right)
@@ -58,7 +61,7 @@ class compare(GraphScene):
         self.graph_origin=3.5*RIGHT
         self.y_axis_label="$\\frac { { l }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ \infty  }{ \\frac { 2{ (-1) }^{ n }{ l }^{ 2 }cos(\\frac { n\pi x }{ l } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  }$"
         self.setup_axes(animate=True,scalee=1)
-        axes.append(self.axes)        
+        axes.append(self.axes)      
         coeffResult=[
             TextMobject("$\\frac { { 1 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 1 }{ \\frac { 2{ (-1) }^{ n }{ 1 }^{ 2 }cos(\\frac { n\pi x }{ 1 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+UP).set_color(YELLOW),
             TextMobject("$\\frac { { 1 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 3 }{ \\frac { 2{ (-1) }^{ n }{ 1 }^{ 2 }cos(\\frac { n\pi x }{ 1 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+UP).set_color(YELLOW),
@@ -77,7 +80,13 @@ class compare(GraphScene):
         result1g=self.returnPartResult(1,13)
         self.play(ApplyMethod(partFunction1.shift,0.2*UP))
         self.wait(0.5)
+        
         self.play(ReplacementTransform(partFunction1,result1a),Write(coeffResult[0]))
+        self.play(FadeOut(axes[0]),FadeOut(left),FadeOut(right),FadeOut(function))
+        self.camera_frame.save_state()
+        self.play(self.camera_frame.set_width, 5,self.camera_frame.move_to, 3.5*RIGHT)
+        
+        
         self.play(ReplacementTransform(result1a,result1b),ReplacementTransform(coeffResult[0],coeffResult[1]))
         self.play(ReplacementTransform(result1b,result1c),ReplacementTransform(coeffResult[1],coeffResult[2]))
         self.play(ReplacementTransform(result1c,result1d),ReplacementTransform(coeffResult[2],coeffResult[3]))
@@ -85,6 +94,9 @@ class compare(GraphScene):
         self.play(ReplacementTransform(result1e,result1f),ReplacementTransform(coeffResult[4],coeffResult[5]))
         self.play(ReplacementTransform(result1f,result1g),ReplacementTransform(coeffResult[5],coeffResult[6]))
         
+        self.wait(0.5)
+        self.play(self.camera_frame.set_width, 14,self.camera_frame.move_to, 0)
+
         text4=TextMobject("Here the","obtained function","will always be","periodic","with period equal to the chosen interval").scale(0.4).shift(3.3*DOWN).set_color_by_tex_to_color_map({"obtained function":YELLOW,"periodic":RED})
         self.play(Write(text4))
 
@@ -93,6 +105,7 @@ class compare(GraphScene):
         self.play(FadeOut(text4))
         text5=TextMobject("As we","increase","the","interval of $x$,").scale(0.5).shift(3*DOWN).set_color_by_tex_to_color_map({"increase":RED,"interval of $x$,":YELLOW})
         text6=TextMobject("We get","approximation","for","higher intervals!").scale(0.5).shift(3.5*DOWN).set_color_by_tex_to_color_map({"approximation":GREEN,"higher intervals!":YELLOW})
+        self.play(FadeIn(axes[0]),FadeIn(left),FadeIn(right),FadeIn(function))
         self.play(Write(text5))
         self.play(Write(text6))
         result2=self.returnPartResult(1.5,20)
@@ -101,33 +114,16 @@ class compare(GraphScene):
         result5=self.returnPartResult(3,20)
         finalCoeff=coeffResult[6]
         coeffResult=[
-            TextMobject("$\\frac { { 1.5 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 1.5 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  }$").scale(0.3).shift(4.5*RIGHT+1.5*UP).set_color(YELLOW),
-            TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP).set_color(YELLOW),
-            TextMobject("$\\frac { { 2.5 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2.5 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP).set_color(YELLOW),
-            TextMobject("$\\frac { { 3 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 3 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP).set_color(YELLOW),
+            TextMobject("$\\frac { { 1.5 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 1.5 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  }$").scale(0.4).shift(5*RIGHT+1.5*UP).set_color(YELLOW),
+            TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.4).shift(5*RIGHT+1.5*UP).set_color(YELLOW),
+            TextMobject("$\\frac { { 2.5 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2.5 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.4).shift(5*RIGHT+2.2*UP).set_color(YELLOW),
+            TextMobject("$\\frac { { 3 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 3 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.4).shift(5*RIGHT+2.2*UP).set_color(YELLOW),
             ]
         self.play(ApplyMethod(left.shift,LEFT*x_each_unit*0.5),ApplyMethod(right.shift,RIGHT*x_each_unit*0.5),ReplacementTransform(result1g,result2),ReplacementTransform(finalCoeff,coeffResult[0]))
         self.play(ApplyMethod(left.shift,LEFT*x_each_unit*0.5),ApplyMethod(right.shift,RIGHT*x_each_unit*0.5),ReplacementTransform(result2,result3),ReplacementTransform(coeffResult[0],coeffResult[1]))
         self.play(ApplyMethod(left.shift,LEFT*x_each_unit*0.5),ApplyMethod(right.shift,RIGHT*x_each_unit*0.5),ReplacementTransform(result3,result4),ReplacementTransform(coeffResult[1],coeffResult[2]))
         self.play(ApplyMethod(left.shift,LEFT*x_each_unit*0.5),ApplyMethod(right.shift,RIGHT*x_each_unit*0.5),ReplacementTransform(result4,result5),ReplacementTransform(coeffResult[2],coeffResult[3]))
 
-
-        # coeffResult=[
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 1 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  }$").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 4 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 10 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     TextMobject("$\\frac { { 2 }^{ 2 } }{ 6 } +\sum _{ n=1 }^{ 20 }{ \\frac { 2{ (-1) }^{ n }{ 2 }^{ 2 }cos(\\frac { n\pi x }{ 2 } ) }{ { \pi  }^{ 2 }{ n }^{ 2 } }  } $").scale(0.3).shift(4.5*RIGHT+1.5*UP),
-        #     ]
-        # result2a=self.returnPartResult(2,1)
-        # result2b=self.returnPartResult(2,4)
-        # result2c=self.returnPartResult(2,10)
-        # result2d=self.returnPartResult(2,20)
-
-        # self.play(ReplacementTransform(partFunction2,result2a),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2a,result2b),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2b,result2c),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.play(ReplacementTransform(result2c,result2d),ReplacementTransform(coeffResult[0],coeffResult[1]))
-        # self.wait(0.5)
 
 
         self.wait(2)

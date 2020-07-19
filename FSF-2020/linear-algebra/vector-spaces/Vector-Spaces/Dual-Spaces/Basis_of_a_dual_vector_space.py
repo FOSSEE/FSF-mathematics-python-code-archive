@@ -1,0 +1,126 @@
+from manimlib.imports import *
+class DualVectorSpace(ZoomedScene):
+	
+	def construct(self):
+		c1 = Ellipse(radius = 2,color=BLUE)
+		c2 = Ellipse(radius = 2,color=YELLOW)
+		c1.rotate(np.pi/2)
+		c2.rotate(np.pi/2)
+		c1.shift(2*LEFT+0.6*UP)
+		c2.shift(2*RIGHT+0.6*UP)
+		c1.scale(2)
+		c2.scale(2)
+		self.play(ShowCreation(c1))
+		self.play(ShowCreation(c2))
+		dot1 = SmallDot(color=BLUE).shift(2*LEFT+2*UP)
+		dot2 = SmallDot(color=BLUE).shift(2*LEFT+1.5*UP)
+		dot3 = SmallDot(color=BLUE).shift(2*LEFT+1*UP)
+		dot4 = SmallDot(color=BLUE).shift(2*LEFT+0.5*UP)
+		dot5 = SmallDot(color=BLUE).shift(2*LEFT)
+		dot6 = SmallDot(color=BLUE).shift(2*LEFT+0.5*DOWN)
+		dot7 = SmallDot(color=BLUE).shift(2*LEFT+1*DOWN)
+		text1 = TextMobject(r"$V$").scale(0.6).shift(3*UP+2*LEFT)
+		text2 = TextMobject(r"$V^* = \{T:V\rightarrow F\}$").scale(0.6).shift(3*UP+2.5*RIGHT)		
+		self.play(ShowCreation(dot1),ShowCreation(dot2),ShowCreation(dot3),ShowCreation(dot4),ShowCreation(dot5),ShowCreation(dot6),ShowCreation(dot7))
+		v1 = TextMobject(r"$v_1$").scale(0.5).shift(2.2*LEFT+2*UP)
+		v2 = TextMobject(r"$v_2$").scale(0.5).shift(2.2*LEFT+1.5*UP)
+		v3 = TextMobject(r"$v_3$").scale(0.5).shift(2.2*LEFT+1*UP)
+		v4 = TextMobject(r"$v_4$").scale(0.5).shift(2.2*LEFT+0.5*UP)
+		v5 = TextMobject(r"$v_5$").scale(0.5).shift(2.2*LEFT)
+		v6 = TextMobject(r"$v_6$").scale(0.5).shift(2.2*LEFT+0.5*DOWN)
+		v7 = TextMobject(r"$v_7$").scale(0.5).shift(2.2*LEFT+1*DOWN)			
+		self.play(ShowCreation(v1),ShowCreation(v2),ShowCreation(v3),ShowCreation(v4),ShowCreation(v5),ShowCreation(v6),ShowCreation(v7))
+		self.play(ShowCreation(text1))
+		dot9 = SmallDot(color=YELLOW).shift(2*RIGHT+2*UP)
+		dot10 = SmallDot(color=YELLOW).shift(2*RIGHT+1.5*UP)
+		dot11 = SmallDot(color=YELLOW).shift(2*RIGHT+1*UP)
+		dot12 = SmallDot(color=YELLOW).shift(2*RIGHT+0.5*UP)
+		dot13 = SmallDot(color=YELLOW).shift(2*RIGHT)
+		dot14 = SmallDot(color=YELLOW).shift(2*RIGHT+0.5*DOWN)
+		dot15 = SmallDot(color=YELLOW).shift(2*RIGHT+1*DOWN)		
+		self.play(ShowCreation(dot9),ShowCreation(dot10),ShowCreation(dot11),ShowCreation(dot12),ShowCreation(dot13),ShowCreation(dot14),ShowCreation(dot15))
+		v9 = TextMobject(r"${T_1}$").scale(0.5).shift(2.2*RIGHT+2*UP)
+		v10 = TextMobject(r"${T_2}$").scale(0.5).shift(2.2*RIGHT+1.5*UP)
+		v11 = TextMobject(r"${T_3}$").scale(0.5).shift(2.2*RIGHT+1*UP)
+		v12 = TextMobject(r"${T_4}$").scale(0.5).shift(2.2*RIGHT+0.5*UP)
+		v13 = TextMobject(r"${T_5}$").scale(0.5).shift(2.2*RIGHT)
+		v14 = TextMobject(r"${T_6}$").scale(0.5).shift(2.2*RIGHT+0.5*DOWN)
+		v15 = TextMobject(r"${T_7}$").scale(0.5).shift(2.2*RIGHT+1*DOWN)		
+		self.play(ShowCreation(v9),ShowCreation(v10),ShowCreation(v11),ShowCreation(v12),ShowCreation(v13),ShowCreation(v14),ShowCreation(v15))
+		self.play(ShowCreation(text2))
+		line1 = Line(start=dot1,end=dot9,stroke_width=0.95)
+		line2 = Line(start=dot2,end=dot10,stroke_width=0.95)
+		line3 = Line(start=dot3,end=dot11,stroke_width=0.95)
+		line4 = Line(start=dot4,end=dot12,stroke_width=0.95)
+		line5 = Line(start=dot5,end=dot13,stroke_width=0.95)
+		line6 = Line(start=dot6,end=dot14,stroke_width=0.95)
+		line7 = Line(start=dot7,end=dot15,stroke_width=0.95)		
+		self.play(ShowCreation(line1),ShowCreation(line2),ShowCreation(line3),ShowCreation(line4),ShowCreation(line5),ShowCreation(line6),ShowCreation(line7))
+		self.wait(1.5)
+		rect1 = Rectangle(stroke_width=0.5,width=1,height=1.9).set_fill(color=BLUE,opacity=0.3)
+		vgroup1 = VGroup(dot3,dot4,v3,v4)
+		rect1.surround(vgroup1)
+		self.play(ShowCreation(rect1))
+		text3 = TextMobject(r"Basis of $V$ = $\{v_3, v_4\}$").shift(4.6*LEFT+1*UP).scale(0.5)
+		self.play(ShowCreation(text3))
+		self.wait(1.5)
+		rect2 = Rectangle(stroke_width=0.5,width=1,height=1.7).set_fill(color=YELLOW,opacity=0.3)
+		vgroup2 = VGroup(dot11,dot12,v11,v12)
+		rect2.surround(vgroup2)
+		self.play(ShowCreation(rect2))
+		text4 = TextMobject(r"Basis of $V^*$ = $\{{T_3},{T_4} \}$").shift(4.6*RIGHT+1*UP).scale(0.5)
+		self.play(ShowCreation(text4))
+		self.wait(2.5)
+		v9.move_to(3*LEFT+3*UP).scale(1.2).set_color(YELLOW)
+		colon = TextMobject(":").shift(3*UP+2.6*LEFT)
+		vgroup3 = VGroup(line1,line2,line3,line4,line5,line6,line7)
+		vgroup4 = VGroup(v10,v11,v12,v13,v14,v15,rect1,rect2,text3,text4,c2)
+		vgroup5 = VGroup(dot9,dot10,dot11,dot12,dot13,dot14,dot15)
+		text5 = TextMobject(r"$F$").scale(0.6).shift(3*UP+2*RIGHT)
+		dot9 = SmallDot(color=GREEN).shift(2*RIGHT+2*UP)
+		dot10 = SmallDot(color=GREEN).shift(2*RIGHT+1.5*UP)
+		dot11 = SmallDot(color=GREEN).shift(2*RIGHT+1*UP)
+		dot12 = SmallDot(color=GREEN).shift(2*RIGHT+0.5*UP)
+		dot13 = SmallDot(color=GREEN).shift(2*RIGHT)
+		dot14 = SmallDot(color=GREEN).shift(2*RIGHT+0.5*DOWN)
+		dot15 = SmallDot(color=GREEN).shift(2*RIGHT+1*DOWN)		
+		f1 = TextMobject(r"${f_1}$").scale(0.5).shift(2.2*RIGHT+2*UP)
+		f2 = TextMobject(r"${f_2}$").scale(0.5).shift(2.2*RIGHT+1.5*UP)
+		f3 = TextMobject(r"${f_3}$").scale(0.5).shift(2.2*RIGHT+1*UP)
+		f4 = TextMobject(r"${f_4}$").scale(0.5).shift(2.2*RIGHT+0.5*UP)
+		f5 = TextMobject(r"${f_5}$").scale(0.5).shift(2.2*RIGHT)
+		f6 = TextMobject(r"${f_6}$").scale(0.5).shift(2.2*RIGHT+0.5*DOWN)
+		f7 = TextMobject(r"${f_7}$").scale(0.5).shift(2.2*RIGHT+1*DOWN)
+		vgroup6 = VGroup(f1,f2,f3,f4,f5,f6,f7)
+		arrow = Arrow(stroke_width=1.6).scale(1.5).shift(3*UP)
+		c3 = Ellipse(radius = 2,color=GREEN)
+		c3.rotate(np.pi/2)		
+		c3.shift(2*RIGHT+0.6*UP)		
+		c3.scale(2)		
+		self.play(ShowCreation(v9))
+		self.wait(1.5)
+		self.play(ShowCreation(arrow),ShowCreation(colon),Transform(text2,text5),FadeOut(vgroup3),FadeOut(vgroup4),FadeOut(vgroup5))
+		self.play(ShowCreation(vgroup5),ShowCreation(vgroup6),ShowCreation(c3))
+		self.wait(0.7)
+		self.play(ShowCreation(vgroup3))
+		self.wait(3)
+
+		
+		
+
+		 
+		
+
+
+
+
+
+
+
+
+		
+	
+
+
+
+
