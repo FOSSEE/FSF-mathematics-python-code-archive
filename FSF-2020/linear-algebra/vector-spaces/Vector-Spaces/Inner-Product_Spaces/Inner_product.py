@@ -1,0 +1,28 @@
+from manimlib.imports import *
+import numpy as np
+class InnerProduct(Scene):
+	def construct(self):
+		big_box=Rectangle().scale(2.7)		
+		box = Rectangle(height=2,width=2,color=DARK_GREY).set_fill(color=BLUE_B,opacity=350)
+		arrow1 = Arrow(color=RED).shift(1.8*LEFT+0.5*UP)
+		arrow2 = Arrow(color=RED).shift(1.8*LEFT+0.5*DOWN)
+		arrow3 = Arrow(color=GREEN).shift(1.8*RIGHT)
+		Inner = TextMobject("INNER",color=BLACK).scale(0.65).shift(0.2*UP)
+		Product = TextMobject("PRODUCT",color=BLACK).scale(0.65).shift(0.2*DOWN)
+		u = TextMobject(r"$\vec{u}$",color=YELLOW).scale(0.7).shift(2.8*LEFT+0.5*UP)
+		v = TextMobject(r"$\vec{v}$",color=YELLOW).scale(0.7).shift(2.8*LEFT+0.5*DOWN)
+		scalar = TextMobject("(Scalar)").scale(0.55).shift(3.3*RIGHT+0.4*DOWN)
+		u.v = TextMobject(r"$<\vec{u}, \vec{v}>$",color=YELLOW).scale(0.7).shift(3.3*RIGHT)
+		V = TextMobject("V").scale(0.7).shift(2*UP+3.8*RIGHT)
+		text = TextMobject(r"The Inner Product is an operation that takes $\vec{u}, \vec{v} \in$ V as inputs and gives a scalar as an output.").scale(0.55).shift(2*DOWN)
+		self.play(ShowCreation(big_box),ShowCreation(V))
+		self.play(ShowCreation(box))
+		self.play(ShowCreation(Product),ShowCreation(Inner))
+		self.wait(2)
+		self.play(ShowCreation(arrow1),ShowCreation(u))
+		self.play(ShowCreation(arrow2),ShowCreation(v))
+		self.wait(1.5)
+		self.play(ShowCreation(arrow3),ShowCreation(scalar),ShowCreation(u.v))
+		self.wait(1)
+		self.play(ShowCreation(text))
+		self.wait(10)
