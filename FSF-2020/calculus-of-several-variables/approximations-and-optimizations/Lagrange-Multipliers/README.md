@@ -21,6 +21,6 @@
 
 <tab>file4_Constraints_g_and_h
 
-![file4_Constraints_g_and_h](?raw=true)
+
 <br/></br>
 <br/></br>
