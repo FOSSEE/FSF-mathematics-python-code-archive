@@ -1,8 +1,11 @@
 <h1><div align=”center”><b>SubTopic: Lagrange Multipliers</b></h1></div>
 <br/></br>
 
-
-
+<tab>file1_Extrema_over_g(x,y)
+ 
+![file1_Extrema_over_g(x,y)](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Lagrange-Multipliers/file1_Extrema_over_g(x%2Cy)%3Dk.gif?raw=true)
+<br/></br>
+<br/></br>
 
 <tab>file2_Constraint_circle_with_contour_plot_of_the_surface_x^2+y^2+x^3-y^3
  
