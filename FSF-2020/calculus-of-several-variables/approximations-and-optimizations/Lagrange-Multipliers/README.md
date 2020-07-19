@@ -7,14 +7,19 @@
 <br/></br>
 <br/></br>
 
-<tab>file2_Geometric_Proof
+<tab>file2_
+![file1_Extrema_over_g(x,y)=k](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Lagrange-Multipliers/file1_Extrema_over_g(x%2Cy)%3Dk.gif?raw=true)
+<br/></br>
+<br/></br>
+
+<tab>file3_Geometric_Proof
  
-![file2_Geometric_Proof](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Lagrange-Multipliers/file2_Geometric_Proof.gif?raw=true)
+![file3_Geometric_Proof](?raw=true)
 <br/></br>
 <br/></br>
 
-<tab>file3_Constraints_g_and_h
+<tab>file4_Constraints_g_and_h
 
-![file3_Constraints_g_and_h](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Lagrange-Multipliers/file3_Constraints_g_and_h.gif?raw=true)
+![file4_Constraints_g_and_h](?raw=true)
 <br/></br>
 <br/></br>
