@@ -4,10 +4,10 @@ import math as m
 #---- optimizing funtion f(x,y) w.r.t to g(x,y)
 class ConstrainedExtrema(ThreeDScene):
     def construct(self):
-        axes = ThreeDAxes().fade(0.4)        
-        label_x = TextMobject("$x$").shift([5.5,-0.5,0])  #---- x axis
-        label_y = TextMobject("$y$").shift([-0.5,5.5,0]).rotate(-4.5) #---- y axis
-
+        axes = ThreeDAxes().scale(0.7).rotate(math.radians(180))       
+        label_x = TextMobject("$x$").shift(4*LEFT).fade(0.4)  #---- x axis
+        label_y = TextMobject("$y$").shift(3.2*DOWN+0.2*RIGHT).rotate(math.radians(180)).fade(0.4)  #---- y axis
+        
         surface = ParametricSurface(
             lambda u, v: np.array([
                 u,
