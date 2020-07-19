@@ -21,6 +21,6 @@
 
 <tab>file4_Constraints_g_and_h
 
-![file4_Constraints_g_and_h](https://github.com/vnb09/FSF-mathematics-python-code-archive/blob/fsf_tasks/FSF-2020/calculus-of-several-variables/approximations-and-optimizations/Lagrange-Multipliers/file4_Constraints_g_and_h.gif?raw=true)
+![file4_Constraints_g_and_h](?raw=true)
 <br/></br>
 <br/></br>
