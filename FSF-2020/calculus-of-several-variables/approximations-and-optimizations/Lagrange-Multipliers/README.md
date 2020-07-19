@@ -1,7 +1,6 @@
 <h1><div align=”center”><b>SubTopic: Lagrange Multipliers</b></h1></div>
 <br/></br>
 
-<tab>file1_Extrema_over_g(x,y)=k
 
 
 <br/></br>
