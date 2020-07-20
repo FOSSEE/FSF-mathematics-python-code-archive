@@ -52,8 +52,6 @@ class sphere(GraphScene, ThreeDScene):
         self.add_fixed_in_frame_mobjects(text7)
         self.wait(2)
         self.move_camera(phi = 60*DEGREES, theta= -45*DEGREES, distance = 200, run_time=5)
-        #self.play(FadeOut(text6))
-        #self.add_fixed_in_frame_mobjects(text7)
         k=0
         while k<9:
             disc1 = ParametricSurface(lambda u, v : np.array([0, (1/(1+k))*v*np.sin(TAU*u), (1/(1+k))*v*np.cos(TAU*u)]), fill_opacity = 0.5, fill_color = PINK).shift((1+k)*RIGHT)

@@ -10,8 +10,8 @@ rierect3.gif
 ![rierect3](https://user-images.githubusercontent.com/61246381/87141949-6e1b9700-c2c1-11ea-9433-4f6be752aa55.gif)
 
 
-RiemannRectanglesAnimation.
-![RiemannRectanglesAnimation](https://user-images.githubusercontent.com/61246381/87142531-4a0c8580-c2c2-11ea-8f5e-9e854eae6eec.gif)
+RiemannRectanglesAnimation.gif
+![RiemannRectanglesAnimation](https://user-images.githubusercontent.com/61246381/87952202-2c5fcd00-cac7-11ea-8b14-a0c522886714.gif)
 
 
 mimi.gif
