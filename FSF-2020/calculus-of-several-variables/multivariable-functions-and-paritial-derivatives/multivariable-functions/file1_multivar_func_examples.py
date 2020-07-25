@@ -17,45 +17,35 @@ class Examples1(GraphScene):
         rectangle_area[2].set_color(YELLOW_C)
         rectangle_area[4].set_color(BLUE_C)
 
-
-        square = Square(side_length = 5, color = PURPLE)
-        square_area_func = TexMobject("Area", "=", "f(", "Length", ")")
-        square_area_func[0].set_color(GREEN_C)
-        square_area_func[2].set_color(ORANGE)
-        square_area_func[3].set_color(BLUE_C)
-        square_area_func[4].set_color(ORANGE)
-
-        square_area = TexMobject("Area", "=", "Length^2")
-        square_area[0].set_color(GREEN_C)
-        square_area[2].set_color(BLUE_C)
-
-
-        circle = Circle(radius = 2, color = PINK)
-        circle_area_func = TexMobject("Area", "=", "f(", "r", ")")
-        circle_area_func[0].set_color(YELLOW_C)
-        circle_area_func[2].set_color(ORANGE)
-        circle_area_func[3].set_color(GREEN_C)
-        circle_area_func[4].set_color(ORANGE)
-
-        circle_area = TexMobject("Area", "=", "\\pi", "r^2")
-        circle_area[0].set_color(YELLOW_C)
-        circle_area[2].set_color(BLUE_C)
-        circle_area[3].set_color(GREEN_C)
-
-        radius = Line(ORIGIN,2*RIGHT, color = RED_C)
         
+        triangle = Polygon(np.array([-3,-1.5,0]), np.array([2,-1.5,0]), np.array([2,1.5,0]), np.array([-3,-1.5,0]), color = PURPLE)
+
+        triangle_area_func = TexMobject("Area", "=", "f(", "Base", ",", "Height", ")").scale(0.6).move_to(1*DOWN)
+        triangle_area_func[0].set_color(RED_C)
+        triangle_area_func[2].set_color(ORANGE)
+        triangle_area_func[3].set_color(YELLOW_C)
+        triangle_area_func[5].set_color(BLUE_C)
+        triangle_area_func[6].set_color(ORANGE)
+
+        triangle_area = TexMobject("Area", "=", "\\frac{1}{2}", "\\times", "Base", "\\times", "Height").scale(0.6).move_to(1*DOWN)
+        triangle_area[0].set_color(RED_C)
+        triangle_area[2].set_color(GREEN_C)
+        triangle_area[4].set_color(YELLOW_C)
+        triangle_area[6].set_color(BLUE_C)
+
 
 
         braces_rect1 = Brace(rectangle, LEFT)
         eq_text1 = braces_rect1.get_text("Length").set_color(YELLOW_C)
         braces_rect2 = Brace(rectangle, UP)
         eq_text2 = braces_rect2.get_text("Breadth").set_color(BLUE_C)
-
-        braces_square = Brace(square, LEFT)
-        braces_square_text = braces_square.get_text("Length").set_color(BLUE_C)
-
-        radius_text = TexMobject("r", color = GREEN_C).next_to(radius,UP)
         
+    
+        braces_triangle_height = Brace(triangle, RIGHT)
+        braces_triangle_height_text = braces_triangle_height.get_text("Height").set_color(BLUE_C)
+
+        braces_triangle_base = Brace(triangle, DOWN)
+        braces_triangle_base_text = braces_triangle_base.get_text("Base").set_color(YELLOW_C)
 
 
         self.play(ShowCreation(rectangle))
@@ -69,28 +59,19 @@ class Examples1(GraphScene):
         self.play(FadeOut(braces_rect1),FadeOut(eq_text1),FadeOut(braces_rect2),FadeOut(eq_text2),FadeOut(rectangle_area_func))
 
 
-        self.play(Transform(rectangle, square))
+        self.play(Transform(rectangle, triangle))
         self.wait(1)
-        self.play(GrowFromCenter(braces_square),Write(braces_square_text))
+        self.play(GrowFromCenter(braces_triangle_height),Write(braces_triangle_height_text))
         self.wait(1)
-        self.play(Write(square_area_func))
+        self.play(GrowFromCenter(braces_triangle_base),Write(braces_triangle_base_text))
         self.wait(1)
-        self.play(Transform(square_area_func, square_area))
+        self.play(Write(triangle_area_func))
         self.wait(1)
-        self.play(FadeOut(braces_square),FadeOut(braces_square_text),FadeOut(square_area_func))
+        self.play(Transform(triangle_area_func, triangle_area))
+        self.wait(1)
+        self.play(FadeOut(braces_triangle_height),FadeOut(braces_triangle_height_text),FadeOut(braces_triangle_base),FadeOut(braces_triangle_base_text),FadeOut(triangle_area_func))
+        self.wait(1)
 
-
-        self.play(Transform(rectangle, circle))
-        self.wait(1)
-        self.play(ShowCreation(radius),Write(radius_text))
-        self.wait(1)
-        self.play(FadeOut(radius_text),FadeOut(radius))
-        self.wait(1)
-        self.play(Write(circle_area_func))
-        self.wait(1)
-        self.play(Transform(circle_area_func, circle_area))
-        self.wait(1)
-        self.play(FadeOut(circle_area_func))
 
 
 

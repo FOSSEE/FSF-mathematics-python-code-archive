@@ -35,8 +35,8 @@ class PartialDerivX(ThreeDScene):
         plane = Polygon(np.array([-2.2,0,-2.5]),np.array([2.2,0,-2.5]),np.array([2.2,0,2.5]),np.array([-2.2,0,2.5]),np.array([-2.2,0,-2.5]), color = GREEN, fill_color = GREEN, fill_opacity = 0.2)
         plane_text = TextMobject(r"$y = 0$", color = GREEN_C).move_to(2*UP + 3*RIGHT)
 
-        surface_eqn = TextMobject("Surface", r"$z = 2- x^2 -y^2$", color = PINK).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
-        surface_eqn[0].set_color(BLUE_C)
+        surface_eqn = TextMobject("Surface", r"$z = f(x,y) = 2 - x^2 - y^2$", color = BLUE_C).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
+        surface_eqn[0].set_color(PINK)
 
         line = Line(np.array([-2,0,0]), np.array([2,0,0]), color = RED_C)
         
@@ -104,7 +104,7 @@ class PartialDerivX(ThreeDScene):
 
         '''
         for i in np.arange(-2,2,0.2):
-        	self.play(ReplacementTransform(Line(np.array([i,0,0]), np.array([i,0,-i*i + 2]), color = GREEN_C), Line(np.array([i+0.2,0,0]), np.array([i+0.2,0,-(i+0.2)**2 + 2]), color = GREEN_C)))
+            self.play(ReplacementTransform(Line(np.array([i,0,0]), np.array([i,0,-i*i + 2]), color = GREEN_C), Line(np.array([i+0.2,0,0]), np.array([i+0.2,0,-(i+0.2)**2 + 2]), color = GREEN_C)))
             #self.wait()
         '''
 
@@ -160,8 +160,8 @@ class PartialDerivY(ThreeDScene):
         plane = Polygon(np.array([0,-2.2,-2.5]),np.array([0,2.2,-2.5]),np.array([0,2.2,2.5]),np.array([0,-2.2,2.5]),np.array([0,-2.2,-2.5]), color = BLUE, fill_color = BLUE, fill_opacity = 0.2)
         plane_text = TextMobject(r"$x = 0$", color = BLUE_C).move_to(2*UP + 3*RIGHT)
 
-        surface_eqn = TextMobject("Surface", r"$z = 2- x^2 -y^2$", color = PINK).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
-        surface_eqn[0].set_color(BLUE_C)
+        surface_eqn = TextMobject("Surface", r"$z = f(x,y) = 2 - x^2 - y^2$", color = BLUE_C ).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
+        surface_eqn[0].set_color(PINK)
         
         line = Line(np.array([0,-2,0]), np.array([0,2,0]), color = RED_C)
  
@@ -223,7 +223,7 @@ class PartialDerivY(ThreeDScene):
         
         '''
         for i in np.arange(-2,2,0.2):
-        	self.play(ReplacementTransform(Line(np.array([0,i,0]), np.array([0,i,-i*i + 2]), color = BLUE_C), Line(np.array([0,i+0.2,0]), np.array([0,i+0.2,-(i+0.2)**2 + 2]), color = BLUE_C)))
+            self.play(ReplacementTransform(Line(np.array([0,i,0]), np.array([0,i,-i*i + 2]), color = BLUE_C), Line(np.array([0,i+0.2,0]), np.array([0,i+0.2,-(i+0.2)**2 + 2]), color = BLUE_C)))
             #self.wait()
         '''
 
