@@ -20,7 +20,9 @@ class Helix(ThreeDScene):
             ]),color=GREEN_C,t_min=-TAU,t_max=TAU,
             )
 
-        function = TexMobject("f(", "r", ",", "\\theta", ")", "=", "[", "r", "\\cos", "\\theta", ",", "r", "\\sin" ,"\\theta", ",", "h" ,"\\theta", "]" ).scale(0.6).to_corner(UL)
+        
+        function = TexMobject("f(", "r", ",", "\\theta", ")", "=", "{ \\begin{bmatrix} r \\cos\\theta \\\ r \\sin \\theta \\\ h \\theta \\end{bmatrix}}" ).scale(0.6).to_corner(UL)
+        
         function.set_color_by_tex(r"\theta", BLUE_C)
         function.set_color_by_tex(r"r", RED_C)
         function.set_color_by_tex(r"\cos", GREEN_C)
@@ -28,8 +30,13 @@ class Helix(ThreeDScene):
         function[0].set_color(ORANGE)
         function[4].set_color(ORANGE)
 
+        
 
-        self.add_fixed_in_frame_mobjects(function)
+        slope_text = TextMobject(r"$\theta = $").move_to(3*UP+3*RIGHT)
+        number = DecimalNumber(0,unit=r" rad", color=RED_C).next_to(slope_text, RIGHT)
+        
+
+        self.add_fixed_in_frame_mobjects(function,slope_text, number)
 
         self.set_camera_orientation(phi=60*DEGREES, theta = 45*DEGREES)
 
@@ -49,41 +56,41 @@ class Helix(ThreeDScene):
         alpha1 = ValueTracker(0)
         vector1 = self.get_vector(alpha1.get_value(),helix1)
         dot1.add_updater(lambda m: m.move_to(vector1.get_end()))
+        number.add_updater(lambda m: m.set_value(alpha1.get_value()*4*np.pi))
+        number.add_updater(lambda m: self.add_fixed_in_frame_mobjects(m))
+          
+        
         self.play(
             ShowCreation(helix1),
             GrowFromCenter(dot1),
             GrowArrow(vector1)
+           
             )
+        
         vector1.add_updater(
             lambda m: m.become(
                     self.get_vector(alpha1.get_value()%1,helix1)
                 )
             )
+
+        
+        
         self.add(vector1,dot1)
+        
+
         self.play(alpha1.increment_value, 1, run_time=10, rate_func=linear)
         
 
-        self.play(FadeOut(vector1), FadeOut(dot1))
-        self.play(ReplacementTransform(helix1, helix2))
+        self.play(FadeOut(vector1), FadeOut(dot1), FadeOut(number))
 
+        self.move_camera(phi=0* DEGREES,theta=90*DEGREES)
 
-        dot2 = Dot().rotate(PI/2).set_color(RED_C)
-        alpha2 = ValueTracker(0)
-        vector2 = self.get_vector(alpha2.get_value(),helix2)
-        dot2.add_updater(lambda m: m.move_to(vector2.get_end()))
-        self.play(
-            ShowCreation(helix2),
-            GrowFromCenter(dot2),
-            GrowArrow(vector2)
-            )
-        vector2.add_updater(
-            lambda m: m.become(
-                    self.get_vector(alpha2.get_value()%1,helix2)
-                )
-            )
-        self.add(vector2,dot2)
-        self.play(alpha2.increment_value, 1, run_time=10, rate_func=linear)
-        self.wait()
+        alpha1 = ValueTracker(0)
+
+        self.add(vector1,dot1)
+        
+
+        self.play(alpha1.increment_value, 1, run_time=10, rate_func=linear)
 
 
 
