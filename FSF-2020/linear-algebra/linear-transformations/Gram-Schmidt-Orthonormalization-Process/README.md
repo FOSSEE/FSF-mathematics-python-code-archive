@@ -1,5 +1,5 @@
 # Contributer: Archit Sangal
-My Github Account : <a href="https://github.com/architsangal">architsangal</a>
+My Github Account : <a href="https://github.com/architsangal">architsangal</a> (https://github.com/architsangal)
 <br/></br>
 
 ## Sub-Topics Covered:

@@ -9,8 +9,8 @@ class ScalarFunction(Scene):
         arrow = Arrow(np.array([3,-3,0]),np.array([3,3,0]))
         line = Line(np.array([3,-1.5,0]),np.array([3,1.5,0]), color = RED_C)
 
-        dot0 = Dot().shift(np.array([3,0,0])).set_color(RED_E)
-        dot0_lab = TextMobject(r"$f(a)$", color = RED_E).scale(0.8).next_to(dot0, RIGHT)
+        dot0 = Dot().shift(np.array([3,0,0])).set_color("#8b000c")
+        dot0_lab = TextMobject(r"$f(a)$", color = "#8b000c").scale(0.8).next_to(dot0, RIGHT)
 
         dot1 = Dot().shift(np.array([3,-1.5,0])).set_color(RED_C)
 
@@ -38,12 +38,12 @@ class ScalarFunction(Scene):
         self.play(ShowCreation(arrow))
 
         
-        self.play(ShowCreation(dot1), ShowCreation(dot2))
+        self.play(ShowCreation(dot1), ShowCreation(dot2), ShowCreation(line))
         self.play(ShowCreation(dot_circle))
         self.play(ShowCreation(dot_circle_lab),  ShowCreation(dot2_lab))
         self.play(ShowCreation(A), ShowCreation(R))
         self.play(GrowArrow(arrow_f), ShowCreation(dot0), ShowCreation(dot0_lab), ShowCreation(F_center), GrowArrow(arrow_R_A), ShowCreation(F), Transform(circle.copy(), line.copy()))
-
+        self.bring_to_front(dot0)
         self.play(Write(scalar_function))
 
 

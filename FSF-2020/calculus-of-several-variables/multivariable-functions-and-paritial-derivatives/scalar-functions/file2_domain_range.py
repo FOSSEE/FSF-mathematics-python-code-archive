@@ -20,7 +20,7 @@ class PlotGraphs(GraphScene):
         self.play(FadeOut(topic))
         self.wait(1)
 
-        scalar_func_R = TextMobject(r"Scalar Valued Functions in $R$").scale(1.5).set_color_by_gradient(RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
+        scalar_func_R = TextMobject(r"Scalar Valued Functions in $\mathbb{R}$").scale(1.5).set_color_by_gradient(RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
         self.play(Write(scalar_func_R))
         self.play(FadeOut(scalar_func_R))
         self.wait(1)
@@ -55,7 +55,7 @@ class PlotGraphs(GraphScene):
         domainMsg.scale(0.5)
         domainMsg.set_color(GREEN)
 
-
+        domain_subset = TextMobject(r"Domain $\subset \mathbb{R}$", color = PURPLE).scale(0.7).move_to(self.graph_origin+3.5*YTD*UP+2*XTD*RIGHT)
     
         
         self.play(ShowCreation(graphobj))
@@ -67,10 +67,8 @@ class PlotGraphs(GraphScene):
         self.wait(1)
         self.play(GrowArrow(domainline1))
         self.play(GrowArrow(domainline2))
-        self.play(Write(domainMsg))
+        self.play(Write(domainMsg), Write(domain_subset))
         self.wait(3)
-
-        self.wait(2)
 
 
 
@@ -98,8 +96,8 @@ class PlotSineGraphs(GraphScene):
         sine_lab = self.get_graph_label(sineobj, label = "\\sin(x)")
 
 
-        rangeline1 = Line(8*XTD*LEFT,1*YTD*UP+8*XTD*LEFT)
-        rangeline2 = Line(8*XTD*LEFT,1*YTD*DOWN+8*XTD*LEFT)
+        rangeline1 = Arrow(8*XTD*LEFT,1*YTD*UP+8*XTD*LEFT, buff = 0)
+        rangeline2 = Arrow(8*XTD*LEFT,1*YTD*DOWN+8*XTD*LEFT, buff = 0)
         rangeline1.set_color(RED)
         rangeline2.set_color(RED)
 
@@ -119,7 +117,7 @@ class PlotSineGraphs(GraphScene):
         domainMsg.scale(0.5)
         domainMsg.set_color(GREEN)
 
-
+        domain_subset = TextMobject(r"Domain $\subseteq \mathbb{R}$", color = PURPLE).scale(0.7).move_to(self.graph_origin+0.8*YTD*UP+4.5*XTD*RIGHT)
 
         self.play(ShowCreation(sineobj))
         self.play(ShowCreation(sine_lab))
@@ -130,16 +128,17 @@ class PlotSineGraphs(GraphScene):
         self.wait(1)
         self.play(GrowArrow(domainline1))
         self.play(GrowArrow(domainline2))
-        self.play(Write(domainMsg))
+        self.play(Write(domainMsg), Write(domain_subset))
         self.wait(3)
 
-    
+
+        
 
         
 class Paraboloid(ThreeDScene):
     def construct(self):
 
-        scalar_func_R2 = TextMobject(r"Scalar Valued Functions in $R^2$").scale(1.5).set_color_by_gradient(RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
+        scalar_func_R2 = TextMobject(r"Scalar Valued Functions in $\mathbb{R}^2$").scale(1.5).set_color_by_gradient(RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
         self.play(Write(scalar_func_R2))
         self.play(FadeOut(scalar_func_R2))
         self.wait(1)
@@ -155,7 +154,7 @@ class Paraboloid(ThreeDScene):
             resolution=(15, 32)).scale(1)
 
         domain = Polygon(np.array([-5,-5,0]),np.array([5,-5,0]),np.array([5,5,0]),np.array([-5,5,0]),np.array([-5,-5,0]), color = BLUE_C, fill_color = BLUE_C, fill_opacity = 0.2)
-        domain_lab = TextMobject(r"$Domain: R^2$", color = YELLOW_C).scale(0.7).move_to(1*DOWN + 2*LEFT)
+        domain_lab = TextMobject(r"$Domain: \mathbb{R}^2$", color = YELLOW_C).scale(0.7).move_to(1*DOWN + 2*LEFT)
         
         rangef = Line(np.array([0, 0,0]), np.array([0, 0,5]), color = RED_C)
         rangef_lab = TextMobject(r"$Range: z \geq 0$", color = RED_C).scale(0.7).move_to(2*UP + 1.5*RIGHT)
@@ -186,5 +185,3 @@ class Paraboloid(ThreeDScene):
         self.play(ShowCreation(rangef))
         self.add_fixed_in_frame_mobjects(rangef_lab)
         self.wait(5)
-
-    

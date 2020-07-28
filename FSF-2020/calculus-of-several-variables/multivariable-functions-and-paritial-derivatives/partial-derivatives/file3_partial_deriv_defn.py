@@ -54,7 +54,7 @@ class PartialDeriv(ThreeDScene):
         plane2 = Polygon(np.array([0,-2.2,-2.5]),np.array([0,2.2,-2.5]),np.array([0,2.2,2.5]),np.array([0,-2.2,2.5]),np.array([0,-2.2,-2.5]), color = BLUE, fill_color = BLUE, fill_opacity = 0.2)
         plane2_text = TextMobject(r"$x = 0$", color = BLUE_C).move_to(2*UP + 3.2*RIGHT)
 
-        surface_eqn = TextMobject("Surface", r"$z = 2- x^2 -y^2$", color = YELLOW_C).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
+        surface_eqn = TextMobject("Surface", r"$z = f(x,y) = 2 - x^2 - y^2$", color = YELLOW_C).scale(0.6).move_to(np.array([3*LEFT +3*UP]))
         surface_eqn[0].set_color(PINK)
 
         dot1 =Sphere(radius=0.08).move_to(np.array([-1,0,1]))

@@ -69,7 +69,7 @@ class Linear(GraphScene):
 class withgrid(LinearTransformationScene):
     def construct(self):
 
-        heading = TextMobject(r"Now, Imagine this happening for all the vectors")
+        heading = TextMobject(r"Now, imagine this happening for all the points")
         heading.scale(0.5)
         heading.move_to(UP*2.5+LEFT*4)
         self.play(Write(heading))
@@ -141,6 +141,7 @@ class ThreeDExplanation(ThreeDScene):
         text = TextMobject(r"$T(x,y) = (x+y,x-y,x+2y)$")
         text.scale(0.75)
         text.move_to(UP*2.5+LEFT*4)
+        text.move_to(-UP*3+LEFT*4)
         self.add_fixed_in_frame_mobjects(text)
         self.play(Write(text))
         self.wait()
@@ -218,15 +219,15 @@ class ThreeDExplanation(ThreeDScene):
         self.wait(3)
         self.stop_ambient_camera_rotation()
 
-        ending = TextMobject(r"$T(\left[\begin{array}{c}x \\ y\end{array}\right]) = \left[\begin{array}{c} x+y \\ x-y \\ x+2y \end{array}\right]$")
+        ending = TextMobject(r"$T(\left[\begin{array}{c}x \\ y\end{array}\right])$ = ",r"$\left[\begin{array}{c} x+y \\ x-y\\ x+2y \end{array}\right]$") #\begin{array}{c} x+y \\ x-y -- \\ x+2y -- \end{array}\right]$")
         ending.scale(0.75)
-        ending.move_to(-UP*2+LEFT*4)
-        self.play(Transform(text,ending))
+        ending.move_to(-UP*3+LEFT*4)
         self.add_fixed_in_frame_mobjects(ending)
+        self.play(FadeOut(text),Write(ending))
 
         self.play(FadeOut(plane))
-        self.wait(3)
+        self.wait(2)
 
-        self.begin_ambient_camera_rotation(rate=0.5)
-        self.wait(5)
+        self.begin_ambient_camera_rotation(rate=0.3)
+        self.wait(8)
         self.stop_ambient_camera_rotation()
